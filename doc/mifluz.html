@@ -1,0 +1,5555 @@
+<html lang="en"><head>
+<title>`Mifluz'</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="`Mifluz'">
+<meta name=generator content="makeinfo 4.0">
+<link href="http://texinfo.org/" rel=generator-home>
+</head><body>
+
+<p><hr>
+Node:<a name="Top">Top</a>,
+Next:<a rel=next href="#Introduction">Introduction</a>,
+Previous:<a rel=previous href="#(dir)">(dir)</a>,
+Up:<a rel=up href="#(dir)">(dir)</a>
+<br>
+
+<h1>Mifluz</h1>
+
+<p><code>Mifluz</code> is a full text indexing library.
+
+<ul>
+<li><a href="#Introduction">Introduction</a>: 
+<li><a href="#Architecture">Architecture</a>: 
+<li><a href="#Constraints">Constraints</a>: 
+<li><a href="#Document%20name%20scheme">Document name scheme</a>: 
+<li><a href="#Data%20Storage%20Spec">Data Storage Spec</a>: 
+<li><a href="#Cache%20tuning">Cache tuning</a>: 
+<li><a href="#Key%20Specification">Key Specification</a>: 
+<li><a href="#Internals">Internals</a>: 
+<li><a href="#Development">Development</a>: 
+<li><a href="#Reference">Reference</a>: 
+<li><a href="#Concept%20Index">Concept Index</a>:
+
+<p>--- The Detailed Node Listing ---
+
+<p>Internals
+
+</p><li><a href="#Compression">Compression</a>:
+
+<p>Compression
+
+</p><li><a href="#Berkeley%20DB%20Compression">Berkeley DB Compression</a>: 
+<li><a href="#Page%20compression%20in%20Mifluz">Page compression in Mifluz</a>:
+
+<p>Reference
+
+</p><li><a href="#htdb_dump">htdb_dump</a>: 
+<li><a href="#htdb_stat">htdb_stat</a>: 
+<li><a href="#htdb_load">htdb_load</a>: 
+<li><a href="#mifluzdump">mifluzdump</a>: 
+<li><a href="#mifluzload">mifluzload</a>: 
+<li><a href="#mifluzsearch">mifluzsearch</a>: 
+<li><a href="#WordContext">WordContext</a>: 
+<li><a href="#WordList">WordList</a>: 
+<li><a href="#WordDict">WordDict</a>: 
+<li><a href="#WordListOne">WordListOne</a>: 
+<li><a href="#WordKey">WordKey</a>: 
+<li><a href="#WordKeyInfo">WordKeyInfo</a>: 
+<li><a href="#WordType">WordType</a>: 
+<li><a href="#WordDBInfo">WordDBInfo</a>: 
+<li><a href="#WordRecordInfo">WordRecordInfo</a>: 
+<li><a href="#WordRecord">WordRecord</a>: 
+<li><a href="#WordReference">WordReference</a>: 
+<li><a href="#WordCursor">WordCursor</a>: 
+<li><a href="#WordCursorOne">WordCursorOne</a>: 
+<li><a href="#WordMonitor">WordMonitor</a>: 
+<li><a href="#Configuration">Configuration</a>: 
+<li><a href="#mifluz">mifluz</a>:
+
+<p>htdb_dump
+
+</p><li><a href="#htdb_dump%20NAME">htdb_dump NAME</a>: 
+<li><a href="#htdb_dump%20SYNOPSIS">htdb_dump SYNOPSIS</a>: 
+<li><a href="#htdb_dump%20DESCRIPTION">htdb_dump DESCRIPTION</a>: 
+<li><a href="#htdb_dump%20OPTIONS">htdb_dump OPTIONS</a>: 
+<li><a href="#htdb_dump%20ENVIRONMENT">htdb_dump ENVIRONMENT</a>:
+
+<p>htdb_stat
+
+</p><li><a href="#htdb_stat%20NAME">htdb_stat NAME</a>: 
+<li><a href="#htdb_stat%20SYNOPSIS">htdb_stat SYNOPSIS</a>: 
+<li><a href="#htdb_stat%20DESCRIPTION">htdb_stat DESCRIPTION</a>: 
+<li><a href="#htdb_stat%20OPTIONS">htdb_stat OPTIONS</a>: 
+<li><a href="#htdb_stat%20ENVIRONMENT">htdb_stat ENVIRONMENT</a>:
+
+<p>htdb_load
+
+</p><li><a href="#htdb_load%20NAME">htdb_load NAME</a>: 
+<li><a href="#htdb_load%20SYNOPSIS">htdb_load SYNOPSIS</a>: 
+<li><a href="#htdb_load%20DESCRIPTION">htdb_load DESCRIPTION</a>: 
+<li><a href="#htdb_load%20OPTIONS">htdb_load OPTIONS</a>: 
+<li><a href="#htdb_load%20KEYWORDS">htdb_load KEYWORDS</a>: 
+<li><a href="#htdb_load%20ENVIRONMENT">htdb_load ENVIRONMENT</a>:
+
+<p>mifluzdump
+
+</p><li><a href="#mifluzdump%20NAME">mifluzdump NAME</a>: 
+<li><a href="#mifluzdump%20SYNOPSIS">mifluzdump SYNOPSIS</a>: 
+<li><a href="#mifluzdump%20DESCRIPTION">mifluzdump DESCRIPTION</a>: 
+<li><a href="#mifluzdump%20ENVIRONMENT">mifluzdump ENVIRONMENT</a>:
+
+<p>mifluzload
+
+</p><li><a href="#mifluzload%20NAME">mifluzload NAME</a>: 
+<li><a href="#mifluzload%20SYNOPSIS">mifluzload SYNOPSIS</a>: 
+<li><a href="#mifluzload%20DESCRIPTION">mifluzload DESCRIPTION</a>: 
+<li><a href="#mifluzload%20ENVIRONMENT">mifluzload ENVIRONMENT</a>:
+
+<p>mifluzsearch
+
+</p><li><a href="#mifluzsearch%20NAME">mifluzsearch NAME</a>: 
+<li><a href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>: 
+<li><a href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>: 
+<li><a href="#mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>:
+
+<p>WordContext
+
+</p><li><a href="#WordContext%20NAME">WordContext NAME</a>: 
+<li><a href="#WordContext%20SYNOPSIS">WordContext SYNOPSIS</a>: 
+<li><a href="#WordContext%20DESCRIPTION">WordContext DESCRIPTION</a>: 
+<li><a href="#WordContext%20CONFIGURATION">WordContext CONFIGURATION</a>: 
+<li><a href="#WordContext%20METHODS">WordContext METHODS</a>: 
+<li><a href="#WordContext%20ENVIRONMENT">WordContext ENVIRONMENT</a>:
+
+<p>WordList
+
+</p><li><a href="#WordList%20NAME">WordList NAME</a>: 
+<li><a href="#WordList%20SYNOPSIS">WordList SYNOPSIS</a>: 
+<li><a href="#WordList%20DESCRIPTION">WordList DESCRIPTION</a>: 
+<li><a href="#WordList%20CONFIGURATION">WordList CONFIGURATION</a>: 
+<li><a href="#WordList%20METHODS">WordList METHODS</a>:
+
+<p>WordDict
+
+</p><li><a href="#WordDict%20NAME">WordDict NAME</a>: 
+<li><a href="#WordDict%20SYNOPSIS">WordDict SYNOPSIS</a>: 
+<li><a href="#WordDict%20DESCRIPTION">WordDict DESCRIPTION</a>: 
+<li><a href="#WordDict%20METHODS">WordDict METHODS</a>:
+
+<p>WordListOne
+
+</p><li><a href="#WordListOne%20NAME">WordListOne NAME</a>: 
+<li><a href="#WordListOne%20SYNOPSIS">WordListOne SYNOPSIS</a>: 
+<li><a href="#WordListOne%20DESCRIPTION">WordListOne DESCRIPTION</a>: 
+<li><a href="#WordListOne%20METHODS">WordListOne METHODS</a>:
+
+<p>WordKey
+
+</p><li><a href="#WordKey%20NAME">WordKey NAME</a>: 
+<li><a href="#WordKey%20SYNOPSIS">WordKey SYNOPSIS</a>: 
+<li><a href="#WordKey%20DESCRIPTION">WordKey DESCRIPTION</a>: 
+<li><a href="#WordKey%20ASCII%20FORMAT">WordKey ASCII FORMAT</a>: 
+<li><a href="#WordKey%20METHODS">WordKey METHODS</a>:
+
+<p>WordKeyInfo
+
+</p><li><a href="#WordKeyInfo%20NAME">WordKeyInfo NAME</a>: 
+<li><a href="#WordKeyInfo%20SYNOPSIS">WordKeyInfo SYNOPSIS</a>: 
+<li><a href="#WordKeyInfo%20DESCRIPTION">WordKeyInfo DESCRIPTION</a>: 
+<li><a href="#WordKeyInfo%20CONFIGURATION">WordKeyInfo CONFIGURATION</a>:
+
+<p>WordType
+
+</p><li><a href="#WordType%20NAME">WordType NAME</a>: 
+<li><a href="#WordType%20SYNOPSIS">WordType SYNOPSIS</a>: 
+<li><a href="#WordType%20DESCRIPTION">WordType DESCRIPTION</a>: 
+<li><a href="#WordType%20CONFIGURATION">WordType CONFIGURATION</a>: 
+<li><a href="#WordType%20METHODS">WordType METHODS</a>:
+
+<p>WordDBInfo
+
+</p><li><a href="#WordDBInfo%20NAME">WordDBInfo NAME</a>: 
+<li><a href="#WordDBInfo%20SYNOPSIS">WordDBInfo SYNOPSIS</a>: 
+<li><a href="#WordDBInfo%20DESCRIPTION">WordDBInfo DESCRIPTION</a>: 
+<li><a href="#WordDBInfo%20CONFIGURATION">WordDBInfo CONFIGURATION</a>:
+
+<p>WordRecordInfo
+
+</p><li><a href="#WordRecordInfo%20NAME">WordRecordInfo NAME</a>: 
+<li><a href="#WordRecordInfo%20SYNOPSIS">WordRecordInfo SYNOPSIS</a>: 
+<li><a href="#WordRecordInfo%20DESCRIPTION">WordRecordInfo DESCRIPTION</a>: 
+<li><a href="#WordRecordInfo%20CONFIGURATION">WordRecordInfo CONFIGURATION</a>:
+
+<p>WordRecord
+
+</p><li><a href="#WordRecord%20NAME">WordRecord NAME</a>: 
+<li><a href="#WordRecord%20SYNOPSIS">WordRecord SYNOPSIS</a>: 
+<li><a href="#WordRecord%20DESCRIPTION">WordRecord DESCRIPTION</a>: 
+<li><a href="#WordRecord%20ASCII%20FORMAT">WordRecord ASCII FORMAT</a>: 
+<li><a href="#WordRecord%20METHODS">WordRecord METHODS</a>:
+
+<p>WordReference
+
+</p><li><a href="#WordReference%20NAME">WordReference NAME</a>: 
+<li><a href="#WordReference%20SYNOPSIS">WordReference SYNOPSIS</a>: 
+<li><a href="#WordReference%20DESCRIPTION">WordReference DESCRIPTION</a>: 
+<li><a href="#WordReference%20ASCII%20FORMAT">WordReference ASCII FORMAT</a>: 
+<li><a href="#WordReference%20METHODS">WordReference METHODS</a>:
+
+<p>WordCursor
+
+</p><li><a href="#WordCursor%20NAME">WordCursor NAME</a>: 
+<li><a href="#WordCursor%20SYNOPSIS">WordCursor SYNOPSIS</a>: 
+<li><a href="#WordCursor%20DESCRIPTION">WordCursor DESCRIPTION</a>: 
+<li><a href="#WordCursor%20METHODS">WordCursor METHODS</a>:
+
+<p>WordCursorOne
+
+</p><li><a href="#WordCursorOne%20NAME">WordCursorOne NAME</a>: 
+<li><a href="#WordCursorOne%20SYNOPSIS">WordCursorOne SYNOPSIS</a>: 
+<li><a href="#WordCursorOne%20DESCRIPTION">WordCursorOne DESCRIPTION</a>: 
+<li><a href="#WordCursorOne%20METHODS">WordCursorOne METHODS</a>:
+
+<p>WordMonitor
+
+</p><li><a href="#WordMonitor%20NAME">WordMonitor NAME</a>: 
+<li><a href="#WordMonitor%20SYNOPSIS">WordMonitor SYNOPSIS</a>: 
+<li><a href="#WordMonitor%20DESCRIPTION">WordMonitor DESCRIPTION</a>: 
+<li><a href="#WordMonitor%20CONFIGURATION">WordMonitor CONFIGURATION</a>:
+
+<p>Configuration
+
+</p><li><a href="#Configuration%20NAME">Configuration NAME</a>: 
+<li><a href="#Configuration%20SYNOPSIS">Configuration SYNOPSIS</a>: 
+<li><a href="#Configuration%20DESCRIPTION">Configuration DESCRIPTION</a>: 
+<li><a href="#Configuration%20FILE%20FORMAT">Configuration FILE FORMAT</a>: 
+<li><a href="#Configuration%20METHODS">Configuration METHODS</a>:
+
+<p>mifluz
+
+</p><li><a href="#mifluz%20NAME">mifluz NAME</a>: 
+<li><a href="#mifluz%20SYNOPSIS">mifluz SYNOPSIS</a>: 
+<li><a href="#mifluz%20DESCRIPTION">mifluz DESCRIPTION</a>: 
+<li><a href="#mifluz%20CLASSES%20AND%20COMMANDS">mifluz CLASSES AND COMMANDS</a>: 
+<li><a href="#mifluz%20CONFIGURATION">mifluz CONFIGURATION</a>: 
+<li><a href="#mifluz%20ENVIRONMENT">mifluz ENVIRONMENT</a>:
+
+</ul>
+
+<p><hr>
+Node:<a name="Introduction">Introduction</a>,
+Next:<a rel=next href="#Architecture">Architecture</a>,
+Previous:<a rel=previous href="#Top">Top</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Introduction</h1>
+
+<p>First of all, <code>mifluz</code> is at beta stage.
+
+<p>The purpose of <code>mifluz</code> is to provide a C++ library to store a full
+text inverted index. To put it briefly, it allows storage of occurrences of
+words in such a way that they can later be searched. The basic idea of
+an inverted index is to associate each unique word with a list of
+documents in which they appear. This list can then be searched to locate
+the documents containing a specific word.
+
+<p>Implementing a library that manages an inverted index is a very easy
+task when there is a small number of words and documents. It becomes a
+lot harder when dealing with a large number of words and
+documents. <code>mifluz</code> has been designed with the further upper limits
+in mind : 500 million documents, 100 giga words, 18 million document
+updates per day. In the present state of <code>mifluz</code>, it is possible to
+store 100 giga words using 600 giga bytes. The best average insertion
+rate observed as of today 4000 key/sec on a 1 giga byte index.
+
+<p><code>mifluz</code> has two main characteristics : it is very simple (one
+might say stupidly simple :-) and uses 100% of the size of the indexed text for
+the index. It is simple because it provides only a few basic
+functions. It does not contain document parsers (HTML, PDF
+etc...). It does not contain a full text query parser. It does not
+provide result display functions or other user friendly stuff. It only
+provides functions to store word occurrences and retrieve them. The fact
+that it uses 100% of the size of the indexed text is rather
+atypical. Most well known full text indexing systems only use 30%. The
+advantage <code>mifluz</code> has over most full text indexing systems is that
+it is fully dynamic (update, delete, insert), uses only a controlled
+amount of memory while resolving a query, has higher upper limits and has a
+simple storage scheme. This is achieved by consuming more disk space.
+
+<p><hr>
+Node:<a name="Architecture">Architecture</a>,
+Next:<a rel=next href="#Constraints">Constraints</a>,
+Previous:<a rel=previous href="#Introduction">Introduction</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Architecture</h1>
+
+<p>In the following figure you can see the place of <code>mifluz</code> in an hypothetical full
+text indexing system.
+
+<img src="drawarchi1.png" alt="drawarchi1.png">
+
+<dl>
+
+<br><dt><code>Query</code>
+<dd>Resolve full text queries. The optimization makes sure the least frequent
+terms are scanned first and that redundant query specifications are merged together.
+
+<br><dt><code>Mifluz</code>
+<dd>Manage efficient storage of the inverted index permanent data.
+
+<br><dt><code>Parser Switch</code>
+<dd>Transform raw documents into list of terms.
+
+<br><dt><code>Indexer</code>
+<dd>Call the Parser Switch to get a list of terms and feed it to <code>mifluz</code>.
+
+</dl>
+
+<p><hr>
+Node:<a name="Constraints">Constraints</a>,
+Next:<a rel=next href="#Document%20name%20scheme">Document name scheme</a>,
+Previous:<a rel=previous href="#Architecture">Architecture</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Constraints</h1>
+
+<p>The following list shows all the constraints imposed by <code>mifluz</code>. 
+It can also be seen as a list of functions provided by <code>mifluz</code>
+that is more general than the API specification.
+
+<dl>
+
+<br><dt><code>Now Available</code>
+<dd>
+<ul>
+
+<li>In-place dynamic update of the index.
+
+<li>Use in memory cache to perform heavy index updates without stressing
+the disk too much.
+
+<li>The library can be linked in an C or C++ application, dynamically or
+statically.
+
+<li>The memory usage is completely controlled. The application can specify
+the maximum total memory usage. The application can specify that the
+memory cache will be shared among processes.
+
+<li>The library is thread safe.
+
+</ul>
+
+<br><dt><code>Future</code>
+<dd>
+<ul>
+
+<li>Transaction logs for backup recovery.
+
+<li>Index integrity check and repair function.
+
+<li>Indexing up to 500 million documents and support up to 18 million document
+updates per 24h. The average size of a document is 4 kilo bytes and contains
+200 indexable words.
+
+</ul>
+
+<br><dt><code>Constraints and Limitations</code>
+<dd>
+<ul>
+
+<li>No atomic data is bigger than a size known in advance. 
+This postulate is essential for disk storage optimization. 
+If an atomic data may have a size of 10Mb, it is impossible to guarantee
+that a query/indexing process controls the memory it's using.
+
+<p>An atomic datum is something that must be manipulated as whole, with
+no possibility of splitting it into smaller parts. For instance a posting
+(Word, document identifier and position) is an atomic datum:
+to manipulate it in memory it has to reside completely in memory. 
+By contrast a postings list is not atomic. Manipulating a postings list
+can be done without loading all the postings list in memory.
+
+</p><li>The cost of an update is O(log m(N)) where m is the average number of
+entries in a page and N the total number of pages. This figure has to
+be considered when the pages are in memory or on disk.
+
+<li>The inverted index data is sorted to fit the most typical search
+pattern. The structure of the inverted index key can be defined at
+run time to fit a usage pattern.
+
+<li>No lock mechanism is provided beyond an individual word occurrence. It is
+assumed that the library is linked in a central server that serializes
+all the requests or in a program that provides its own lock mechanism.
+
+</ul>
+
+</dl>
+
+<p><hr>
+Node:<a name="Document%20name%20scheme">Document name scheme</a>,
+Next:<a rel=next href="#Data%20Storage%20Spec">Data Storage Spec</a>,
+Previous:<a rel=previous href="#Constraints">Constraints</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Document name scheme</h1>
+
+<p>In all of the literature dealing with full text indexing a collection of
+documents is considered to be a flat set of documents containing
+words. Each document has a unique name. The inverted index associates
+terms found in the documents with a list of unique document names.
+
+<img src="drawdoc1.png" alt="drawdoc1.png">
+
+<p>We found it more interesting to consider that the document names have a
+hierarchical structure, just like path names in file systems. The main
+difference is that each component of the document name (think path name
+in file system) may contain terms.
+
+<p>As shown in the figure above we can consider that the first component of
+the document name is the name of a collection, the second the logical
+name of a set of documents within the collection, the third the name of
+the document, the fourth the name of a part of the document.
+
+<img src="drawdoc2.png" alt="drawdoc2.png">
+
+<p>This logical structure may be applied to URLs in the following way :
+there is only one collection, it contains servers (document sets)
+containing URLs (documents) containing tags such as TITLE (document
+parts).
+
+<img src="drawdoc3.png" alt="drawdoc3.png">
+
+<p>This logical structure may be also be applied to databases in the following
+way : there is one collection for each database, it contains tables
+(document set) containing fields (document) containing records (document
+part).
+
+<p>What does this imply for full text indexing ? Instead of having only
+one dictionary to map the document name to a numerical identifier (this
+is needed to compress the postings for a term), we must have a
+dictionary for each level of the hierarchy.
+
+<p>Using the database example again:
+
+<ul>
+
+<li>A dictionary for database names
+
+<li>A dictionary for table names
+
+<li>A dictionary for field names
+
+<li>Since records are already identified by a number, no dictionary is needed.
+
+</ul>
+
+<p>When coding the document identifier in the postings for a term, we have
+to code a list of numerical identifiers instead of a single numerical
+identifier. Alternatively one could see the document identifier as an
+aribtrary precision number sliced in parts.
+
+<p>The advantage of this document naming scheme are:
+
+<ul>
+
+<li>A <code>uniq</code> query operator can be trivially implemented. This is mostly
+useful to answer a query such as : I want URLs matching the word foo
+but I only want to see one URL for a given server (avoid the problem of
+having the first 40 URLs for a request on the same server).
+
+<li>The posting lists are traditionally ordered according to the document
+number.  This is a must to have an efficient query mechanism. With a
+hierachical document name, each level of the hierarchy is
+sorted. Therefore the postings are sorted in multiple ways: sorted by
+collection first, then document set, then document part.
+
+<li>Searching document paths is facilitated by the structure of the key. 
+For instance: I only want to
+search TITLEs.
+
+</ul>
+
+<p>Of course, the suggested hierarchy semantic is not mandatory and may be
+redefined according to sorting needs. For instance a relevance ranking
+algorithm can lead to a relevance ranking number being inserted into the
+hierarchy.
+
+<p>The space overhead implied by this name scheme is quite small for
+databases and URL pools.  The big dictionary for URL pools maps URL to
+identifiers. The dictionary for tags (TITLE etc..) is only 10-50 at
+most. The dictionary for site names (www.domain.com) will be ~1/100 of
+the dictionary for URLs, assuming you have 100 URLs for a given site. For
+databases the situation is even better: the big dictionary would be the
+dictionary mapping rowids to numerical identifiers. But since rowids are
+already numerical we don't need this.  We only need the database name,
+field name and table name dictionaries and they are small. Since we are
+able to encode small numbers using only a few bits in postings, the
+overhead of hierarchical names is acceptable.
+
+<p><hr>
+Node:<a name="Data%20Storage%20Spec">Data Storage Spec</a>,
+Next:<a rel=next href="#Cache%20tuning">Cache tuning</a>,
+Previous:<a rel=previous href="#Document%20name%20scheme">Document name scheme</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Data Storage Spec</h1>
+
+<p>Efficient management of the data storage space is an important issue of
+the management of inverted indexes. The needs of an inverted index are
+very similar to the needs of a regular file system. We need:
+
+<ul>
+
+<li>A cache associated with an LRU list to keep the
+most frequently used entries in memory.
+
+<li>To group postings into pages of fixed size to optimize I/O
+on disk.
+
+<li>A locking mechanism to prevent race conditions between threads or
+multiple processes accessing the same data.
+
+<li>A transaction system to ensure data integrity and atomicity of logical
+operations.
+
+<li>Transparent compression of pages to reduce I/O bottleneck for large
+volumes of data and reduce disk usage as a bonus.
+
+<li>To create indexes using up to 1 tera bytes.
+
+</ul>
+
+<p>All these functionalities are provided by file systems and kernel
+services. Since we also wanted the <code>mifluz</code> library to be portable
+we chose the Berkeley DB library that implements all the services
+above. The transparent compression is not part of Berkeley DB and is
+implemented as a patch to Berkeley DB (version 3.1.14).
+
+<p>Based on these low level services, Bekeley DB also implements a Btree
+structure that <code>mifluz</code> used to store the postings. Each posting is
+an entry in the Btree structure. Indexing 100 million words implies creating
+100 million entries in the Btree. When transparent compression is
+used and assuming we have 6 byte words and a document identifier using
+7 * 8 bits, the average disk size used per entry is 6 bytes.
+
+<p>Unique word statistics are also stored in the inverted index. 
+For each unique word, an entry is created in a dictionnary and associated
+with a serial number (the word identifier and the total number of occurrences.
+
+<p><hr>
+Node:<a name="Cache%20tuning">Cache tuning</a>,
+Next:<a rel=next href="#Key%20Specification">Key Specification</a>,
+Previous:<a rel=previous href="#Data%20Storage%20Spec">Data Storage Spec</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Cache tuning</h1>
+
+<p>The cache memory used by <code>mifluz</code> has a tremendous impact on
+performance.  It is set by the <strong>wordlist_cache_size</strong> attribute
+(see WordList(3) and mifluz(3)).  It holds pages from the inverted index
+in memory (uncompressed if the file is compressed) to reduce disk
+access. Pages migrate from disk to memory using a LRU.
+
+<p>Each page in the cache is really a node of the B-Tree used to store the inverted
+index entries. The internal pages are intermediate nodes that <code>mifluz</code> must
+traverse each time a key is searched. It is therefore very important to keep them in memory. 
+Fortunately they only count for 1% of the total size of the index, at most. 
+The size of the cache must at least include enough space for the internal pages.
+
+<p>The other factors that must be taken into account in sizing the cache are highly dependant
+on the application. A typical case is insertion of many random words in the index. 
+In this case two factors are of special importance:
+
+<dl>
+
+<br><dt><code>repartition of unique words</code>
+<dd>When filling an inverted index it is very likely that the dictionary of
+unique words occuring in the index is limited. Let's say you have 1 000 000
+unique words in a 100 000 000 occurrences index. Now assume that 90 000 000
+occurrences are only using 20 000 unique words, that is 90% of the index is
+filled with 2% of the complete vocabulary. If you are in this situation,
+the indexing process will spend 90% of its time updating 20 000 pages. 
+If you can afford 20 000 * pagesize bytes of cache, you will have the
+maximum insertion rate.
+
+<p>The general rule is : estimate or calculate how many unique words fill
+90% of your index. Multiply this number by the pagesize and increase your
+cache by that amount. 
+See <strong>wordlist_page_size</strong> attribute in WordList(3) or mifluz(3).
+
+<br><dt><code>order of numbers following the key</code>
+<dd>The cache calculation above is fine as long as the words inserted are associated
+with increasing numbers in the key. If the numbers following the word in the
+key are random, the cache efficiency will be reduced. Where possible the application
+should therefore make sure that when inserting two identical words, the first is
+followed by a number that is lower than the second. In other words, insert
+
+<pre>foo 100
+foo 103
+</pre>
+
+<p>rather than
+
+<pre>foo 103
+foo 100
+</pre>
+
+</dl>
+
+<p>This hint must not be considered in isolation but with careful analysis of the
+distribution of the key components (word and numbers). For instance it does
+not matter much if a random key follows the word as long as the range
+of values of the number is small.
+
+<p>The conclusion is that the cache size should be at least 1% of the total index
+size (uncompressed) plus a number of bytes that depends on the usage pattern.
+
+<p><hr>
+Node:<a name="Key%20Specification">Key Specification</a>,
+Next:<a rel=next href="#Internals">Internals</a>,
+Previous:<a rel=previous href="#Cache%20tuning">Cache tuning</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Key Specification</h1>
+
+<p>The key structure is what uniquely identifies each word that is inserted
+in the inverted index. A key is made of a string (which is the word being
+indexed), and a document identifier (which is really a list of numbers), as
+discussed above.
+
+<p>The exact structure of the inverted index key must
+be specified in the configuration parameter
+<code>"wordlist_wordkey_description"</code>. See the WordKeyInfo(3) manual
+page for more information on the format.
+
+<p>We will focus on three examples that illustrate common usage.
+
+<p>First example: a very simple inverted index would be to associate each word occurrence
+to an URL (coded as a 32 bit number). The key description would be:
+
+<pre>Word 8/URL 32
+</pre>
+
+<p>Second example: if building a full text index of the content of a
+database, you need to know in which field, table and record the word
+appeared. This makes three numbers for the document id.
+
+<p>Only a few bits are needed to encode the field and table name (let's say
+you have a maximum of 16 field names and 16 table names, 4 bits each is
+enough). The record number uses 24 bits because we know we won't have
+more than 16 M records.
+
+<p>The structure of the key would then be:
+
+<pre>Word 8/Table 4/Field 4/Record 32
+</pre>
+
+<p>When you have more than one field involved in a key you must chose the
+order in which they appear. It is mandatory that the <strong>Word</strong> is first. 
+It is the part of the key that has highest precedence
+when sorting. The fields that follow have lower and lower precedence.
+
+<p>Third example: we go back to the first example and imagine we have
+a relevance ranking function that calculates a value for each word
+occurrence. By inserting this relevance ranking value in the inverted
+index key, all the occurrences will be sorted with the most relevant
+first.
+
+<pre>Word 8/Rank 5/URL 32
+</pre>
+
+<p><hr>
+Node:<a name="Internals">Internals</a>,
+Next:<a rel=next href="#Development">Development</a>,
+Previous:<a rel=previous href="#Key%20Specification">Key Specification</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Internals</h1>
+
+<ul>
+<li><a href="#Compression">Compression</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="Compression">Compression</a>,
+Previous:<a rel=previous href="#Internals">Internals</a>,
+Up:<a rel=up href="#Internals">Internals</a>
+<br>
+
+<h2>Compression</h2>
+
+<p>Compressing the index reduces disk space consumption
+and speeds up the indexing by reducing I/O.
+
+<p>Compressing at the <code>mifluz</code> level would imply choosing complicated key
+structures, slowing down and complexifying insert and delete
+operations. We have chosen to do the compression within Berkeley DB in
+the memory pool subsystem. Berkeley DB keeps fixed size pages in a
+memory cache, when it is full it writes the least recently used pages to
+disk. When a page is needed Berkeley DB looks for it in memory and
+retrieves it from disk if its not in memory. The compression/uncompression
+occurs when a page moves between the memory pool and the disk.
+
+<img src="cmprinfo-1.png" alt="cmprinfo-1.png">
+
+<ul>
+<li><a href="#Berkeley%20DB%20Compression">Berkeley DB Compression</a>: 
+<li><a href="#Page%20compression%20in%20Mifluz">Page compression in Mifluz</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="Berkeley%20DB%20Compression">Berkeley DB Compression</a>,
+Next:<a rel=next href="#Page%20compression%20in%20Mifluz">Page compression in Mifluz</a>,
+Previous:<a rel=previous href="#Compression">Compression</a>,
+Up:<a rel=up href="#Compression">Compression</a>
+<br>
+
+<h3>Compression inside Berekeley DB</h3>
+
+<p>Berkeley DB uses fixed size pages.  Suppose, for example that our compression
+algorithm can compress by a factor of 8 in most cases, we use a disk
+page size that's 1/8 of the memory page size.  However there are
+exceptions. Some pages won't compress well and therefore won't fit on
+one disk page. Extra pages are therefore allocated and are linked into a
+chained list. Allocating extra pages implies that some pages may become
+free as a result of a better compression.
+
+<img src="dbcompress-1.png" alt="dbcompress-1.png">
+<img src="dbcompress-2.png" alt="dbcompress-2.png">
+<img src="dbcompress-3.png" alt="dbcompress-3.png">
+<img src="dbcompress-4.png" alt="dbcompress-4.png">
+
+<p><hr>
+Node:<a name="Page%20compression%20in%20Mifluz">Page compression in Mifluz</a>,
+Previous:<a rel=previous href="#Berkeley%20DB%20Compression">Berkeley DB Compression</a>,
+Up:<a rel=up href="#Compression">Compression</a>
+<br>
+
+<h3>Page compression in Mifluz</h3>
+
+<p>The <code>mifluz</code> classes WordDBCompress and WordBitCompress do the compression/decompression
+work. From the list of keys stored in a page it extracts several lists
+of numbers. Each list of numbers has common statistical properties that
+allow good compression.
+
+<p>The  WordDBCompress_compress_c and WordDBCompress_uncompress_c
+functions are C callbacks that  are called by the the page compression
+code  in  BerkeleyDB. The  C  callbacks  then  call the  WordDBCompress
+compress/uncompress  methods. The  WordDBCompress creates a WordBitCompress
+object that acts as a buffer holding the compressed stream.
+
+<p>Compression algorithm.
+
+<p>Most DB pages contain redundant data because <code>mifluz</code> chose
+to store one word occurrence per entry. 
+Because of this choice the pages have a very simple structure.
+
+<p>Here is a real world example of what a page can look like:
+(key structure: word identifier + 4 numerical fields)
+
+<pre>756     1 4482    1  10b
+756     1 4482    1  142
+756     1 4484    1   40
+756     1 449f    1  11e
+756     1 4545    1   11
+756     1 45d3    1  545
+756     1 45e0    1  7e5
+756     1 45e2    1  830
+756     1 45e8    1  545
+756     1 45fe    1   ec
+756     1 4616    1  395
+756     1 461a    1  1eb
+756     1 4631    1   49
+756     1 4634    1   48
+.... etc ....
+</pre>
+
+<p>To compress we chose to only code differences between adjacent entries. 
+A flag is stored for each entry indicating which fields have changed. 
+When a field is different from the previous one, the compression stores
+the difference which is likely to be small since the entries are sorted.
+
+<p>The basic idea is to build columns of numbers, one for each field, and
+then compress them individually. One can see that the first and second
+columns will compress very well since all the values are the same. The
+third column will also compress well since the differences between the
+numbers are small, leading to a small set of numbers.
+
+<p><hr>
+Node:<a name="Development">Development</a>,
+Next:<a rel=next href="#Reference">Reference</a>,
+Previous:<a rel=previous href="#Internals">Internals</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Development</h1>
+
+<p>The development of <code>mifluz</code> is shared between <code>Senga</code>
+(www.senga.org) and the <code>Ht://dig</code> Group (dev.htdig.org). Part of
+the distribution comes from the <code>Ht://dig</code> CVS tree and part from
+the <code>Senga</code> CVS tree. The idea is to share efforts between two
+development groups that have very similar needs. Since <code>Senga</code> and
+<code>Ht://dig</code> are both developped under the GPL licence, such
+cooperation occurs naturally.
+
+<p>To compile a program using the <code>mifluz</code> library use something that looks
+like the following:
+
+<pre>gcc -o word -I/usr/local/include -L/usr/local/lib -lmifluz word.cc
+</pre>
+
+<p><hr>
+Node:<a name="Reference">Reference</a>,
+Next:<a rel=next href="#Concept%20Index">Concept Index</a>,
+Previous:<a rel=previous href="#Development">Development</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Reference</h1>
+
+<ul>
+<li><a href="#htdb_dump">htdb_dump</a>: 
+<li><a href="#htdb_stat">htdb_stat</a>: 
+<li><a href="#htdb_load">htdb_load</a>: 
+<li><a href="#mifluzdump">mifluzdump</a>: 
+<li><a href="#mifluzload">mifluzload</a>: 
+<li><a href="#mifluzsearch">mifluzsearch</a>: 
+<li><a href="#WordContext">WordContext</a>: 
+<li><a href="#WordList">WordList</a>: 
+<li><a href="#WordDict">WordDict</a>: 
+<li><a href="#WordListOne">WordListOne</a>: 
+<li><a href="#WordKey">WordKey</a>: 
+<li><a href="#WordKeyInfo">WordKeyInfo</a>: 
+<li><a href="#WordType">WordType</a>: 
+<li><a href="#WordDBInfo">WordDBInfo</a>: 
+<li><a href="#WordRecordInfo">WordRecordInfo</a>: 
+<li><a href="#WordRecord">WordRecord</a>: 
+<li><a href="#WordReference">WordReference</a>: 
+<li><a href="#WordCursor">WordCursor</a>: 
+<li><a href="#WordCursorOne">WordCursorOne</a>: 
+<li><a href="#WordMonitor">WordMonitor</a>: 
+<li><a href="#Configuration">Configuration</a>: 
+<li><a href="#mifluz">mifluz</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="htdb_dump">htdb_dump</a>,
+Next:<a rel=next href="#htdb_stat">htdb_stat</a>,
+Previous:<a rel=previous href="#Reference">Reference</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>htdb_dump</h2>
+
+<ul>
+<li><a href="#htdb_dump%20NAME">htdb_dump NAME</a>: 
+<li><a href="#htdb_dump%20SYNOPSIS">htdb_dump SYNOPSIS</a>: 
+<li><a href="#htdb_dump%20DESCRIPTION">htdb_dump DESCRIPTION</a>: 
+<li><a href="#htdb_dump%20OPTIONS">htdb_dump OPTIONS</a>: 
+<li><a href="#htdb_dump%20ENVIRONMENT">htdb_dump ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="htdb_dump%20NAME">htdb_dump NAME</a>,
+Next:<a rel=next href="#htdb_dump%20SYNOPSIS">htdb_dump SYNOPSIS</a>,
+Previous:<a rel=previous href="#htdb_dump">htdb_dump</a>,
+Up:<a rel=up href="#htdb_dump">htdb_dump</a>
+<br>
+
+<h3>htdb_dump NAME</h3>
+
+<p>dump the content of an inverted index in Berkeley DB fashion
+
+<p><hr>
+Node:<a name="htdb_dump%20SYNOPSIS">htdb_dump SYNOPSIS</a>,
+Next:<a rel=next href="#htdb_dump%20DESCRIPTION">htdb_dump DESCRIPTION</a>,
+Previous:<a rel=previous href="#htdb_dump%20NAME">htdb_dump NAME</a>,
+Up:<a rel=up href="#htdb_dump">htdb_dump</a>
+<br>
+
+<h3>htdb_dump SYNOPSIS</h3>
+
+<pre>
+htdb_dump [-klNpWz] [-C cachesize] [-d ahr] [-f file] [-h home] [-s subdb] db_file
+</pre>
+
+<p><hr>
+Node:<a name="htdb_dump%20DESCRIPTION">htdb_dump DESCRIPTION</a>,
+Next:<a rel=next href="#htdb_dump%20OPTIONS">htdb_dump OPTIONS</a>,
+Previous:<a rel=previous href="#htdb_dump%20SYNOPSIS">htdb_dump SYNOPSIS</a>,
+Up:<a rel=up href="#htdb_dump">htdb_dump</a>
+<br>
+
+<h3>htdb_dump DESCRIPTION</h3>
+
+<p>htdb_dump is a slightly modified version of the standard
+Berkeley DB db_dump utility.
+
+<p>The htdb_dump utility reads the database file
+<strong>db_file
+</strong> and
+writes it to the standard output using a portable flat-text format
+understood by the
+<code>htdb_load
+</code>
+utility. The argument
+<strong>db_file
+</strong> must be a file produced using
+the Berkeley DB library functions.
+
+<p><hr>
+Node:<a name="htdb_dump%20OPTIONS">htdb_dump OPTIONS</a>,
+Next:<a rel=next href="#htdb_dump%20ENVIRONMENT">htdb_dump ENVIRONMENT</a>,
+Previous:<a rel=previous href="#htdb_dump%20DESCRIPTION">htdb_dump DESCRIPTION</a>,
+Up:<a rel=up href="#htdb_dump">htdb_dump</a>
+<br>
+
+<h3>htdb_dump OPTIONS</h3>
+
+<dl>
+<dt><code></code>
+<dd><strong>-W
+</strong>
+
+<p>Initialize WordContext(3) before dumping. With the
+<strong>-z
+</strong>
+flag allows to dump inverted indexes using the mifluz(3) specific
+compression scheme. The MIFLUZ_CONFIG environment variable must be
+set to a file containing the mifluz(3) configuration. 
+<br><dt><code></code>
+<dd><strong>-z
+</strong>
+
+<p>The
+<strong>db_file
+</strong> is compressed. If
+<strong>-W
+</strong> is given the
+mifluz(3) specific compression scheme is used. Otherwise the default
+gzip compression scheme is used. 
+<br><dt><code></code>
+<dd><strong>-d
+</strong>
+
+<p>Dump the specified database in a format helpful for debugging
+the Berkeley DB library routines.
+<dl>
+<dt><code></code>
+<dd>a
+
+<p>Display all information. 
+<br><dt><code></code>
+<dd>h
+
+<p>Display only page headers. 
+<br><dt><code></code>
+<dd>r
+
+<p>Do not display the free-list or pages on the free list.  This
+mode is used by the recovery tests. 
+</dl>
+The output format of the
+<strong>-d
+</strong> option is not standard and may change,
+without notice, between releases of the Berkeley DB library. 
+<br><dt><code></code>
+<dd><strong>-f
+</strong>
+
+<p>Write to the specified
+<strong>file
+</strong> instead of to the standard output. 
+<br><dt><code></code>
+<dd><strong>-h
+</strong>
+
+<p>Specify a home directory for the database. 
+As Berkeley DB versions before 2.0 did not support the concept of a
+<code>database home. 
+</code>
+<br><dt><code></code>
+<dd><strong>-k
+</strong>
+
+<p>Dump record numbers from Queue and Recno databases as keys. 
+<br><dt><code></code>
+<dd><strong>-l
+</strong>
+
+<p>List the subdatabases stored in the database. 
+<br><dt><code></code>
+<dd><strong>-N
+</strong>
+
+<p>Do not acquire shared region locks while running.  Other problems such
+as potentially fatal errors in Berkeley DB will be ignored as well.  This option
+is intended only for debugging errors and should not be used under any
+other circumstances. 
+<br><dt><code></code>
+<dd><strong>-p
+</strong>
+
+<p>If characters in either the key or data items are printing characters
+(as defined by
+<strong>isprint
+</strong>(3)), use printing characters in
+<strong>file
+</strong> to represent them.  This option permits users to use standard
+text editors and tools to modify the contents of databases.
+
+<p>Note, different systems may have different notions as to what characters
+are considered
+<code>printing characters
+</code>, and databases dumped in
+this manner may be less portable to external systems. 
+<br><dt><code></code>
+<dd><strong>-s
+</strong>
+
+<p>Specify a subdatabase to dump.  If no subdatabase is specified, all
+subdatabases found in the database are dumped. 
+<br><dt><code></code>
+<dd><strong>-V
+</strong>
+
+<p>Write the version number to the standard output and exit. 
+</dl>
+
+<p>Dumping and reloading Hash databases that use user-defined hash functions
+will result in new databases that use the default hash function. 
+While using the default hash function may not be optimal for the new database,
+it will continue to work correctly.
+
+<p>Dumping and reloading Btree databases that use user-defined prefix or
+comparison functions will result in new databases that use the default
+prefix and comparison functions. 
+<strong>In this case, it is quite likely that the database will be damaged
+beyond repair permitting neither record storage or retrieval. 
+</strong>
+
+<p>The only available workaround for either case is to modify the sources
+for the
+<code>htdb_load
+</code> utility to load the
+database using the correct hash, prefix and comparison functions.
+
+<p><hr>
+Node:<a name="htdb_dump%20ENVIRONMENT">htdb_dump ENVIRONMENT</a>,
+Previous:<a rel=previous href="#htdb_dump%20OPTIONS">htdb_dump OPTIONS</a>,
+Up:<a rel=up href="#htdb_dump">htdb_dump</a>
+<br>
+
+<h3>htdb_dump ENVIRONMENT</h3>
+
+<p><strong>DB_HOME
+</strong>
+If the
+<strong>-h
+</strong> option is not specified and the environment variable
+DB_HOME is set, it is used as the path of the database home.
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
+Node:<a name="htdb_stat">htdb_stat</a>,
+Next:<a rel=next href="#htdb_load">htdb_load</a>,
+Previous:<a rel=previous href="#htdb_dump">htdb_dump</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>htdb_stat</h2>
+
+<ul>
+<li><a href="#htdb_stat%20NAME">htdb_stat NAME</a>: 
+<li><a href="#htdb_stat%20SYNOPSIS">htdb_stat SYNOPSIS</a>: 
+<li><a href="#htdb_stat%20DESCRIPTION">htdb_stat DESCRIPTION</a>: 
+<li><a href="#htdb_stat%20OPTIONS">htdb_stat OPTIONS</a>: 
+<li><a href="#htdb_stat%20ENVIRONMENT">htdb_stat ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="htdb_stat%20NAME">htdb_stat NAME</a>,
+Next:<a rel=next href="#htdb_stat%20SYNOPSIS">htdb_stat SYNOPSIS</a>,
+Previous:<a rel=previous href="#htdb_stat">htdb_stat</a>,
+Up:<a rel=up href="#htdb_stat">htdb_stat</a>
+<br>
+
+<h3>htdb_stat NAME</h3>
+
+<p>displays statistics for Berkeley DB environments.
+
+<p><hr>
+Node:<a name="htdb_stat%20SYNOPSIS">htdb_stat SYNOPSIS</a>,
+Next:<a rel=next href="#htdb_stat%20DESCRIPTION">htdb_stat DESCRIPTION</a>,
+Previous:<a rel=previous href="#htdb_stat%20NAME">htdb_stat NAME</a>,
+Up:<a rel=up href="#htdb_stat">htdb_stat</a>
+<br>
+
+<h3>htdb_stat SYNOPSIS</h3>
+
+<pre>
+htdb_stat [-celmNtzW] [-C Acfhlmo] [-d file [-s file]] [-h home] [-M Ahlm]
+</pre>
+
+<p><hr>
+Node:<a name="htdb_stat%20DESCRIPTION">htdb_stat DESCRIPTION</a>,
+Next:<a rel=next href="#htdb_stat%20OPTIONS">htdb_stat OPTIONS</a>,
+Previous:<a rel=previous href="#htdb_stat%20SYNOPSIS">htdb_stat SYNOPSIS</a>,
+Up:<a rel=up href="#htdb_stat">htdb_stat</a>
+<br>
+
+<h3>htdb_stat DESCRIPTION</h3>
+
+<p>htdb_stat is a slightly modified version of the standard Berkeley
+DB db_stat utility which displays statistics for Berkeley DB
+environments.
+
+<p><hr>
+Node:<a name="htdb_stat%20OPTIONS">htdb_stat OPTIONS</a>,
+Next:<a rel=next href="#htdb_stat%20ENVIRONMENT">htdb_stat ENVIRONMENT</a>,
+Previous:<a rel=previous href="#htdb_stat%20DESCRIPTION">htdb_stat DESCRIPTION</a>,
+Up:<a rel=up href="#htdb_stat">htdb_stat</a>
+<br>
+
+<h3>htdb_stat OPTIONS</h3>
+
+<dl>
+<dt><code></code>
+<dd><strong>-W
+</strong>
+
+<p>Initialize WordContext(3) before gathering statistics. With the
+<strong>-z
+</strong>
+flag allows to gather statistics on inverted indexes generated
+with the mifluz(3) specific
+compression scheme. The MIFLUZ_CONFIG environment variable must be
+set to a file containing the mifluz(3) configuration. 
+<br><dt><code></code>
+<dd><strong>-z
+</strong>
+
+<p>The
+<strong>file
+</strong> is compressed. If
+<strong>-W
+</strong> is given the
+mifluz(3) specific compression scheme is used. Otherwise the default
+gzip compression scheme is used. 
+<br><dt><code></code>
+<dd><strong>-C
+</strong>
+
+<p>Display internal information about the lock region. 
+(The output from this option is often both voluminous and meaningless,
+and is intended only for debugging.)
+<dl>
+<dt><code></code>
+<dd><strong>A
+</strong>
+
+<p>Display all information. 
+<br><dt><code></code>
+<dd><strong>c
+</strong>
+
+<p>Display lock conflict matrix. 
+<br><dt><code></code>
+<dd><strong>f
+</strong>
+
+<p>Display lock and object free lists. 
+<br><dt><code></code>
+<dd><strong>l
+</strong>
+
+<p>Display lockers within hash chains. 
+<br><dt><code></code>
+<dd><strong>m
+</strong>
+
+<p>Display region memory information. 
+<br><dt><code></code>
+<dd><strong>o
+</strong>
+
+<p>Display objects within hash chains. 
+</dl>
+<br><dt><code></code>
+<dd><strong>-c
+</strong>
+
+<p>Display lock region statistics. 
+<br><dt><code></code>
+<dd><strong>-d
+</strong>
+
+<p>Display database statistics for the specified database. 
+If the database contains subdatabases, the statistics
+are for the database or subdatabase specified, and not for the database
+as a whole. 
+<br><dt><code></code>
+<dd><strong>-e
+</strong>
+
+<p>Display current environment statistics. 
+<br><dt><code></code>
+<dd><strong>-h
+</strong>
+
+<p>Specify a home directory for the database. 
+<br><dt><code></code>
+<dd><strong>-l
+</strong>
+
+<p>Display log region statistics. 
+<br><dt><code></code>
+<dd><strong>-M
+</strong>
+
+<p>Display internal information about the shared memory buffer pool. 
+(The output from this option is often both voluminous and meaningless,
+and is intended only for debugging.)
+<dl>
+<dt><code></code>
+<dd><strong>A
+</strong>
+
+<p>Display all information. 
+<br><dt><code></code>
+<dd><strong>h
+</strong>
+
+<p>Display buffers within hash chains. 
+<br><dt><code></code>
+<dd><strong>l
+</strong>
+
+<p>Display buffers within LRU chains. 
+<br><dt><code></code>
+<dd><strong>m
+</strong>
+
+<p>Display region memory information. 
+</dl>
+<br><dt><code></code>
+<dd><strong>-m
+</strong>
+
+<p>Display shared memory buffer pool statistics. 
+<br><dt><code></code>
+<dd><strong>-N
+</strong>
+
+<p>Do not acquire shared region locks while running.  Other problems such
+as potentially fatal errors in Berkeley DB will be ignored as well.  This option
+is intended only for debugging errors and should not be used under any
+other circumstances. 
+<br><dt><code></code>
+<dd><strong>-s
+</strong>
+
+<p>Display database statistics for the specified subdatabase of the
+database specified with the
+<strong>-d
+</strong> flag. 
+<br><dt><code></code>
+<dd><strong>-t
+</strong>
+
+<p>Display transaction region statistics. 
+<br><dt><code></code>
+<dd><strong>-V
+</strong>
+
+<p>Write the version number to the standard output and exit. 
+</dl>
+
+<p>Only one set of statistics is displayed for each run, and the last option
+specifying a set of statistics takes precedence.
+
+<p>Values smaller than 10 million are generally displayed without any special
+notation.  Values larger than 10 million are normally displayed as
+<strong>&lt;number&gt;M
+</strong>.
+
+<p>The htdb_stat utility attaches to one or more of the Berkeley DB shared memory
+regions.  In order to avoid region corruption, it should always be given
+the chance to detach and exit gracefully.  To cause htdb_stat to clean up
+after itself and exit, send it an interrupt signal (SIGINT).
+
+<p><hr>
+Node:<a name="htdb_stat%20ENVIRONMENT">htdb_stat ENVIRONMENT</a>,
+Previous:<a rel=previous href="#htdb_stat%20OPTIONS">htdb_stat OPTIONS</a>,
+Up:<a rel=up href="#htdb_stat">htdb_stat</a>
+<br>
+
+<h3>htdb_stat ENVIRONMENT</h3>
+
+<p><strong>DB_HOME
+</strong>
+If the
+<strong>-h
+</strong> option is not specified and the environment variable
+DB_HOME is set, it is used as the path of the database home.
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
+Node:<a name="htdb_load">htdb_load</a>,
+Next:<a rel=next href="#mifluzdump">mifluzdump</a>,
+Previous:<a rel=previous href="#htdb_stat">htdb_stat</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>htdb_load</h2>
+
+<ul>
+<li><a href="#htdb_load%20NAME">htdb_load NAME</a>: 
+<li><a href="#htdb_load%20SYNOPSIS">htdb_load SYNOPSIS</a>: 
+<li><a href="#htdb_load%20DESCRIPTION">htdb_load DESCRIPTION</a>: 
+<li><a href="#htdb_load%20OPTIONS">htdb_load OPTIONS</a>: 
+<li><a href="#htdb_load%20KEYWORDS">htdb_load KEYWORDS</a>: 
+<li><a href="#htdb_load%20ENVIRONMENT">htdb_load ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="htdb_load%20NAME">htdb_load NAME</a>,
+Next:<a rel=next href="#htdb_load%20SYNOPSIS">htdb_load SYNOPSIS</a>,
+Previous:<a rel=previous href="#htdb_load">htdb_load</a>,
+Up:<a rel=up href="#htdb_load">htdb_load</a>
+<br>
+
+<h3>htdb_load NAME</h3>
+
+<p>displays statistics for Berkeley DB environments.
+
+<p><hr>
+Node:<a name="htdb_load%20SYNOPSIS">htdb_load SYNOPSIS</a>,
+Next:<a rel=next href="#htdb_load%20DESCRIPTION">htdb_load DESCRIPTION</a>,
+Previous:<a rel=previous href="#htdb_load%20NAME">htdb_load NAME</a>,
+Up:<a rel=up href="#htdb_load">htdb_load</a>
+<br>
+
+<h3>htdb_load SYNOPSIS</h3>
+
+<pre>
+htdb_load [-nTzW] [-c name=value] [-f file] [-h home] [-C cachesize] [-t btree | hash | recno] db_file
+</pre>
+
+<p><hr>
+Node:<a name="htdb_load%20DESCRIPTION">htdb_load DESCRIPTION</a>,
+Next:<a rel=next href="#htdb_load%20OPTIONS">htdb_load OPTIONS</a>,
+Previous:<a rel=previous href="#htdb_load%20SYNOPSIS">htdb_load SYNOPSIS</a>,
+Up:<a rel=up href="#htdb_load">htdb_load</a>
+<br>
+
+<h3>htdb_load DESCRIPTION</h3>
+
+<p>The htdb_load utility reads from the standard input and loads it into
+the database
+<strong>db_file
+</strong>. 
+The database
+<strong>db_file
+</strong> is created if it does not already exist.
+
+<p>The input to htdb_load must be in the output format specified by the
+htdb_dump utility, or as specified for the
+<strong>-T
+</strong> below.
+
+<p><hr>
+Node:<a name="htdb_load%20OPTIONS">htdb_load OPTIONS</a>,
+Next:<a rel=next href="#htdb_load%20KEYWORDS">htdb_load KEYWORDS</a>,
+Previous:<a rel=previous href="#htdb_load%20DESCRIPTION">htdb_load DESCRIPTION</a>,
+Up:<a rel=up href="#htdb_load">htdb_load</a>
+<br>
+
+<h3>htdb_load OPTIONS</h3>
+
+<dl>
+<dt><code></code>
+<dd><strong>-W
+</strong>
+
+<p>Initialize WordContext(3) before loading. With the
+<strong>-z
+</strong>
+flag allows to load inverted indexes using the mifluz(3) specific
+compression scheme. The MIFLUZ_CONFIG environment variable must be
+set to a file containing the mifluz(3) configuration. 
+<br><dt><code></code>
+<dd><strong>-z
+</strong>
+
+<p>The
+<strong>db_file
+</strong> is compressed. If
+<strong>-W
+</strong> is given the
+mifluz(3) specific compression scheme is used. Otherwise the default
+gzip compression scheme is used. 
+<br><dt><code></code>
+<dd><strong>-c
+</strong>
+
+<p>Specify configuration options for the DB structure
+ignoring any value they may have based on the input. 
+The command-line format is
+<strong>name=value
+</strong>. 
+See
+<code>Supported Keywords
+</code> for
+a list of supported words for the
+<strong>-c
+</strong> option. 
+<br><dt><code></code>
+<dd><strong>-f
+</strong>
+
+<p>Read from the specified
+<strong>input
+</strong> file instead of from
+the standard input. 
+<br><dt><code></code>
+<dd><strong>-h
+</strong>
+
+<p>Specify a home directory for the database. 
+If a home directory is specified, the database environment is opened using
+the
+<code>DB_INIT_LOCK
+</code>,
+<code>DB_INIT_LOG
+</code>,
+<code>DB_INIT_MPOOL
+</code>,
+<code>DB_INIT_TXN
+</code> and
+<code>DB_USE_ENVIRON
+</code> flags to
+DBENV-&gt;open. This means that htdb_load can be used to load
+data into databases while they are in use by other processes. If the
+DBENV-&gt;open call fails, or if no home directory is specified, the
+database is still updated, but the environment is ignored, e.g., no
+locking is done. 
+<br><dt><code></code>
+<dd><strong>-n
+</strong>
+
+<p>Do not overwrite existing keys in the database when loading into an
+already existing database. 
+If a key/data pair cannot be loaded into the database for this reason,
+a warning message is displayed on the standard error output and the
+key/data pair are skipped. 
+<br><dt><code></code>
+<dd><strong>-T
+</strong>
+
+<p>The
+<strong>-T
+</strong>
+option allows non-Berkeley DB applications to easily load text files
+into databases.
+
+<p>If the database to be created is of type Btree or Hash, or the keyword
+<strong>keys
+</strong> is specified as set, the input must be paired lines of text,
+where the first line of the pair is the key item, and the second line of
+the pair is its corresponding data item.  If the database to be created
+is of type Queue or Recno and the keywork
+<strong>keys
+</strong> is not set, the
+input must be lines of text, where each line is a new data item for the
+database.
+
+<p>A simple escape mechanism, where newline and backslash (\)
+characters are special, is applied to the text input. 
+Newline characters are interpreted as record separators. 
+Backslash characters in the text will be interpreted in one of two ways:
+if the backslash character precedes another backslash character, the pair
+will be interpreted as a literal backslash. 
+If the backslash character precedes any other character, the two characters
+following the backslash will be interpreted as hexadecimal specification of
+a single character, e.g., \0a is a newline character in the ASCII
+character set.
+
+<p>For this reason, any backslash or newline characters that naturally
+occur in the text input must be escaped to avoid misinterpretation by
+htdb_load
+
+<p>If the
+<strong>-T
+</strong> option is specified, the underlying access method type
+must be specified using the
+<strong>-t
+</strong> option. 
+<br><dt><code></code>
+<dd><strong>-t
+</strong>
+
+<p>Specify the underlying access method. 
+If no
+<strong>-t
+</strong> option is specified, the database will be loaded into a
+database of the same type as was dumped, e.g., a Hash database will be
+created if a Hash database was dumped.
+
+<p>Btree and Hash databases may be converted from one to the other.  Queue
+and Recno databases may be converted from one to the other.  If the
+<strong>-k
+</strong> option was specified on the call to htdb_dump then Queue
+and Recno databases may be converted to Btree or Hash, with the key being
+the integer record number. 
+<br><dt><code></code>
+<dd><strong>-V
+</strong>
+
+<p>Write the version number to the standard output and exit. 
+</dl>
+
+<p>The htdb_load utility attaches to one or more of the Berkeley DB
+shared memory regions.  In order to avoid region corruption, it
+should always be given
+the chance to detach and exit gracefully.  To cause htdb_load to clean up
+after itself and exit, send it an interrupt signal (SIGINT).
+
+<p>The htdb_load utility exits 0 on success, 1 if one or more key/data
+pairs were not loaded into the database because the key already existed,
+and &gt;1 if an error occurs.
+
+<p><hr>
+Node:<a name="htdb_load%20KEYWORDS">htdb_load KEYWORDS</a>,
+Next:<a rel=next href="#htdb_load%20ENVIRONMENT">htdb_load ENVIRONMENT</a>,
+Previous:<a rel=previous href="#htdb_load%20OPTIONS">htdb_load OPTIONS</a>,
+Up:<a rel=up href="#htdb_load">htdb_load</a>
+<br>
+
+<h3>htdb_load KEYWORDS</h3>
+
+<p>The following keywords are supported for the
+<strong>-c
+</strong> command-line option
+to the htdb_load utility. See DB-&gt;open for further discussion of
+these keywords and what values should be specified.
+
+<p>The parenthetical listing specifies how the value part of the
+<strong>name=value
+</strong> pair is interpreted. 
+Items listed as (boolean) expect value to be
+<strong>1
+</strong> (set) or
+<strong>0
+</strong>
+(unset). 
+Items listed as (number) convert value to a number. 
+Items listed as (string) use the string value without modification.
+<dl>
+<dt><code>bt_minkey (number)</code>
+<dd>
+The minimum number of keys per page. 
+<br><dt><code>db_lorder (number)</code>
+<dd>
+The byte order for integers in the stored database metadata. 
+<br><dt><code>db_pagesize (number)</code>
+<dd>
+The size of pages used for nodes in the tree, in bytes. 
+<br><dt><code>duplicates (boolean)</code>
+<dd>
+The value of the DB_DUP flag. 
+<br><dt><code>h_ffactor (number)</code>
+<dd>
+The density within the Hash database. 
+<br><dt><code>h_nelem (number)</code>
+<dd>
+The size of the Hash database. 
+<br><dt><code>keys (boolean)</code>
+<dd>
+Specify if keys are present for Queue or Recno databases. 
+<br><dt><code>re_len (number)</code>
+<dd>
+Specify fixed-length records of the specified length. 
+<br><dt><code>re_pad (string)</code>
+<dd>
+Specify the fixed-length record pad character. 
+<br><dt><code>recnum (boolean)</code>
+<dd>
+The value of the DB_RECNUM flag. 
+<br><dt><code>renumber (boolean)</code>
+<dd>
+The value of the DB_RENUMBER flag. 
+<br><dt><code>subdatabase (string)</code>
+<dd>
+The subdatabase to load. 
+</dl>
+
+<p><hr>
+Node:<a name="htdb_load%20ENVIRONMENT">htdb_load ENVIRONMENT</a>,
+Previous:<a rel=previous href="#htdb_load%20KEYWORDS">htdb_load KEYWORDS</a>,
+Up:<a rel=up href="#htdb_load">htdb_load</a>
+<br>
+
+<h3>htdb_load ENVIRONMENT</h3>
+
+<p><strong>DB_HOME
+</strong>
+If the
+<strong>-h
+</strong> option is not specified and the environment variable
+DB_HOME is set, it is used as the path of the database home.
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
+Node:<a name="mifluzdump">mifluzdump</a>,
+Next:<a rel=next href="#mifluzload">mifluzload</a>,
+Previous:<a rel=previous href="#htdb_load">htdb_load</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>mifluzdump</h2>
+
+<ul>
+<li><a href="#mifluzdump%20NAME">mifluzdump NAME</a>: 
+<li><a href="#mifluzdump%20SYNOPSIS">mifluzdump SYNOPSIS</a>: 
+<li><a href="#mifluzdump%20DESCRIPTION">mifluzdump DESCRIPTION</a>: 
+<li><a href="#mifluzdump%20ENVIRONMENT">mifluzdump ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="mifluzdump%20NAME">mifluzdump NAME</a>,
+Next:<a rel=next href="#mifluzdump%20SYNOPSIS">mifluzdump SYNOPSIS</a>,
+Previous:<a rel=previous href="#mifluzdump">mifluzdump</a>,
+Up:<a rel=up href="#mifluzdump">mifluzdump</a>
+<br>
+
+<h3>mifluzdump NAME</h3>
+
+<p>dump the content of an inverted index.
+
+<p><hr>
+Node:<a name="mifluzdump%20SYNOPSIS">mifluzdump SYNOPSIS</a>,
+Next:<a rel=next href="#mifluzdump%20DESCRIPTION">mifluzdump DESCRIPTION</a>,
+Previous:<a rel=previous href="#mifluzdump%20NAME">mifluzdump NAME</a>,
+Up:<a rel=up href="#mifluzdump">mifluzdump</a>
+<br>
+
+<h3>mifluzdump SYNOPSIS</h3>
+
+<pre>
+mifluzdump file
+</pre>
+
+<p><hr>
+Node:<a name="mifluzdump%20DESCRIPTION">mifluzdump DESCRIPTION</a>,
+Next:<a rel=next href="#mifluzdump%20ENVIRONMENT">mifluzdump ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzdump%20SYNOPSIS">mifluzdump SYNOPSIS</a>,
+Up:<a rel=up href="#mifluzdump">mifluzdump</a>
+<br>
+
+<h3>mifluzdump DESCRIPTION</h3>
+
+<p>mifluzdump writes on
+<strong>stdout
+</strong> a complete ascii description
+of the
+<strong>file
+</strong> inverted index using the
+<code>WordList::Write
+</code>
+method.
+
+<p><hr>
+Node:<a name="mifluzdump%20ENVIRONMENT">mifluzdump ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzdump%20DESCRIPTION">mifluzdump DESCRIPTION</a>,
+Up:<a rel=up href="#mifluzdump">mifluzdump</a>
+<br>
+
+<h3>mifluzdump ENVIRONMENT</h3>
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
+Node:<a name="mifluzload">mifluzload</a>,
+Next:<a rel=next href="#mifluzsearch">mifluzsearch</a>,
+Previous:<a rel=previous href="#mifluzdump">mifluzdump</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>mifluzload</h2>
+
+<ul>
+<li><a href="#mifluzload%20NAME">mifluzload NAME</a>: 
+<li><a href="#mifluzload%20SYNOPSIS">mifluzload SYNOPSIS</a>: 
+<li><a href="#mifluzload%20DESCRIPTION">mifluzload DESCRIPTION</a>: 
+<li><a href="#mifluzload%20ENVIRONMENT">mifluzload ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="mifluzload%20NAME">mifluzload NAME</a>,
+Next:<a rel=next href="#mifluzload%20SYNOPSIS">mifluzload SYNOPSIS</a>,
+Previous:<a rel=previous href="#mifluzload">mifluzload</a>,
+Up:<a rel=up href="#mifluzload">mifluzload</a>
+<br>
+
+<h3>mifluzload NAME</h3>
+
+<p>load the content of an inverted index.
+
+<p><hr>
+Node:<a name="mifluzload%20SYNOPSIS">mifluzload SYNOPSIS</a>,
+Next:<a rel=next href="#mifluzload%20DESCRIPTION">mifluzload DESCRIPTION</a>,
+Previous:<a rel=previous href="#mifluzload%20NAME">mifluzload NAME</a>,
+Up:<a rel=up href="#mifluzload">mifluzload</a>
+<br>
+
+<h3>mifluzload SYNOPSIS</h3>
+
+<pre>
+mifluzload file
+</pre>
+
+<p><hr>
+Node:<a name="mifluzload%20DESCRIPTION">mifluzload DESCRIPTION</a>,
+Next:<a rel=next href="#mifluzload%20ENVIRONMENT">mifluzload ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzload%20SYNOPSIS">mifluzload SYNOPSIS</a>,
+Up:<a rel=up href="#mifluzload">mifluzload</a>
+<br>
+
+<h3>mifluzload DESCRIPTION</h3>
+
+<p>mifluzload reads from
+<strong>stdout
+</strong> a complete ascii description
+of the
+<strong>file
+</strong> inverted index using the
+<code>WordList::Read
+</code>
+method.
+
+<p><hr>
+Node:<a name="mifluzload%20ENVIRONMENT">mifluzload ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzload%20DESCRIPTION">mifluzload DESCRIPTION</a>,
+Up:<a rel=up href="#mifluzload">mifluzload</a>
+<br>
+
+<h3>mifluzload ENVIRONMENT</h3>
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
+Node:<a name="mifluzsearch">mifluzsearch</a>,
+Next:<a rel=next href="#WordContext">WordContext</a>,
+Previous:<a rel=previous href="#mifluzload">mifluzload</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>mifluzsearch</h2>
+
+<ul>
+<li><a href="#mifluzsearch%20NAME">mifluzsearch NAME</a>: 
+<li><a href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>: 
+<li><a href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>: 
+<li><a href="#mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="mifluzsearch%20NAME">mifluzsearch NAME</a>,
+Next:<a rel=next href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>,
+Previous:<a rel=previous href="#mifluzsearch">mifluzsearch</a>,
+Up:<a rel=up href="#mifluzsearch">mifluzsearch</a>
+<br>
+
+<h3>mifluzsearch NAME</h3>
+
+<p>search the content of an inverted index.
+
+<p><hr>
+Node:<a name="mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>,
+Next:<a rel=next href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>,
+Previous:<a rel=previous href="#mifluzsearch%20NAME">mifluzsearch NAME</a>,
+Up:<a rel=up href="#mifluzsearch">mifluzsearch</a>
+<br>
+
+<h3>mifluzsearch SYNOPSIS</h3>
+
+<pre>
+mifluzsearch -f words [options]
+</pre>
+
+<p><hr>
+Node:<a name="mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>,
+Next:<a rel=next href="#mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>,
+Up:<a rel=up href="#mifluzsearch">mifluzsearch</a>
+<br>
+
+<h3>mifluzsearch DESCRIPTION</h3>
+
+<p>mifluzsearch searches a mifluz index for documents matching a
+Alt*Vista expression (simple syntax).
+
+<p><hr>
+Node:<a name="mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>,
+Up:<a rel=up href="#mifluzsearch">mifluzsearch</a>
+<br>
+
+<h3>mifluzsearch ENVIRONMENT</h3>
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
+Node:<a name="WordContext">WordContext</a>,
+Next:<a rel=next href="#WordList">WordList</a>,
+Previous:<a rel=previous href="#mifluzsearch">mifluzsearch</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordContext</h2>
+
+<ul>
+<li><a href="#WordContext%20NAME">WordContext NAME</a>: 
+<li><a href="#WordContext%20SYNOPSIS">WordContext SYNOPSIS</a>: 
+<li><a href="#WordContext%20DESCRIPTION">WordContext DESCRIPTION</a>: 
+<li><a href="#WordContext%20CONFIGURATION">WordContext CONFIGURATION</a>: 
+<li><a href="#WordContext%20METHODS">WordContext METHODS</a>: 
+<li><a href="#WordContext%20ENVIRONMENT">WordContext ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordContext%20NAME">WordContext NAME</a>,
+Next:<a rel=next href="#WordContext%20SYNOPSIS">WordContext SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordContext">WordContext</a>,
+Up:<a rel=up href="#WordContext">WordContext</a>
+<br>
+
+<h3>WordContext NAME</h3>
+
+<p>read configuration and setup mifluz context.
+
+<p><hr>
+Node:<a name="WordContext%20SYNOPSIS">WordContext SYNOPSIS</a>,
+Next:<a rel=next href="#WordContext%20DESCRIPTION">WordContext DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordContext%20NAME">WordContext NAME</a>,
+Up:<a rel=up href="#WordContext">WordContext</a>
+<br>
+
+<h3>WordContext SYNOPSIS</h3>
+
+<pre>
+#include &lt;mifluz.h&gt;
+
+WordContext context;
+</pre>
+
+<p><hr>
+Node:<a name="WordContext%20DESCRIPTION">WordContext DESCRIPTION</a>,
+Next:<a rel=next href="#WordContext%20CONFIGURATION">WordContext CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordContext%20SYNOPSIS">WordContext SYNOPSIS</a>,
+Up:<a rel=up href="#WordContext">WordContext</a>
+<br>
+
+<h3>WordContext DESCRIPTION</h3>
+
+<p>The WordContext object must be the first object created. 
+All other objects (WordList, WordReference, WordKey and WordRecord)
+are allocated via the corresponding methods of WordContext (List,
+Word, Key and Record respectively).
+
+<p>The WordContext object contains a
+<strong>Configuration
+</strong> object
+that holds the configuration parameters used by the instance. 
+If a configuration parameter is changed, the
+<code>ReInitialize
+</code>
+method should be called to take them in account.
+
+<p><hr>
+Node:<a name="WordContext%20CONFIGURATION">WordContext CONFIGURATION</a>,
+Next:<a rel=next href="#WordContext%20METHODS">WordContext METHODS</a>,
+Previous:<a rel=previous href="#WordContext%20DESCRIPTION">WordContext DESCRIPTION</a>,
+Up:<a rel=up href="#WordContext">WordContext</a>
+<br>
+
+<h3>WordContext CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_monitor {true|false} (default false)</code>
+<dd>
+ If true create a
+<code>WordMonitor
+</code> instance to gather statistics and
+build reports. 
+</dl>
+
+<p><hr>
+Node:<a name="WordContext%20METHODS">WordContext METHODS</a>,
+Next:<a rel=next href="#WordContext%20ENVIRONMENT">WordContext ENVIRONMENT</a>,
+Previous:<a rel=previous href="#WordContext%20CONFIGURATION">WordContext CONFIGURATION</a>,
+Up:<a rel=up href="#WordContext">WordContext</a>
+<br>
+
+<h3>WordContext METHODS</h3>
+
+<dl>
+<dt><code>WordContext()</code>
+<dd>Constructor. Read the configuration parameters from the
+environment.  If the environment variable
+<strong>MIFLUZ_CONFIG
+</strong> is
+set to a pathname, read it as a configuration file. If
+<strong>MIFLUZ_CONFIG
+</strong> is not set, try to read the
+<code>~/.mifluz
+</code>
+configuration file or
+<code>/etc/mifluz.conf
+</code>. See the mifluz
+manual page for a complete list of the configuration attributes. 
+<br><dt><code>WordContext(const Configuration &amp;config)</code>
+<dd>Constructor. The
+<strong>config
+</strong> argument must contain all the configuration
+parameters, no configuration file is loaded from the environment. 
+<br><dt><code>WordContext(const ConfigDefaults *array)</code>
+<dd>Constructor. The
+<strong>array
+</strong> argument holds configuration parameters
+that will override their equivalent in the configuration file read
+from the environment. 
+<br><dt><code>void Initialize(const Configuration &amp;config)</code>
+<dd>Initialize the WordContext object. This method is called by
+every constructor.
+
+<p>When calling
+<strong>Initialize
+</strong> a second time, one must ensure
+that all WordList and WordCursor objects have been
+destroyed. WordList and WordCursor internal state depends on the
+current WordContext that will be lost by a second call.
+
+<p>For those interested by the internals, the
+<strong>Initialize
+</strong> function
+maintains a Berkeley DB environment (DB_ENV) in the following way:
+
+<p>First invocation:
+<pre>Initialize -&gt; new DB_ENV (thru WordDBInfo)
+</pre>
+
+<p>Second invocation:
+<pre>Initialize -&gt; delete DB_ENV -&gt; new DB_ENV (thru WordDBInfo)
+</pre>
+<br><dt><code>int Initialize(const ConfigDefaults* config_defaults = 0)</code>
+<dd>Initialize the WordContext object. 
+Build a
+<code>Configuration
+</code> object from the file pointed to by the
+MIFLUZ_CONFIG environment variable or ~/.mifluz or /etc/mifluz.conf. 
+The
+<strong>config_defaults
+</strong> argument, if provided, is passed to
+the
+<code>Configuration
+</code> object using the
+<strong>Defaults
+</strong> method. 
+The
+<strong>Initialize(const Configuration &amp;)
+</strong> method is then called
+with the
+<code>Configuration
+</code> object. 
+Return OK if success, NOTOK otherwise. 
+Refer to the
+<code>Configuration
+</code> description for more information. 
+<br><dt><code>int ReInitialize()</code>
+<dd>Destroy internal state except the
+<code>Configuration
+</code> object and
+rebuild it. May be used when the configuration is changed to
+take these changes in account. 
+Return OK if success, NOTOK otherwise. 
+<br><dt><code>const WordType&amp; GetType() const</code>
+<dd>Return the
+<strong>WordType
+</strong> data member of the current object as a const. 
+<br><dt><code>WordType&amp; GetType()</code>
+<dd>Return the
+<strong>WordType
+</strong> data member of the current object. 
+<br><dt><code>const WordKeyInfo&amp; GetKeyInfo() const</code>
+<dd>Return the
+<strong>WordKeyInfo
+</strong> data member of the current object
+as a const. 
+<br><dt><code>WordKeyInfo&amp; GetKeyInfo()</code>
+<dd>Return the
+<strong>WordKeyInfo
+</strong> data member of the current object. 
+<br><dt><code>const WordRecordInfo&amp; GetRecordInfo() const</code>
+<dd>Return the
+<strong>WordRecordInfo
+</strong> data member of the current
+object as a const. 
+<br><dt><code>WordRecordInfo&amp; GetRecordInfo()</code>
+<dd>Return the
+<strong>WordRecordInfo
+</strong> data member of the current object. 
+<br><dt><code>const WordDBInfo&amp; GetDBInfo() const</code>
+<dd>Return the
+<strong>WordDBInfo
+</strong> data member of the current object as
+a const. 
+<br><dt><code>WordDBInfo&amp; GetDBInfo()</code>
+<dd>Return the
+<strong>WordDBInfo
+</strong> data member of the current object. 
+<br><dt><code>const WordMonitor* GetMonitor() const</code>
+<dd>Return the
+<strong>WordMonitor
+</strong> data member of the current object
+as a const.  The pointer may be NULL if the word_monitor
+attribute is false. 
+<br><dt><code>WordMonitor* GetMonitor()</code>
+<dd>Return the
+<strong>WordMonitor
+</strong> data member of the current object. 
+The pointer may be NULL if the word_monitor attribute is false. 
+<br><dt><code>const Configuration&amp; GetConfiguration() const</code>
+<dd>Return the
+<strong>Configuration
+</strong> data member of the current object
+as a const. 
+<br><dt><code>Configuration&amp; GetConfiguration()</code>
+<dd>Return the
+<strong>Configuration
+</strong> data member of the current object. 
+<br><dt><code>WordList* List()</code>
+<dd>Return a new
+<strong>WordList
+</strong> object, using the
+WordList(WordContext*) constructor. It is the responsibility of the
+caller to delete this object before the WordContext object is
+deleted. Refer to the
+<strong>wordlist_multi
+</strong> configuration parameter
+to know the exact type of the object created. 
+<br><dt><code>WordReference* Word()</code>
+<dd>Return a new
+<strong>WordReference
+</strong> object, using the
+WordReference(WordContext*) constructor. It is the responsibility of the
+caller to delete this object before the WordContext object is
+deleted. 
+<br><dt><code>WordReference* Word(const String&amp; key0, const String&amp; record0)</code>
+<dd>Return a new
+<strong>WordReference
+</strong> object, using the
+WordReference(WordContext*, const String&amp;, const&amp; String)
+constructor. It is the responsibility of the
+caller to delete this object before the WordContext object is
+deleted. 
+<br><dt><code>WordReference* Word(const String&amp; word)</code>
+<dd>Return a new
+<strong>WordReference
+</strong> object, using the
+WordReference(WordContext*, const String&amp;)
+constructor. It is the responsibility of the
+caller to delete this object before the WordContext object is
+deleted. 
+<br><dt><code>WordRecord* Record()</code>
+<dd>Return a new
+<strong>WordRecord
+</strong> object, using the
+WordRecord(WordContext*) constructor. It is the responsibility of the
+caller to delete this object before the WordContext object is
+deleted. 
+<br><dt><code>WordKey* Key()</code>
+<dd>Return a new
+<strong>WordKey
+</strong> object, using the
+WordKey(WordContext*) constructor. It is the responsibility of the
+caller to delete this object before the WordContext object is
+deleted. 
+<br><dt><code>WordKey* Key(const String&amp; word)</code>
+<dd>Return a new
+<strong>WordKey
+</strong> object, using the
+WordKey(WordContext*, const String&amp;) constructor. It is the
+responsibility of the caller to delete this object before the
+WordContext object is deleted. 
+<br><dt><code>WordKey* Key(const WordKey&amp; other)</code>
+<dd>Return a new
+<strong>WordKey
+</strong> object, using the
+WordKey(WordContext*, const WordKey&amp;) constructor. It is the
+responsibility of the caller to delete this object before the
+WordContext object is deleted. 
+</dl>
+
+<p><hr>
+Node:<a name="WordContext%20ENVIRONMENT">WordContext ENVIRONMENT</a>,
+Previous:<a rel=previous href="#WordContext%20METHODS">WordContext METHODS</a>,
+Up:<a rel=up href="#WordContext">WordContext</a>
+<br>
+
+<h3>WordContext ENVIRONMENT</h3>
+
+<p><strong>MIFLUZ_CONFIG
+</strong> file name of configuration file read by
+WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong> or
+<strong>/etc/mifluz.conf
+</strong>
+
+<p><hr>
+Node:<a name="WordList">WordList</a>,
+Next:<a rel=next href="#WordDict">WordDict</a>,
+Previous:<a rel=previous href="#WordContext">WordContext</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordList</h2>
+
+<ul>
+<li><a href="#WordList%20NAME">WordList NAME</a>: 
+<li><a href="#WordList%20SYNOPSIS">WordList SYNOPSIS</a>: 
+<li><a href="#WordList%20DESCRIPTION">WordList DESCRIPTION</a>: 
+<li><a href="#WordList%20CONFIGURATION">WordList CONFIGURATION</a>: 
+<li><a href="#WordList%20METHODS">WordList METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordList%20NAME">WordList NAME</a>,
+Next:<a rel=next href="#WordList%20SYNOPSIS">WordList SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordList">WordList</a>,
+Up:<a rel=up href="#WordList">WordList</a>
+<br>
+
+<h3>WordList NAME</h3>
+
+<p>abstract class to manage and use an inverted index file.
+
+<p><hr>
+Node:<a name="WordList%20SYNOPSIS">WordList SYNOPSIS</a>,
+Next:<a rel=next href="#WordList%20DESCRIPTION">WordList DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordList%20NAME">WordList NAME</a>,
+Up:<a rel=up href="#WordList">WordList</a>
+<br>
+
+<h3>WordList SYNOPSIS</h3>
+
+<pre>
+#include &lt;mifluz.h&gt;
+
+WordContext context;
+
+WordList* words = context-&gt;List();
+
+delete words;
+</pre>
+
+<p><hr>
+Node:<a name="WordList%20DESCRIPTION">WordList DESCRIPTION</a>,
+Next:<a rel=next href="#WordList%20CONFIGURATION">WordList CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordList%20SYNOPSIS">WordList SYNOPSIS</a>,
+Up:<a rel=up href="#WordList">WordList</a>
+<br>
+
+<h3>WordList DESCRIPTION</h3>
+
+<p>WordList is the
+<code>mifluz
+</code> equivalent of a database handler. Each
+WordList object is bound to an inverted index file and implements the
+operations to create it, fill it with word occurrences and search
+for an entry matching a given criterion.
+
+<p>WordList is an abstract class and cannot be instanciated. 
+The
+<strong>List
+</strong> method of the class WordContext will create
+an instance using the appropriate derived class, either WordListOne
+or WordListMulti. Refer to the corresponding manual pages for
+more information on their specific semantic.
+
+<p>When doing bulk insertions, mifluz creates temporary files that
+contain the entries to be inserted in the index. Those files are
+typically named
+<code>indexC00000000
+</code>. The maximum size of the
+temporary file is
+<strong>wordlist_cache_size
+</strong> / 2. When the maximum
+size of the temporary file is reached, mifluz creates another temporary
+file named
+<code>indexC00000001
+</code>. The process continues until mifluz
+created 50 temporary file. At this point it merges all temporary files
+into one that replaces the first
+<code>indexC00000000
+</code>. Then it continues
+to create temporary file again and keeps following this algorithm until
+the bulk insertion is finished. When the bulk insertion is finished,
+mifluz has one big file named
+<code>indexC00000000
+</code> that contains
+all the entries to be inserted in the index. mifluz inserts all the
+entries from
+<code>indexC00000000
+</code> into the index and delete the
+temporary file when done. The insertion will be fast since all the
+entries in
+<code>indexC00000000
+</code> are already sorted.
+
+<p>The parameter
+<strong>wordlist_cache_max
+</strong> can be used to prevent the
+temporary files to grow indefinitely. If the total cumulated size of
+the
+<code>indexC*
+</code> files grow beyond this parameter, they are merged
+into the main index and deleted. For instance setting this parameter
+value to 500Mb garanties that the total size of the
+<code>indexC*
+</code>
+files will not grow above 500Mb.
+
+<p><hr>
+Node:<a name="WordList%20CONFIGURATION">WordList CONFIGURATION</a>,
+Next:<a rel=next href="#WordList%20METHODS">WordList METHODS</a>,
+Previous:<a rel=previous href="#WordList%20DESCRIPTION">WordList DESCRIPTION</a>,
+Up:<a rel=up href="#WordList">WordList</a>
+<br>
+
+<h3>WordList CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_extend {true|false} (default false)</code>
+<dd>
+ If
+<strong>true
+</strong> maintain reference count of unique
+words. The
+<strong>Noccurrence
+</strong> method gives access to this count. 
+<br><dt><code>wordlist_verbose &lt;number&gt; (default 0)</code>
+<dd>
+ Set the verbosity level of the WordList class.
+
+<p>1 walk logic
+
+<p>2 walk logic details
+
+<p>3 walk logic lots of details
+<br><dt><code>wordlist_page_size &lt;bytes&gt; (default 8192)</code>
+<dd>
+ Berkeley DB page size (see Berkeley DB documentation)
+<br><dt><code>wordlist_cache_size &lt;bytes&gt; (default 500K)</code>
+<dd>
+ Berkeley DB cache size (see Berkeley DB documentation)
+Cache makes a huge difference in performance. It must be at least 2%
+of the expected total data size. Note that if compression is activated
+the data size is eight times larger than the actual file size. In this
+case the cache must be scaled to 2% of the data size, not 2%
+of the file size. See
+<strong>Cache tuning
+</strong> in the mifluz guide for
+more hints. 
+See WordList(3) for the rationale behind cache file handling. 
+<br><dt><code>wordlist_cache_max &lt;bytes&gt; (default 0)</code>
+<dd>
+ Maximum size of the cumulated cache files generated when doing bulk
+insertion with the
+<strong>BatchStart()
+</strong> function. When this limit is
+reached, the cache files are all merged into the inverted index. 
+The value 0 means infinite size allowed. 
+See WordList(3) for the rationale behind cache file handling. 
+<br><dt><code>wordlist_cache_inserts {true|false} (default false)</code>
+<dd>
+ If true all
+<strong>Insert
+</strong> calls are cached in memory. When the
+WordList object is closed or a different access method is called
+the cached entries are flushed in the inverted index. 
+<br><dt><code>wordlist_compress {true|false} (default false)</code>
+<dd>
+ Activate compression of the index. The resulting index is eight times
+smaller than the uncompressed index. 
+</dl>
+
+<p><hr>
+Node:<a name="WordList%20METHODS">WordList METHODS</a>,
+Previous:<a rel=previous href="#WordList%20CONFIGURATION">WordList CONFIGURATION</a>,
+Up:<a rel=up href="#WordList">WordList</a>
+<br>
+
+<h3>WordList METHODS</h3>
+
+<dl>
+<dt><code>inline WordContext* GetContext()</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance. 
+<br><dt><code>inline const WordContext* GetContext() const</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance as a const. 
+<br><dt><code>virtual inline int Override(const WordReference&amp; wordRef)</code>
+<dd>Insert
+<strong>wordRef
+</strong> in index. If the
+<code>Key()
+</code> part of
+the
+<strong>wordRef
+</strong> exists in the index, override it. 
+Returns OK on success, NOTOK on error. 
+<br><dt><code>virtual int Exists(const WordReference&amp; wordRef)</code>
+<dd>Returns OK if
+<strong>wordRef
+</strong> exists in the index, NOTOK otherwise. 
+<br><dt><code>inline int Exists(const String&amp; word)</code>
+<dd>Returns OK if
+<strong>word
+</strong> exists in the index, NOTOK otherwise. 
+<br><dt><code>virtual int WalkDelete(const WordReference&amp; wordRef)</code>
+<dd>Delete all entries in the index whose key matches the
+<code>Key()
+</code> part of
+<strong>wordRef
+</strong>, using the
+<code>Walk
+</code>
+method. 
+Returns the number of entries successfully deleted. 
+<br><dt><code>virtual int Delete(const WordReference&amp; wordRef)</code>
+<dd>Delete the entry in the index that exactly matches the
+<code>Key()
+</code> part of
+<strong>wordRef. 
+</strong>
+Returns OK if deletion is successfull, NOTOK otherwise. 
+<br><dt><code>virtual int Open(const String&amp; filename, int mode)</code>
+<dd>Open inverted index
+<strong>filename. 
+</strong>
+<strong>mode
+</strong>
+may be
+<code>O_RDONLY
+</code> or
+<code>O_RDWR. 
+</code> If mode is
+<code>O_RDWR
+</code> it can be or'ed with
+<code>O_TRUNC
+</code> to reset
+the content of an existing inverted index. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int Close()</code>
+<dd>Close inverted index. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>virtual unsigned int Size() const</code>
+<dd>Return the size of the index in pages. 
+<br><dt><code>virtual int Pagesize() const</code>
+<dd>Return the page size
+<br><dt><code>virtual WordDict *Dict()</code>
+<dd>Return a pointer to the inverted index dictionnary. 
+<br><dt><code>const String&amp; Filename() const</code>
+<dd>Return the filename given to the last call to Open. 
+<br><dt><code>int Flags() const</code>
+<dd>Return the mode given to the last call to Open. 
+<br><dt><code>inline List *Find(const WordReference&amp; wordRef)</code>
+<dd>Returns the list of word occurrences exactly matching the
+<code>Key()
+</code> part of
+<strong>wordRef. 
+</strong> The
+<code>List
+</code> returned
+contains pointers to
+<code>WordReference
+</code> objects. It is
+the responsibility of the caller to free the list. See List.h
+header for usage. 
+<br><dt><code>inline List *FindWord(const String&amp; word)</code>
+<dd>Returns the list of word occurrences exactly matching the
+<strong>word. 
+</strong> The
+<code>List
+</code> returned
+contains pointers to
+<code>WordReference
+</code> objects. It is
+the responsibility of the caller to free the list. See List.h
+header for usage. 
+<br><dt><code>virtual List *operator [] (const WordReference&amp; wordRef)</code>
+<dd>Alias to the
+<strong>Find
+</strong> method. 
+<br><dt><code>inline List *operator [] (const String&amp; word)</code>
+<dd>Alias to the
+<strong>FindWord
+</strong> method. 
+<br><dt><code>virtual List *Prefix (const WordReference&amp; prefix)</code>
+<dd>Returns the list of word occurrences matching the
+<code>Key()
+</code>
+part of
+<strong>wordRef. 
+</strong> In the
+<code>Key()
+</code>, the string
+(accessed with
+<code>GetWord()
+</code>) matches any string that begins
+with it. The
+<code>List
+</code> returned contains pointers to
+<code>WordReference
+</code> objects. It is the responsibility of the
+caller to free the list. 
+<br><dt><code>inline List *Prefix (const String&amp; prefix)</code>
+<dd>Returns the list of word occurrences matching the
+<strong>word. 
+</strong> In the
+<code>Key()
+</code>, the string (accessed with
+<code>GetWord()
+</code>) matches any string that begins with it. The
+<code>List
+</code> returned contains pointers to
+<code>WordReference
+</code>
+objects. It is the responsibility of the caller to free the
+list. 
+<br><dt><code>virtual List *Words()</code>
+<dd>Returns a list of all unique words contained in the inverted
+index. The
+<code>List
+</code> returned contains pointers to
+<code>String
+</code> objects. It is the responsibility of the caller
+to free the list. See List.h header for usage. 
+<br><dt><code>virtual List *WordRefs()</code>
+<dd>Returns a list of all entries contained in the
+inverted index. The
+<code>List
+</code> returned contains pointers to
+<code>WordReference
+</code> objects. It is the responsibility of
+the caller to free the list. See List.h header for usage. 
+<br><dt><code>virtual WordCursor *Cursor(wordlist_walk_callback_t callback, Object *callback_data)</code>
+<dd>Create a cursor that searches all the occurrences in the
+inverted index and call
+<strong>ncallback
+</strong> with
+<strong>ncallback_data
+</strong> for every match. 
+<br><dt><code>virtual WordCursor *Cursor(const WordKey &amp;searchKey, int action = HTDIG_WORDLIST_WALKER)</code>
+<dd>Create a cursor that searches all the occurrences in the
+inverted index and that match
+<strong>nsearchKey. 
+</strong> If
+<strong>naction
+</strong> is set to HTDIG_WORDLIST_WALKER calls
+<strong>searchKey.callback
+</strong> with
+<strong>searchKey.callback_data
+</strong>
+for every match. If
+<strong>naction
+</strong> is set to
+HTDIG_WORDLIST_COLLECT push each match in
+<strong>searchKey.collectRes
+</strong>
+data member as a
+<strong>WordReference
+</strong> object. It is the responsibility
+of the caller to free the
+<strong>searchKey.collectRes
+</strong> list. 
+<br><dt><code>virtual WordCursor *Cursor(const WordKey &amp;searchKey, wordlist_walk_callback_t callback, Object * callback_data)</code>
+<dd>Create a cursor that searches all the occurrences in the
+inverted index and that match
+<strong>nsearchKey
+</strong> and calls
+<strong>ncallback
+</strong> with
+<strong>ncallback_data
+</strong> for every match. 
+<br><dt><code>virtual WordKey Key(const String&amp; bufferin)</code>
+<dd>Create a WordKey object and return it. The
+<strong>bufferin
+</strong> argument
+is used to initialize the key, as in the WordKey::Set method. 
+The first component of
+<strong>bufferin
+</strong> must be a word that is translated
+to the corresponding numerical id using the WordDict::Serial
+method. 
+<br><dt><code>virtual WordReference Word(const String&amp; bufferin, int exists = 0)</code>
+<dd>Create a WordReference object and return it. The
+<strong>bufferin
+</strong> argument is used to initialize the structure,
+as in the WordReference::Set method.  The first component of
+<strong>bufferin
+</strong> must be a word that is translated to the
+corresponding numerical id using the WordDict::Serial method. 
+If the
+<strong>exists
+</strong> argument is set to 1, the method
+WordDict::SerialExists is used instead, that is no serial is
+assigned to the word if it does not already have one. 
+Before translation the word is normalized using the
+WordType::Normalize method. The word is saved using the
+WordReference::SetWord method. 
+<br><dt><code>virtual WordReference WordExists(const String&amp; bufferin)</code>
+<dd>Alias for Word(bufferin, 1). 
+<br><dt><code>virtual void BatchStart()</code>
+<dd>Accelerate bulk insertions in the inverted index. All
+insertion done with the
+<strong>Override
+</strong> method are batched
+instead of being updating the inverted index immediately. 
+No update of the inverted index file is done before the
+<strong>BatchEnd
+</strong> method is called. 
+<br><dt><code>virtual void BatchEnd()</code>
+<dd>Terminate a bulk insertion started with a call to the
+<strong>BatchStart
+</strong> method. When all insertions are done
+the
+<strong>AllRef
+</strong> method is called to restore statistics. 
+<br><dt><code>virtual int Noccurrence(const String&amp; key, unsigned int&amp; noccurrence) const</code>
+<dd>Return in
+<strong>noccurrence
+</strong> the number of occurrences of the
+string contained in the
+<code>GetWord()
+</code> part of
+<strong>key. 
+</strong>
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int Write(FILE* f)</code>
+<dd>Write on file descriptor
+<strong>f
+</strong> an ASCII description of the
+index. Each line of the file contains a
+<code>WordReference
+</code>
+ASCII description. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int WriteDict(FILE* f)</code>
+<dd>Write on file descriptor
+<strong>f
+</strong> the complete dictionnary
+with statistics. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int Read(FILE* f)</code>
+<dd>Read
+<code>WordReference
+</code> ASCII descriptions from
+<strong>f
+</strong>,
+returns the number of inserted WordReference or &lt; 0 if an error
+occurs. Invalid descriptions are ignored as well as empty
+lines. 
+</dl>
+
+<p><hr>
+Node:<a name="WordDict">WordDict</a>,
+Next:<a rel=next href="#WordListOne">WordListOne</a>,
+Previous:<a rel=previous href="#WordList">WordList</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordDict</h2>
+
+<ul>
+<li><a href="#WordDict%20NAME">WordDict NAME</a>: 
+<li><a href="#WordDict%20SYNOPSIS">WordDict SYNOPSIS</a>: 
+<li><a href="#WordDict%20DESCRIPTION">WordDict DESCRIPTION</a>: 
+<li><a href="#WordDict%20METHODS">WordDict METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordDict%20NAME">WordDict NAME</a>,
+Next:<a rel=next href="#WordDict%20SYNOPSIS">WordDict SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordDict">WordDict</a>,
+Up:<a rel=up href="#WordDict">WordDict</a>
+<br>
+
+<h3>WordDict NAME</h3>
+
+<p>manage and use an inverted index dictionary.
+
+<p><hr>
+Node:<a name="WordDict%20SYNOPSIS">WordDict SYNOPSIS</a>,
+Next:<a rel=next href="#WordDict%20DESCRIPTION">WordDict DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordDict%20NAME">WordDict NAME</a>,
+Up:<a rel=up href="#WordDict">WordDict</a>
+<br>
+
+<h3>WordDict SYNOPSIS</h3>
+
+<pre>
+#include &lt;mifluz.h&gt;
+
+WordList* words = ...;
+WordDict* dict = words-&gt;Dict();
+</pre>
+
+<p><hr>
+Node:<a name="WordDict%20DESCRIPTION">WordDict DESCRIPTION</a>,
+Next:<a rel=next href="#WordDict%20METHODS">WordDict METHODS</a>,
+Previous:<a rel=previous href="#WordDict%20SYNOPSIS">WordDict SYNOPSIS</a>,
+Up:<a rel=up href="#WordDict">WordDict</a>
+<br>
+
+<h3>WordDict DESCRIPTION</h3>
+
+<p>WordDict maps strings to unique identifiers and frequency in the
+inverted index. Whenever a new word is found, the WordDict class
+can be asked to assign it a serial number. When doing so, an entry
+is created in the dictionary with a frequency of zero. The application
+may then increment or decrement the frequency to reflect the inverted
+index content.
+
+<p>The serial numbers range from 1 to 2^32 inclusive.
+
+<p>A WordDict object is automatically created by the WordList object and
+should not be created directly by the application.
+
+<p><hr>
+Node:<a name="WordDict%20METHODS">WordDict METHODS</a>,
+Previous:<a rel=previous href="#WordDict%20DESCRIPTION">WordDict DESCRIPTION</a>,
+Up:<a rel=up href="#WordDict">WordDict</a>
+<br>
+
+<h3>WordDict METHODS</h3>
+
+<dl>
+<dt><code>WordDict()</code>
+<dd>Private constructor. 
+<br><dt><code>int Initialize(WordList* words)</code>
+<dd>Bind the object a WordList inverted index. Return OK on success,
+NOTOK otherwise. 
+<br><dt><code>int Open()</code>
+<dd>Open the underlying Berkeley DB sub-database. The enclosing
+file is given by the
+<code>words
+</code> data member. Return OK on success,
+NOTOK otherwise. 
+<br><dt><code>int Remove()</code>
+<dd>Destroy the underlying Berkeley DB sub-database. Return OK on success,
+NOTOK otherwise. 
+<br><dt><code>int Close()</code>
+<dd>Close the underlying Berkeley DB sub-database. Return OK on success,
+NOTOK otherwise. 
+<br><dt><code>int Serial(const String&amp; word, unsigned int&amp; serial)</code>
+<dd>If the
+<strong>word
+</strong> argument exists in the dictionnary, return its
+serial number in the
+<strong>serial
+</strong> argument. If it does not already
+exists, assign it a serial number, create an entry with a frequency
+of zero and return the new serial in the
+<strong>serial
+</strong> argument. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int SerialExists(const String&amp; word, unsigned int&amp; serial)</code>
+<dd>If the
+<strong>word
+</strong> argument exists in the dictionnary, return its
+serial number in the
+<strong>serial
+</strong> argument. If it does not exists
+set the
+<strong>serial
+</strong> argument to WORD_DICT_SERIAL_INVALID. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int SerialRef(const String&amp; word, unsigned int&amp; serial)</code>
+<dd>Short hand for Serial() followed by Ref(). 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Noccurrence(const String&amp; word, unsigned int&amp; noccurrence) const</code>
+<dd>Return the frequency of the
+<strong>word
+</strong> argument
+in the
+<strong>noccurrence
+</strong> argument. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Normalize(String&amp; word) const</code>
+<dd>Short hand for words-&gt;GetContext()-&gt;GetType()-&gt;Normalize(word). 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Ref(const String&amp; word)</code>
+<dd>Short hand for Incr(word, 1)
+<br><dt><code>int Incr(const String&amp; word, unsigned int incr)</code>
+<dd>Add
+<strong>incr
+</strong> to the frequency of the
+<strong>word
+</strong>. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Unref(const String&amp; word)</code>
+<dd>Short hand for Decr(word, 1)
+<br><dt><code>int Decr(const String&amp; word, unsigned int decr)</code>
+<dd>Subtract
+<strong>decr
+</strong> to the frequency of the
+<strong>word
+</strong>. If
+the frequency becomes lower or equal to zero, remove the entry
+from the dictionnary and lose the association between the word and its
+serial number. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Put(const String&amp; word, unsigned int noccurrence)</code>
+<dd>Set the frequency of
+<strong>word
+</strong> with the value of the
+<strong>noccurrence
+</strong>
+argument. 
+<br><dt><code>int Exists(const String&amp; word) const</code>
+<dd>Return true if
+<strong>word
+</strong> exists in the dictionnary, false otherwise. 
+<br><dt><code>List* Words() const</code>
+<dd>Return a pointer to the associated WordList object. 
+<br><dt><code>WordDictCursor* Cursor() const</code>
+<dd>Return a cursor to sequentially walk the dictionnary using the
+<strong>Next
+</strong> method. 
+<br><dt><code>int Next(WordDictCursor* cursor, String&amp; word, WordDictRecord&amp; record)</code>
+<dd>Return the next entry in the dictionnary. The
+<strong>cursor
+</strong> argument
+must have been created using the
+<code>Cursor
+</code> method. The word is
+returned in the
+<strong>word
+</strong> argument and the record is returned in
+the
+<strong>record
+</strong> argument. 
+On success the function returns 0, at the end of the dictionnary it
+returns DB_NOTFOUND. The
+<strong>cursor
+</strong> argument is deallocated when
+the function hits the end of the dictionnary or an error occurs. 
+<br><dt><code>WordDictCursor* CursorPrefix(const String&amp; prefix) const</code>
+<dd>Return a cursor to sequentially walk the entries of the dictionnary
+that start with the
+<strong>prefix
+</strong> argument, using the
+<strong>NextPrefix
+</strong> method. 
+<br><dt><code>int NextPrefix(WordDictCursor* cursor, String&amp; word, WordDictRecord&amp; record)</code>
+<dd>Return the next prefix from the dictionnary. The
+<strong>cursor
+</strong> argument
+must have been created using the
+<code>CursorPrefix
+</code> method. The word is
+returned in the
+<strong>word
+</strong> argument and the record is returned in
+the
+<strong>record
+</strong> argument. The
+<strong>word
+</strong> is guaranteed to start with
+the prefix specified to the
+<strong>CursorPrefix
+</strong> method. 
+On success the function returns 0, at the end of the dictionnary it
+returns DB_NOTFOUND. The
+<strong>cursor
+</strong> argument is deallocated when
+the function hits the end of the dictionnary or an error occurs. 
+<br><dt><code>int Write(FILE* f)</code>
+<dd>Dump the complete dictionary in the file descriptor
+<strong>f. 
+</strong> The
+format of the dictionary is
+<code>word serial frequency
+</code>, one by
+line. 
+</dl>
+
+<p><hr>
+Node:<a name="WordListOne">WordListOne</a>,
+Next:<a rel=next href="#WordKey">WordKey</a>,
+Previous:<a rel=previous href="#WordDict">WordDict</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordListOne</h2>
+
+<ul>
+<li><a href="#WordListOne%20NAME">WordListOne NAME</a>: 
+<li><a href="#WordListOne%20SYNOPSIS">WordListOne SYNOPSIS</a>: 
+<li><a href="#WordListOne%20DESCRIPTION">WordListOne DESCRIPTION</a>: 
+<li><a href="#WordListOne%20METHODS">WordListOne METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordListOne%20NAME">WordListOne NAME</a>,
+Next:<a rel=next href="#WordListOne%20SYNOPSIS">WordListOne SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordListOne">WordListOne</a>,
+Up:<a rel=up href="#WordListOne">WordListOne</a>
+<br>
+
+<h3>WordListOne NAME</h3>
+
+<p>manage and use an inverted index file.
+
+<p><hr>
+Node:<a name="WordListOne%20SYNOPSIS">WordListOne SYNOPSIS</a>,
+Next:<a rel=next href="#WordListOne%20DESCRIPTION">WordListOne DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordListOne%20NAME">WordListOne NAME</a>,
+Up:<a rel=up href="#WordListOne">WordListOne</a>
+<br>
+
+<h3>WordListOne SYNOPSIS</h3>
+
+<pre>
+#include &lt;mifluz.h&gt;
+
+WordContext context;
+
+WordList* words = context-&gt;List();
+WordList* words = WordListOne(context)
+</pre>
+
+<p><hr>
+Node:<a name="WordListOne%20DESCRIPTION">WordListOne DESCRIPTION</a>,
+Next:<a rel=next href="#WordListOne%20METHODS">WordListOne METHODS</a>,
+Previous:<a rel=previous href="#WordListOne%20SYNOPSIS">WordListOne SYNOPSIS</a>,
+Up:<a rel=up href="#WordListOne">WordListOne</a>
+<br>
+
+<h3>WordListOne DESCRIPTION</h3>
+
+<p>WordList is the
+<code>mifluz
+</code> equivalent of a database handler. Each
+WordList object is bound to an inverted index file and implements the
+operations to create it, fill it with word occurrences and search
+for an entry matching a given criterion.
+
+<p>The general behavious of WordListOne is described in the WordList
+manual page. It is prefered to create a WordListOne instance by
+setting the
+<code>wordlist_multi
+</code> configuration parameter to false
+and calling the
+<strong>WordContext::List
+</strong> method.
+
+<p>Only the methods that differ from WordList are listed here. 
+All the methods of WordList are implemented by WordListOne and
+you should refer to the manual page for more information.
+
+<p>The
+<strong>Cursor
+</strong> methods all return a WordCursorOne instance
+cast to a WordCursor object.
+
+<p><hr>
+Node:<a name="WordListOne%20METHODS">WordListOne METHODS</a>,
+Previous:<a rel=previous href="#WordListOne%20DESCRIPTION">WordListOne DESCRIPTION</a>,
+Up:<a rel=up href="#WordListOne">WordListOne</a>
+<br>
+
+<h3>WordListOne METHODS</h3>
+
+<dl>
+<dt><code>WordListOne(WordContext* ncontext)</code>
+<dd>Constructor. Build inverted index handling object using
+run time configuration parameters listed in the
+<strong>CONFIGURATION
+</strong>
+section of the
+<strong>WordList
+</strong> manual page. 
+<br><dt><code>int DeleteCursor(WordDBCursor&amp; cursor)</code>
+<dd>Delete the inverted index entry currently pointed to by the
+<strong>cursor. 
+</strong>
+Returns 0 on success, Berkeley DB error code on error. This
+is mainly useful when implementing a callback function for
+a
+<strong>WordCursor. 
+</strong>
+</dl>
+
+<p><hr>
+Node:<a name="WordKey">WordKey</a>,
+Next:<a rel=next href="#WordKeyInfo">WordKeyInfo</a>,
+Previous:<a rel=previous href="#WordListOne">WordListOne</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordKey</h2>
+
+<ul>
+<li><a href="#WordKey%20NAME">WordKey NAME</a>: 
+<li><a href="#WordKey%20SYNOPSIS">WordKey SYNOPSIS</a>: 
+<li><a href="#WordKey%20DESCRIPTION">WordKey DESCRIPTION</a>: 
+<li><a href="#WordKey%20ASCII%20FORMAT">WordKey ASCII FORMAT</a>: 
+<li><a href="#WordKey%20METHODS">WordKey METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordKey%20NAME">WordKey NAME</a>,
+Next:<a rel=next href="#WordKey%20SYNOPSIS">WordKey SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordKey">WordKey</a>,
+Up:<a rel=up href="#WordKey">WordKey</a>
+<br>
+
+<h3>WordKey NAME</h3>
+
+<p>inverted index key.
+
+<p><hr>
+Node:<a name="WordKey%20SYNOPSIS">WordKey SYNOPSIS</a>,
+Next:<a rel=next href="#WordKey%20DESCRIPTION">WordKey DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordKey%20NAME">WordKey NAME</a>,
+Up:<a rel=up href="#WordKey">WordKey</a>
+<br>
+
+<h3>WordKey SYNOPSIS</h3>
+
+<pre>
+#include &lt;WordKey.h&gt;
+
+#define WORD_KEY_DOCID    1
+#define WORD_KEY_LOCATION 2
+
+WordList* words = ...;
+WordKey key = words-&gt;Key("word 100 20");
+WordKey searchKey;
+words-&gt;Dict()-&gt;SerialExists("dog", searchKey.Get(WORD_KEY_WORD));
+searchKey.Set(WORD_KEY_LOCATION, 5);
+WordCursor* cursor = words-&gt;Key(searchKey);
+</pre>
+
+<p><hr>
+Node:<a name="WordKey%20DESCRIPTION">WordKey DESCRIPTION</a>,
+Next:<a rel=next href="#WordKey%20ASCII%20FORMAT">WordKey ASCII FORMAT</a>,
+Previous:<a rel=previous href="#WordKey%20SYNOPSIS">WordKey SYNOPSIS</a>,
+Up:<a rel=up href="#WordKey">WordKey</a>
+<br>
+
+<h3>WordKey DESCRIPTION</h3>
+
+<p>Describes the key used to store a entry in the inverted index. 
+Each field in the key has a bit in the
+<strong>set
+</strong>
+member that says if it is set or not. This bit allows to
+say that a particular field is
+<code>undefined
+</code> regardless of
+the actual value stored. The methods
+<strong>IsDefined, SetDefined
+</strong> and
+<strong>Undefined
+</strong> are used to manipulate
+the
+<code>defined
+</code> status of a field. The
+<strong>Pack
+</strong> and
+<strong>Unpack
+</strong>
+methods are used to convert to and from the disk storage representation
+of the key.
+
+<p>Although constructors may be used, the prefered way to create a
+WordKey object is by using the
+<strong>WordContext::Key
+</strong> method.
+
+<p>The following constants are defined:
+<dl>
+<dt><code>WORD_KEY_WORD</code>
+<dd>
+ the index of the word identifier with the key for Set and Get
+methods. 
+<br><dt><code>WORD_KEY_VALUE_INVALID</code>
+<dd>
+ a value that is invalid for any field of the key. 
+</dl>
+
+<p><hr>
+Node:<a name="WordKey%20ASCII%20FORMAT">WordKey ASCII FORMAT</a>,
+Next:<a rel=next href="#WordKey%20METHODS">WordKey METHODS</a>,
+Previous:<a rel=previous href="#WordKey%20DESCRIPTION">WordKey DESCRIPTION</a>,
+Up:<a rel=up href="#WordKey">WordKey</a>
+<br>
+
+<h3>WordKey ASCII FORMAT</h3>
+
+<p>The ASCII description is a string with fields separated by tabs or
+white space.
+<pre>Example: 200 &lt;UNDEF&gt; 1 4 2
+Field 1: The word identifier or &lt;UNDEF&gt; if not defined
+Field 2 to the end: numerical value of the field or &lt;UNDEF&gt; if
+                    not defined
+</pre>
+
+<p><hr>
+Node:<a name="WordKey%20METHODS">WordKey METHODS</a>,
+Previous:<a rel=previous href="#WordKey%20ASCII%20FORMAT">WordKey ASCII FORMAT</a>,
+Up:<a rel=up href="#WordKey">WordKey</a>
+<br>
+
+<h3>WordKey METHODS</h3>
+
+<dl>
+<dt><code>WordKey(WordContext* ncontext)</code>
+<dd>Constructor. Build an empty key. 
+The
+<strong>ncontext
+</strong> argument must be a pointer to a valid
+WordContext object. 
+<br><dt><code>WordKey(WordContext* ncontext, const String&amp; desc)</code>
+<dd>Constructor. Initialize from an ASCII description of a key. 
+See
+<code>ASCII FORMAT
+</code> section. 
+The
+<strong>ncontext
+</strong> argument must be a pointer to a valid
+WordContext object. 
+<br><dt><code>void Clear()</code>
+<dd>Reset to empty key. 
+<br><dt><code>inline int NFields() const</code>
+<dd>Convenience functions to access the total number of fields
+in a key (see
+<code>WordKeyInfo(3)
+</code>). 
+<br><dt><code>inline WordKeyNum MaxValue(int position)</code>
+<dd>Convenience functions to access the
+maximum possible value for field at
+<strong>position. 
+</strong>
+in a key (see
+<code>WordKeyInfo(3)
+</code>). 
+<br><dt><code>inline WordContext* GetContext()</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance. 
+<br><dt><code>inline const WordContext* GetContext() const</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance as a const. 
+<br><dt><code>inline WordKeyNum Get(int position) const</code>
+<dd>Return value of numerical field at
+<strong>position
+</strong> as const. 
+<br><dt><code>inline WordKeyNum&amp; Get(int position)</code>
+<dd>Return value of numerical field at
+<strong>position. 
+</strong>
+<br><dt><code>inline const WordKeyNum &amp; operator[] (int position) const</code>
+<dd>Return value of numerical field at
+<strong>position
+</strong> as const. 
+<br><dt><code>inline WordKeyNum &amp; operator[] (int position)</code>
+<dd>Return value of numerical field at
+<strong>position. 
+</strong>
+<br><dt><code>inline void Set(int position, WordKeyNum val)</code>
+<dd>Set value of numerical field at
+<strong>position
+</strong> to
+<strong>val. 
+</strong>
+<br><dt><code>int IsDefined(int position) const</code>
+<dd>Returns true if field at
+<strong>position
+</strong> is
+<code>defined
+</code>, false
+otherwise. 
+<br><dt><code>void SetDefined(int position)</code>
+<dd>Value in field
+<strong>position
+</strong> becomes
+<code>defined. 
+</code>
+<br><dt><code>void Undefined(int position)</code>
+<dd>Value in field
+<strong>position
+</strong> becomes
+<code>undefined. 
+</code>
+<br><dt><code>int Set(const String&amp; bufferin)</code>
+<dd>Set the whole structure from ASCII string in
+<strong>bufferin. 
+</strong>
+See
+<code>ASCII FORMAT
+</code> section. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>int Get(String&amp; bufferout) const</code>
+<dd>Convert the whole structure to an ASCII string description
+in
+<strong>bufferout. 
+</strong>
+See
+<code>ASCII FORMAT
+</code> section. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>String Get() const</code>
+<dd>Convert the whole structure to an ASCII string description
+and return it. 
+See
+<code>ASCII FORMAT
+</code> section. 
+<br><dt><code>int Unpack(const char* string, int length)</code>
+<dd>Set structure from disk storage format as found in
+<strong>string
+</strong> buffer or length
+<strong>length. 
+</strong>
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>inline int Unpack(const String&amp; data)</code>
+<dd>Set structure from disk storage format as found in
+<strong>data
+</strong> string. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>int Pack(String&amp; data) const</code>
+<dd>Convert object into disk storage format as found in
+and place the result in
+<strong>data
+</strong> string. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>int Merge(const WordKey&amp; other)</code>
+<dd>Copy each
+<code>defined
+</code> field from other into the object, if
+the corresponding field of the object is not defined. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>int PrefixOnly()</code>
+<dd>Undefine all fields found after the first undefined field. The
+resulting key has a set of defined fields followed by undefined fields. 
+Returns NOTOK if the word is not defined because the resulting key would
+be empty and this is considered an error. Returns OK on success. 
+<br><dt><code>int SetToFollowing(int position = WORD_FOLLOWING_MAX)</code>
+<dd>Implement ++ on a key.
+
+<p>It behaves like arithmetic but follows these rules:
+<pre>. Increment starts at field &lt;position&gt;
+. If a field value overflows, increment field
+<strong>position
+</strong> - 1
+. Undefined fields are ignored and their value untouched
+. When a field is incremented all fields to the left are set to 0
+</pre>
+If position is not specified it is equivalent to NFields() - 1. 
+It returns OK if successfull, NOTOK if
+<strong>position
+</strong> out of range or
+WORD_FOLLOWING_ATEND if the maximum possible value was reached. 
+<br><dt><code>int Filled() const</code>
+<dd>Return true if all the fields are
+<code>defined
+</code>, false otherwise. 
+<br><dt><code>int Empty() const</code>
+<dd>Return true if no fields are
+<code>defined
+</code>, false otherwise. 
+<br><dt><code>int Equal(const WordKey&amp; other) const</code>
+<dd>Return true if the object and
+<strong>other
+</strong> are equal. 
+Only fields defined in both keys are compared. 
+<br><dt><code>int ExactEqual(const WordKey&amp; other) const</code>
+<dd>Return true if the object and
+<strong>other
+</strong> are equal. 
+All fields are compared. If a field is defined in
+<strong>object
+</strong>
+and not defined in the object, the key are not considered
+equal. 
+<br><dt><code>int PackEqual(const WordKey&amp; other) const</code>
+<dd>Return true if the object and
+<strong>other
+</strong> are equal. 
+The packed string are compared. An
+<code>undefined
+</code> numerical field
+will be 0 and therefore undistinguishable from a
+<code>defined
+</code> field
+whose value is 0. 
+<br><dt><code>int Outbound(int position, int increment)</code>
+<dd>Return true if adding
+<strong>increment
+</strong> in field at
+<strong>position
+</strong> makes
+it overflow or underflow, false if it fits. 
+<br><dt><code>int Overflow(int position, int increment)</code>
+<dd>Return true if adding positive
+<strong>increment
+</strong> to field at
+<strong>position
+</strong> makes it overflow, false if it fits. 
+<br><dt><code>int Underflow(int position, int increment)</code>
+<dd>Return true if subtracting positive
+<strong>increment
+</strong> to field
+at
+<strong>position
+</strong> makes it underflow, false if it fits. 
+<br><dt><code>int Prefix() const</code>
+<dd>Return OK if the key may be used as a prefix for search. 
+In other words return OK if the fields set in the key
+are all contiguous, starting from the first field. 
+Otherwise returns NOTOK
+<br><dt><code>static int Compare(WordContext* context, const String&amp; a, const String&amp; b)</code>
+<dd>Compare
+<strong>a
+</strong> and
+<strong>b
+</strong> in the Berkeley DB fashion. 
+<strong>a
+</strong> and
+<strong>b
+</strong> are packed keys. The semantics of the
+returned int is as of strcmp and is driven by the key description
+found in
+<code>WordKeyInfo. 
+</code> Returns positive number if
+<strong>a
+</strong> is
+greater than
+<strong>b
+</strong>, zero if they are equal, a negative number
+if
+<strong>a
+</strong> is lower than
+<strong>b. 
+</strong>
+<br><dt><code>static int Compare(WordContext* context, const unsigned char *a, int a_length, const unsigned char *b, int b_length)</code>
+<dd>Compare
+<strong>a
+</strong> and
+<strong>b
+</strong> in the Berkeley DB fashion. 
+<strong>a
+</strong> and
+<strong>b
+</strong> are packed keys. The semantics of the
+returned int is as of strcmp and is driven by the key description
+found in
+<code>WordKeyInfo. 
+</code> Returns positive number if
+<strong>a
+</strong> is
+greater than
+<strong>b
+</strong>, zero if they are equal, a negative number
+if
+<strong>a
+</strong> is lower than
+<strong>b. 
+</strong>
+<br><dt><code>int Diff(const WordKey&amp; other, int&amp; position, int&amp; lower)</code>
+<dd>Compare object defined fields with
+<strong>other
+</strong> key defined fields only,
+ignore fields that are not defined in object or
+<strong>other. 
+</strong>
+Return 1 if different 0 if equal. 
+If different,
+<strong>position
+</strong> is set to the field number that differ,
+<strong>lower
+</strong> is set to 1 if Get(
+<strong>position
+</strong>) is lower than
+other.Get(
+<strong>position
+</strong>) otherwise lower is set to 0. 
+<br><dt><code>int Write(FILE* f) const</code>
+<dd>Print object in ASCII form on
+<strong>f
+</strong> (uses
+<code>Get
+</code> method). 
+See
+<code>ASCII FORMAT
+</code> section. 
+<br><dt><code>void Print() const</code>
+<dd>Print object in ASCII form on
+<strong>stdout
+</strong> (uses
+<code>Get
+</code> method). 
+See
+<code>ASCII FORMAT
+</code> section. 
+</dl>
+
+<p><hr>
+Node:<a name="WordKeyInfo">WordKeyInfo</a>,
+Next:<a rel=next href="#WordType">WordType</a>,
+Previous:<a rel=previous href="#WordKey">WordKey</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordKeyInfo</h2>
+
+<ul>
+<li><a href="#WordKeyInfo%20NAME">WordKeyInfo NAME</a>: 
+<li><a href="#WordKeyInfo%20SYNOPSIS">WordKeyInfo SYNOPSIS</a>: 
+<li><a href="#WordKeyInfo%20DESCRIPTION">WordKeyInfo DESCRIPTION</a>: 
+<li><a href="#WordKeyInfo%20CONFIGURATION">WordKeyInfo CONFIGURATION</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordKeyInfo%20NAME">WordKeyInfo NAME</a>,
+Next:<a rel=next href="#WordKeyInfo%20SYNOPSIS">WordKeyInfo SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordKeyInfo">WordKeyInfo</a>,
+Up:<a rel=up href="#WordKeyInfo">WordKeyInfo</a>
+<br>
+
+<h3>WordKeyInfo NAME</h3>
+
+<p>information on the key structure of the inverted index.
+
+<p><hr>
+Node:<a name="WordKeyInfo%20SYNOPSIS">WordKeyInfo SYNOPSIS</a>,
+Next:<a rel=next href="#WordKeyInfo%20DESCRIPTION">WordKeyInfo DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordKeyInfo%20NAME">WordKeyInfo NAME</a>,
+Up:<a rel=up href="#WordKeyInfo">WordKeyInfo</a>
+<br>
+
+<h3>WordKeyInfo SYNOPSIS</h3>
+
+<pre>
+Helper for the WordKey class.
+</pre>
+
+<p><hr>
+Node:<a name="WordKeyInfo%20DESCRIPTION">WordKeyInfo DESCRIPTION</a>,
+Next:<a rel=next href="#WordKeyInfo%20CONFIGURATION">WordKeyInfo CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordKeyInfo%20SYNOPSIS">WordKeyInfo SYNOPSIS</a>,
+Up:<a rel=up href="#WordKeyInfo">WordKeyInfo</a>
+<br>
+
+<h3>WordKeyInfo DESCRIPTION</h3>
+
+<p>Describe the structure of the index key (
+<code>WordKey
+</code>). 
+The description includes the layout of the packed version
+stored on disk.
+
+<p><hr>
+Node:<a name="WordKeyInfo%20CONFIGURATION">WordKeyInfo CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordKeyInfo%20DESCRIPTION">WordKeyInfo DESCRIPTION</a>,
+Up:<a rel=up href="#WordKeyInfo">WordKeyInfo</a>
+<br>
+
+<h3>WordKeyInfo CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_wordkey_description &lt;desc&gt; (no default)</code>
+<dd>
+ Describe the structure of the inverted index key. 
+In the following explanation of the
+<code>&lt;desc&gt;
+</code> format,
+mandatory words are
+in bold and values that must be replaced in italic.
+
+<p><strong>Word
+</strong>
+<code>bits/name bits
+</code>[/...]
+
+<p>The
+<code>name
+</code> is an alphanumerical symbolic name for the key field. 
+The
+<code>bits
+</code> is the number of bits required to store this field. 
+Note that all values are stored in unsigned integers (unsigned int). 
+Example:
+<pre>Word 8/Document 16/Location 8
+</pre>
+</dl>
+
+<p><hr>
+Node:<a name="WordType">WordType</a>,
+Next:<a rel=next href="#WordDBInfo">WordDBInfo</a>,
+Previous:<a rel=previous href="#WordKeyInfo">WordKeyInfo</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordType</h2>
+
+<ul>
+<li><a href="#WordType%20NAME">WordType NAME</a>: 
+<li><a href="#WordType%20SYNOPSIS">WordType SYNOPSIS</a>: 
+<li><a href="#WordType%20DESCRIPTION">WordType DESCRIPTION</a>: 
+<li><a href="#WordType%20CONFIGURATION">WordType CONFIGURATION</a>: 
+<li><a href="#WordType%20METHODS">WordType METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordType%20NAME">WordType NAME</a>,
+Next:<a rel=next href="#WordType%20SYNOPSIS">WordType SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordType">WordType</a>,
+Up:<a rel=up href="#WordType">WordType</a>
+<br>
+
+<h3>WordType NAME</h3>
+
+<p>defines a word in term of allowed characters, length etc.
+
+<p><hr>
+Node:<a name="WordType%20SYNOPSIS">WordType SYNOPSIS</a>,
+Next:<a rel=next href="#WordType%20DESCRIPTION">WordType DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordType%20NAME">WordType NAME</a>,
+Up:<a rel=up href="#WordType">WordType</a>
+<br>
+
+<h3>WordType SYNOPSIS</h3>
+
+<pre>
+Only called thru WordContext::Initialize()
+</pre>
+
+<p><hr>
+Node:<a name="WordType%20DESCRIPTION">WordType DESCRIPTION</a>,
+Next:<a rel=next href="#WordType%20CONFIGURATION">WordType CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordType%20SYNOPSIS">WordType SYNOPSIS</a>,
+Up:<a rel=up href="#WordType">WordType</a>
+<br>
+
+<h3>WordType DESCRIPTION</h3>
+
+<p>WordType defines an indexed word and operations to validate
+a word to be indexed. All words inserted into the
+<code>mifluz
+</code> index
+are
+<strong>Normalize
+</strong>d before insertion. The configuration options
+give some control over the definition of a word.
+
+<p><hr>
+Node:<a name="WordType%20CONFIGURATION">WordType CONFIGURATION</a>,
+Next:<a rel=next href="#WordType%20METHODS">WordType METHODS</a>,
+Previous:<a rel=previous href="#WordType%20DESCRIPTION">WordType DESCRIPTION</a>,
+Up:<a rel=up href="#WordType">WordType</a>
+<br>
+
+<h3>WordType CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_allow_numbers {true|false} &lt;number&gt; (default false)</code>
+<dd>
+ A digit is considered a valid character within a word if
+this configuration parameter is set to
+<code>true
+</code> otherwise
+it is an error to insert a word containing digits. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_mimimun_word_length &lt;number&gt; (default 3)</code>
+<dd>
+ The minimum length of a word. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_maximum_word_length &lt;number&gt; (default 25)</code>
+<dd>
+ The maximum length of a word. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_allow_numbers {true|false} &lt;number&gt; (default false)</code>
+<dd>
+ A digit is considered a valid character within a word if
+this configuration parameter is set to
+<code>true
+</code> otherwise
+it is an error to insert a word containing digits. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_truncate {true|false} &lt;number&gt; (default true)</code>
+<dd>
+ If a word is too long according to
+the
+<code>wordlist_maximum_word_length
+</code> it is truncated
+if this configuration parameter is
+<code>true
+</code> otherwise it
+is considered an invalid word. 
+<br><dt><code>wordlist_lowercase {true|false} &lt;number&gt; (default true)</code>
+<dd>
+ If a word contains upper case letters it is converted to lowercase
+if this configuration parameter is true, otherwise it is left
+untouched. 
+<br><dt><code>wordlist_valid_punctuation [characters] (default none)</code>
+<dd>
+ A list of punctuation characters that may appear in a word. 
+These characters will be removed from the word before insertion
+in the index. 
+</dl>
+
+<p><hr>
+Node:<a name="WordType%20METHODS">WordType METHODS</a>,
+Previous:<a rel=previous href="#WordType%20CONFIGURATION">WordType CONFIGURATION</a>,
+Up:<a rel=up href="#WordType">WordType</a>
+<br>
+
+<h3>WordType METHODS</h3>
+
+<dl>
+<dt><code>int Normalize(String &amp;s) const</code>
+<dd>Normalize a word according to configuration specifications and
+builtin transformations. 
+<strong>Every
+</strong> word inserted in the inverted
+index goes thru this function. If
+a word is rejected (return value has WORD_NORMALIZE_NOTOK bit set) it will not
+be inserted in the index. If a word is accepted (return value has
+WORD_NORMALIZE_OK bit set) it will be inserted in the index. In
+addition to these two bits, informational values are stored that
+give information on the processing done on the word. 
+The bit field values and their meanings are
+as follows:
+<dl>
+<dt><code>WORD_NORMALIZE_TOOLONG</code>
+<dd>
+the word length exceeds the value of
+    the
+<code>wordlist_maximum_word_length
+</code> configuration parameter. 
+<br><dt><code>WORD_NORMALIZE_TOOSHORT</code>
+<dd>
+the word length is smaller than the value of
+    the
+<code>wordlist_minimum_word_length
+</code> configuration parameter. 
+<br><dt><code>WORD_NORMALIZE_CAPITAL</code>
+<dd>
+the word contained capital letters and has been converted
+    to lowercase. This bit is only set
+    if the
+<code>wordlist_lowercase
+</code> configuration parameter
+    is true. 
+<br><dt><code>WORD_NORMALIZE_NUMBER</code>
+<dd>
+the word contains digits and the configuration
+    parameter
+<code>wordlist_allow_numbers
+</code> is set to false. 
+<br><dt><code>WORD_NORMALIZE_CONTROL</code>
+<dd>
+the word contains control characters. 
+<br><dt><code>WORD_NORMALIZE_BAD</code>
+<dd>
+the word is listed in the file pointed by
+    the
+<code>wordlist_bad_word_list
+</code> configuration parameter. 
+<br><dt><code>WORD_NORMALIZE_NULL</code>
+<dd>
+the word is a zero length string. 
+<br><dt><code>WORD_NORMALIZE_PUNCTUATION</code>
+<dd>
+at least one character listed in
+    the
+<code>wordlist_valid_punctuation
+</code> attribute was removed
+    from the word. 
+<br><dt><code>WORD_NORMALIZE_NOALPHA</code>
+<dd>
+the word does not contain any alphanumerical character. 
+</dl>
+
+</dl>
+
+<p><hr>
+Node:<a name="WordDBInfo">WordDBInfo</a>,
+Next:<a rel=next href="#WordRecordInfo">WordRecordInfo</a>,
+Previous:<a rel=previous href="#WordType">WordType</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordDBInfo</h2>
+
+<ul>
+<li><a href="#WordDBInfo%20NAME">WordDBInfo NAME</a>: 
+<li><a href="#WordDBInfo%20SYNOPSIS">WordDBInfo SYNOPSIS</a>: 
+<li><a href="#WordDBInfo%20DESCRIPTION">WordDBInfo DESCRIPTION</a>: 
+<li><a href="#WordDBInfo%20CONFIGURATION">WordDBInfo CONFIGURATION</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordDBInfo%20NAME">WordDBInfo NAME</a>,
+Next:<a rel=next href="#WordDBInfo%20SYNOPSIS">WordDBInfo SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordDBInfo">WordDBInfo</a>,
+Up:<a rel=up href="#WordDBInfo">WordDBInfo</a>
+<br>
+
+<h3>WordDBInfo NAME</h3>
+
+<p>inverted index usage environment.
+
+<p><hr>
+Node:<a name="WordDBInfo%20SYNOPSIS">WordDBInfo SYNOPSIS</a>,
+Next:<a rel=next href="#WordDBInfo%20DESCRIPTION">WordDBInfo DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordDBInfo%20NAME">WordDBInfo NAME</a>,
+Up:<a rel=up href="#WordDBInfo">WordDBInfo</a>
+<br>
+
+<h3>WordDBInfo SYNOPSIS</h3>
+
+<pre>
+Only called thru WordContext::Initialize()
+</pre>
+
+<p><hr>
+Node:<a name="WordDBInfo%20DESCRIPTION">WordDBInfo DESCRIPTION</a>,
+Next:<a rel=next href="#WordDBInfo%20CONFIGURATION">WordDBInfo CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordDBInfo%20SYNOPSIS">WordDBInfo SYNOPSIS</a>,
+Up:<a rel=up href="#WordDBInfo">WordDBInfo</a>
+<br>
+
+<h3>WordDBInfo DESCRIPTION</h3>
+
+<p>The inverted indexes may be shared among processes/threads and provide the
+appropriate locking to prevent mistakes. In addition the memory cache
+used by
+<code>WordList
+</code> objects may be shared by processes/threads,
+greatly reducing the memory needs in multi-process applications. 
+For more information about the shared environment, check the Berkeley
+DB documentation.
+
+<p><hr>
+Node:<a name="WordDBInfo%20CONFIGURATION">WordDBInfo CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordDBInfo%20DESCRIPTION">WordDBInfo DESCRIPTION</a>,
+Up:<a rel=up href="#WordDBInfo">WordDBInfo</a>
+<br>
+
+<h3>WordDBInfo CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_env_skip {true,false} (default false)</code>
+<dd>
+ If true no environment is created at all. This must never
+be used if a
+<code>WordList
+</code> object is created. It may be
+useful if only
+<code>WordKey
+</code> objects are used, for instance. 
+<br><dt><code>wordlist_env_share {true,false} (default false)</code>
+<dd>
+ If true a sharable environment is open or created if none exist. 
+<br><dt><code>wordlist_env_dir &lt;directory&gt; (default .)</code>
+<dd>
+ Only valid if
+<code>wordlist_env_share
+</code> set to
+<code>true. 
+</code>
+Specify the directory in which the sharable environment will
+be created. All
+inverted indexes specified with a non-absolute pathname will be
+created relative to this directory. 
+</dl>
+
+<p><hr>
+Node:<a name="WordRecordInfo">WordRecordInfo</a>,
+Next:<a rel=next href="#WordRecord">WordRecord</a>,
+Previous:<a rel=previous href="#WordDBInfo">WordDBInfo</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordRecordInfo</h2>
+
+<ul>
+<li><a href="#WordRecordInfo%20NAME">WordRecordInfo NAME</a>: 
+<li><a href="#WordRecordInfo%20SYNOPSIS">WordRecordInfo SYNOPSIS</a>: 
+<li><a href="#WordRecordInfo%20DESCRIPTION">WordRecordInfo DESCRIPTION</a>: 
+<li><a href="#WordRecordInfo%20CONFIGURATION">WordRecordInfo CONFIGURATION</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordRecordInfo%20NAME">WordRecordInfo NAME</a>,
+Next:<a rel=next href="#WordRecordInfo%20SYNOPSIS">WordRecordInfo SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordRecordInfo">WordRecordInfo</a>,
+Up:<a rel=up href="#WordRecordInfo">WordRecordInfo</a>
+<br>
+
+<h3>WordRecordInfo NAME</h3>
+
+<p>information on the record structure of the inverted index.
+
+<p><hr>
+Node:<a name="WordRecordInfo%20SYNOPSIS">WordRecordInfo SYNOPSIS</a>,
+Next:<a rel=next href="#WordRecordInfo%20DESCRIPTION">WordRecordInfo DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordRecordInfo%20NAME">WordRecordInfo NAME</a>,
+Up:<a rel=up href="#WordRecordInfo">WordRecordInfo</a>
+<br>
+
+<h3>WordRecordInfo SYNOPSIS</h3>
+
+<pre>
+Only called thru WordContext::Initialize()
+</pre>
+
+<p><hr>
+Node:<a name="WordRecordInfo%20DESCRIPTION">WordRecordInfo DESCRIPTION</a>,
+Next:<a rel=next href="#WordRecordInfo%20CONFIGURATION">WordRecordInfo CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordRecordInfo%20SYNOPSIS">WordRecordInfo SYNOPSIS</a>,
+Up:<a rel=up href="#WordRecordInfo">WordRecordInfo</a>
+<br>
+
+<h3>WordRecordInfo DESCRIPTION</h3>
+
+<p>The structure of a record is very limited. It can contain
+a single integer value or a string.
+
+<p><hr>
+Node:<a name="WordRecordInfo%20CONFIGURATION">WordRecordInfo CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordRecordInfo%20DESCRIPTION">WordRecordInfo DESCRIPTION</a>,
+Up:<a rel=up href="#WordRecordInfo">WordRecordInfo</a>
+<br>
+
+<h3>WordRecordInfo CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_wordrecord_description {NONE|DATA|STR} (no default)</code>
+<dd>
+ NONE: the record is empty
+
+<p>DATA: the record contains an integer (unsigned int)
+
+<p>STR: the record contains a string (String)
+</dl>
+
+<p><hr>
+Node:<a name="WordRecord">WordRecord</a>,
+Next:<a rel=next href="#WordReference">WordReference</a>,
+Previous:<a rel=previous href="#WordRecordInfo">WordRecordInfo</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordRecord</h2>
+
+<ul>
+<li><a href="#WordRecord%20NAME">WordRecord NAME</a>: 
+<li><a href="#WordRecord%20SYNOPSIS">WordRecord SYNOPSIS</a>: 
+<li><a href="#WordRecord%20DESCRIPTION">WordRecord DESCRIPTION</a>: 
+<li><a href="#WordRecord%20ASCII%20FORMAT">WordRecord ASCII FORMAT</a>: 
+<li><a href="#WordRecord%20METHODS">WordRecord METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordRecord%20NAME">WordRecord NAME</a>,
+Next:<a rel=next href="#WordRecord%20SYNOPSIS">WordRecord SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordRecord">WordRecord</a>,
+Up:<a rel=up href="#WordRecord">WordRecord</a>
+<br>
+
+<h3>WordRecord NAME</h3>
+
+<p>inverted index record.
+
+<p><hr>
+Node:<a name="WordRecord%20SYNOPSIS">WordRecord SYNOPSIS</a>,
+Next:<a rel=next href="#WordRecord%20DESCRIPTION">WordRecord DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordRecord%20NAME">WordRecord NAME</a>,
+Up:<a rel=up href="#WordRecord">WordRecord</a>
+<br>
+
+<h3>WordRecord SYNOPSIS</h3>
+
+<pre>
+#include &lt;WordRecord.h&gt;
+
+WordContext* context;
+WordRecord* record = context-&gt;Record();
+if(record-&gt;DefaultType() == WORD_RECORD_DATA) {
+  record-&gt;info.data = 120;
+} else if(record-&gt;DefaultType() == WORD_RECORD_STR) {
+  record-&gt;info.str = "foobar";
+}
+delete record;
+</pre>
+
+<p><hr>
+Node:<a name="WordRecord%20DESCRIPTION">WordRecord DESCRIPTION</a>,
+Next:<a rel=next href="#WordRecord%20ASCII%20FORMAT">WordRecord ASCII FORMAT</a>,
+Previous:<a rel=previous href="#WordRecord%20SYNOPSIS">WordRecord SYNOPSIS</a>,
+Up:<a rel=up href="#WordRecord">WordRecord</a>
+<br>
+
+<h3>WordRecord DESCRIPTION</h3>
+
+<p>The record can contain an integer, if the default record
+type (see CONFIGURATION in
+<code>WordKeyInfo
+</code>) is set to
+<code>DATA
+</code>
+or a string if set to
+<code>STR. 
+</code>
+If the type is set to
+<code>NONE
+</code> the record does not contain
+any usable information.
+
+<p>Although constructors may be used, the prefered way to create a
+WordRecord object is by using the
+<strong>WordContext::Record
+</strong> method.
+
+<p><hr>
+Node:<a name="WordRecord%20ASCII%20FORMAT">WordRecord ASCII FORMAT</a>,
+Next:<a rel=next href="#WordRecord%20METHODS">WordRecord METHODS</a>,
+Previous:<a rel=previous href="#WordRecord%20DESCRIPTION">WordRecord DESCRIPTION</a>,
+Up:<a rel=up href="#WordRecord">WordRecord</a>
+<br>
+
+<h3>WordRecord ASCII FORMAT</h3>
+
+<p>If default type is
+<code>DATA
+</code> it is the decimal representation of
+an integer. If default type is
+<code>NONE
+</code> it is the empty string.
+
+<p><hr>
+Node:<a name="WordRecord%20METHODS">WordRecord METHODS</a>,
+Previous:<a rel=previous href="#WordRecord%20ASCII%20FORMAT">WordRecord ASCII FORMAT</a>,
+Up:<a rel=up href="#WordRecord">WordRecord</a>
+<br>
+
+<h3>WordRecord METHODS</h3>
+
+<dl>
+<dt><code>inline WordRecord(WordContext* ncontext)</code>
+<dd>Constructor. Build an empty record. 
+The
+<strong>ncontext
+</strong> argument must be a pointer to a valid
+WordContext object. 
+<br><dt><code>inline void Clear()</code>
+<dd>Reset to empty and set the type to the default specified
+in the configuration. 
+<br><dt><code>inline int DefaultType()</code>
+<dd>Return the default type WORD_RECORD_{DATA,STR,NONE}
+<br><dt><code>inline int Pack(String&amp; packed) const</code>
+<dd>Convert the object to a representation for disk storage written
+in the
+<strong>packed
+</strong> string. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>inline int Unpack(const char* string, int length)</code>
+<dd>
+Alias for Unpack(String(string, length))
+<br><dt><code>inline int Unpack(const String&amp; packed)</code>
+<dd>Read the object from a representation for disk storage contained
+in the
+<strong>packed
+</strong> argument. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Set(const String&amp; bufferin)</code>
+<dd>Set the whole structure from ASCII string description stored
+in the
+<strong>bufferin
+</strong> argument. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>int Get(String&amp; bufferout) const</code>
+<dd>Convert the whole structure to an ASCII string description
+and return it in the
+<strong>bufferout
+</strong> argument. 
+Return OK on success, NOTOK otherwise. 
+<br><dt><code>String Get() const</code>
+<dd>Convert the whole structure to an ASCII string description
+and return it. 
+<br><dt><code>inline WordContext* GetContext()</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance. 
+<br><dt><code>inline const WordContext* GetContext() const</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance as a const. 
+<br><dt><code>int Write(FILE* f) const</code>
+<dd>Print object in ASCII form on descriptor
+<strong>f
+</strong> using the
+Get method. 
+</dl>
+
+<p><hr>
+Node:<a name="WordReference">WordReference</a>,
+Next:<a rel=next href="#WordCursor">WordCursor</a>,
+Previous:<a rel=previous href="#WordRecord">WordRecord</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordReference</h2>
+
+<ul>
+<li><a href="#WordReference%20NAME">WordReference NAME</a>: 
+<li><a href="#WordReference%20SYNOPSIS">WordReference SYNOPSIS</a>: 
+<li><a href="#WordReference%20DESCRIPTION">WordReference DESCRIPTION</a>: 
+<li><a href="#WordReference%20ASCII%20FORMAT">WordReference ASCII FORMAT</a>: 
+<li><a href="#WordReference%20METHODS">WordReference METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordReference%20NAME">WordReference NAME</a>,
+Next:<a rel=next href="#WordReference%20SYNOPSIS">WordReference SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordReference">WordReference</a>,
+Up:<a rel=up href="#WordReference">WordReference</a>
+<br>
+
+<h3>WordReference NAME</h3>
+
+<p>inverted index occurrence.
+
+<p><hr>
+Node:<a name="WordReference%20SYNOPSIS">WordReference SYNOPSIS</a>,
+Next:<a rel=next href="#WordReference%20DESCRIPTION">WordReference DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordReference%20NAME">WordReference NAME</a>,
+Up:<a rel=up href="#WordReference">WordReference</a>
+<br>
+
+<h3>WordReference SYNOPSIS</h3>
+
+<pre>
+#include &lt;WordReference.h&gt;
+
+WordContext* context;
+WordReference* word = context-&gt;Word("word");
+WordReference* word = context-&gt;Word();
+WordReference* word = context-&gt;Word(WordKey("key 1 2"), WordRecord());
+
+WordKey key = word-&gt;Key()
+WordKey record = word-&gt;Record()
+
+word-&gt;Clear();
+
+delete word;
+</pre>
+
+<p><hr>
+Node:<a name="WordReference%20DESCRIPTION">WordReference DESCRIPTION</a>,
+Next:<a rel=next href="#WordReference%20ASCII%20FORMAT">WordReference ASCII FORMAT</a>,
+Previous:<a rel=previous href="#WordReference%20SYNOPSIS">WordReference SYNOPSIS</a>,
+Up:<a rel=up href="#WordReference">WordReference</a>
+<br>
+
+<h3>WordReference DESCRIPTION</h3>
+
+<p>A
+<code>WordReference
+</code> object is an agregate of a
+<code>WordKey
+</code> object
+and a
+<code>WordRecord
+</code> object.
+
+<p>Although constructors may be used, the prefered way to create a
+WordReference object is by using the
+<strong>WordContext::Word
+</strong> method.
+
+<p><hr>
+Node:<a name="WordReference%20ASCII%20FORMAT">WordReference ASCII FORMAT</a>,
+Next:<a rel=next href="#WordReference%20METHODS">WordReference METHODS</a>,
+Previous:<a rel=previous href="#WordReference%20DESCRIPTION">WordReference DESCRIPTION</a>,
+Up:<a rel=up href="#WordReference">WordReference</a>
+<br>
+
+<h3>WordReference ASCII FORMAT</h3>
+
+<p>The ASCII description is a string with fields separated by tabs or
+white space. It is made of the ASCII description of a
+<code>WordKey
+</code> object immediately followed by the ASCII
+description of a
+<code>WordRecord
+</code> object.  See the corresponding
+manual pages for more information.
+
+<p><hr>
+Node:<a name="WordReference%20METHODS">WordReference METHODS</a>,
+Previous:<a rel=previous href="#WordReference%20ASCII%20FORMAT">WordReference ASCII FORMAT</a>,
+Up:<a rel=up href="#WordReference">WordReference</a>
+<br>
+
+<h3>WordReference METHODS</h3>
+
+<dl>
+<dt><code>WordReference(WordContext* ncontext) :</code>
+<dd>Constructor. Build an object with empty key and empty record. 
+The
+<strong>ncontext
+</strong> argument must be a pointer to a valid
+WordContext object. 
+<br><dt><code>WordReference(WordContext* ncontext, const String&amp; key0, const String&amp; record0) :</code>
+<dd>Constructor. Build an object from disk representation of
+<strong>key
+</strong>
+and
+<strong>record
+</strong>. 
+The
+<strong>ncontext
+</strong> argument must be a pointer to a valid
+WordContext object. 
+<br><dt><code>WordReference(WordContext* ncontext, const String&amp; word) :</code>
+<dd>Constructor. Build an object with key word set to
+<strong>word
+</strong>
+and otherwise empty and empty record. 
+The
+<strong>ncontext
+</strong> argument must be a pointer to a valid
+WordContext object. 
+<br><dt><code>void Clear()</code>
+<dd>Reset to empty key and record
+<br><dt><code>inline WordContext* GetContext()</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance. 
+<br><dt><code>inline const WordContext* GetContext() const</code>
+<dd>Return a pointer to the WordContext object used to create
+this instance as a const. 
+<br><dt><code>inline String&amp; GetWord()</code>
+<dd>Return the
+<strong>word
+</strong> data member. 
+<br><dt><code>inline const String&amp; GetWord() const</code>
+<dd>Return the
+<strong>word
+</strong> data member as a const. 
+<br><dt><code>inline void SetWord(const String&amp; nword)</code>
+<dd>Set the
+<strong>word
+</strong> data member from the
+<strong>nword
+</strong> argument. 
+<br><dt><code>WordKey&amp; Key()</code>
+<dd>Return the key object. 
+<br><dt><code>const WordKey&amp; Key() const</code>
+<dd>Return the key object as const. 
+<br><dt><code>WordRecord&amp; Record()</code>
+<dd>Return the record object. 
+<br><dt><code>const WordRecord&amp; Record() const</code>
+<dd>Return the record object as const. 
+<br><dt><code>void Key(const WordKey&amp; arg)</code>
+<dd>Copy
+<strong>arg
+</strong> in the key part of the object. 
+<br><dt><code>int KeyUnpack(const String&amp; packed)</code>
+<dd>Set key structure from disk storage format as found in
+<strong>packed
+</strong> string. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>String KeyPack() const</code>
+<dd>Convert key object into disk storage format as found in
+return the resulting string. 
+<br><dt><code>int KeyPack(String&amp; packed) const</code>
+<dd>Convert key object into disk storage format as found in
+and place the result in
+<strong>packed
+</strong> string. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>void Record(const WordRecord&amp; arg)</code>
+<dd>Copy
+<strong>arg
+</strong> in the record part of the object. 
+<br><dt><code>int RecordUnpack(const String&amp; packed)</code>
+<dd>Set record structure from disk storage format as found in
+<strong>packed
+</strong> string. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>String RecordPack() const</code>
+<dd>Convert record object into disk storage format as found in
+return the resulting string. 
+<br><dt><code>int RecordPack(String&amp; packed) const</code>
+<dd>Convert record object into disk storage format as found in
+and place the result in
+<strong>packed
+</strong> string. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>inline int Pack(String&amp; ckey, String&amp; crecord) const</code>
+<dd>Short hand for KeyPack(
+<strong>ckey
+</strong>) RecordPack(
+<strong>crecord
+</strong>). 
+<br><dt><code>int Unpack(const String&amp; ckey, const String&amp; crecord)</code>
+<dd>Short hand for KeyUnpack(
+<strong>ckey
+</strong>) RecordUnpack(
+<strong>crecord
+</strong>). 
+<br><dt><code>int Merge(const WordReference&amp; other)</code>
+<dd>Merge key with other.Key() using the
+<code>WordKey::Merge
+</code> method:
+key.Merge(other.Key()). 
+See the corresponding manual page for details. Copy other.record
+into the record part of the object. 
+<br><dt><code>static WordReference Merge(const WordReference&amp; master, const WordReference&amp; slave)</code>
+<dd>Copy
+<strong>master
+</strong> before merging with
+<strong>master. 
+</strong>Merge(
+<strong>slave
+</strong>)
+and return the copy. Prevents alteration of
+<strong>master
+</strong>. 
+<br><dt><code>int Set(const String&amp; bufferin)</code>
+<dd>Set the whole structure from ASCII string in
+<strong>bufferin
+</strong>. 
+See
+<code>ASCII FORMAT
+</code> section. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>int Get(String&amp; bufferout) const</code>
+<dd>Convert the whole structure to an ASCII string description
+in
+<strong>bufferout. 
+</strong>
+See
+<code>ASCII FORMAT
+</code> section. 
+Return OK if successfull, NOTOK otherwise. 
+<br><dt><code>String Get() const</code>
+<dd>Convert the whole structure to an ASCII string description
+and return it. 
+See
+<code>ASCII FORMAT
+</code> section. 
+<br><dt><code>int Write(FILE* f) const</code>
+<dd>Print object in ASCII form on
+<strong>f
+</strong> (uses
+<code>Get
+</code> method). 
+See
+<code>ASCII FORMAT
+</code> section. 
+<br><dt><code>void Print() const</code>
+<dd>Print object in ASCII form on
+<strong>stdout
+</strong> (uses
+<code>Get
+</code> method). 
+See
+<code>ASCII FORMAT
+</code> section. 
+</dl>
+
+<p><hr>
+Node:<a name="WordCursor">WordCursor</a>,
+Next:<a rel=next href="#WordCursorOne">WordCursorOne</a>,
+Previous:<a rel=previous href="#WordReference">WordReference</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordCursor</h2>
+
+<ul>
+<li><a href="#WordCursor%20NAME">WordCursor NAME</a>: 
+<li><a href="#WordCursor%20SYNOPSIS">WordCursor SYNOPSIS</a>: 
+<li><a href="#WordCursor%20DESCRIPTION">WordCursor DESCRIPTION</a>: 
+<li><a href="#WordCursor%20METHODS">WordCursor METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordCursor%20NAME">WordCursor NAME</a>,
+Next:<a rel=next href="#WordCursor%20SYNOPSIS">WordCursor SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordCursor">WordCursor</a>,
+Up:<a rel=up href="#WordCursor">WordCursor</a>
+<br>
+
+<h3>WordCursor NAME</h3>
+
+<p>abstract class to search and retrieve entries in a WordList object.
+
+<p><hr>
+Node:<a name="WordCursor%20SYNOPSIS">WordCursor SYNOPSIS</a>,
+Next:<a rel=next href="#WordCursor%20DESCRIPTION">WordCursor DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordCursor%20NAME">WordCursor NAME</a>,
+Up:<a rel=up href="#WordCursor">WordCursor</a>
+<br>
+
+<h3>WordCursor SYNOPSIS</h3>
+
+<pre>
+#include &lt;WordList.h&gt;
+
+int callback(WordList *, WordDBCursor&amp; , const WordReference *, Object &amp;)
+{
+   ...
+}
+
+Object* data = ...
+
+WordList *words = ...;
+
+WordCursor *search = words-&gt;Cursor(WordKey("word &lt;UNDEF&gt; &lt;UNDEF&gt;"), HTDIG_WORDLIST_COLLECTOR);
+
+if(search-&gt;Walk() == NOTOK) bark;
+List* results = search-&gt;GetResults();
+
+WordCursor *search = words-&gt;Cursor(callback, data);
+WordCursor *search = words-&gt;Cursor(WordKey("word &lt;UNDEF&gt; &lt;UNDEF&gt;"));
+WordCursor *search = words-&gt;Cursor(WordKey("word &lt;UNDEF&gt; &lt;UNDEF&gt;"), callback, data);
+WordCursor *search = words-&gt;Cursor(WordKey());
+
+search-&gt;WalkInit();
+if(search-&gt;WalkNext() == OK)
+  dosomething(search-&gt;GetFound());
+search-&gt;WalkFinish();
+</pre>
+
+<p><hr>
+Node:<a name="WordCursor%20DESCRIPTION">WordCursor DESCRIPTION</a>,
+Next:<a rel=next href="#WordCursor%20METHODS">WordCursor METHODS</a>,
+Previous:<a rel=previous href="#WordCursor%20SYNOPSIS">WordCursor SYNOPSIS</a>,
+Up:<a rel=up href="#WordCursor">WordCursor</a>
+<br>
+
+<h3>WordCursor DESCRIPTION</h3>
+
+<p>WordCursor is an iterator on an inverted index. It is created by
+asking a
+<code>WordList
+</code> object with the
+<code>Cursor. 
+</code> There is
+no other way to create a WordCursor object. 
+When the
+<code>Walk*
+</code> methods return,
+the WordCursor object contains the result of the search and
+status information that indicates if it reached the end of
+the list (IsAtEnd() method).
+
+<p>The
+<strong>callback
+</strong> function that is called each time a match is
+found takes the following arguments:
+<pre>WordList* words pointer to the inverted index handle.
+WordDBCursor&amp; cursor to call Del() and delete the current match
+WordReference* wordRef is the match
+Object&amp; data is the user data provided by the caller when
+             search began.
+</pre>
+
+<p>The
+<code>WordKey
+</code> object that specifies the search criterion
+may be used as follows (assuming word is followed by DOCID and
+LOCATION):
+
+<p>Ex1:
+<strong>WordKey()
+</strong> walk the entire list of occurences.
+
+<p>Ex2:
+<strong>WordKey("word &lt;UNDEF&gt; &lt;UNDEF&gt;")
+</strong> find all occurrences
+of
+<code>word
+</code>.
+
+<p>Ex3:
+<strong>WordKey("meet &lt;UNDEF&gt; 1")
+</strong> find all occurrences of
+<code>meet
+</code> that occur at LOCATION 1 in any DOCID. This can
+be inefficient since the search has to scan all occurrences
+of
+<code>meet
+</code> to find the ones that occur at LOCATION 1.
+
+<p>Ex4:
+<strong>WordKey("meet 2 &lt;UNDEF&gt;")
+</strong> find all occurrences of
+<code>meet
+</code> that occur in DOCID 2, at any location.
+
+<p>WordList is an abstract class and cannot be instanciated. 
+See the WordCursorOne manual page for an actual implementation of
+a WordCursor object.
+
+<p><hr>
+Node:<a name="WordCursor%20METHODS">WordCursor METHODS</a>,
+Previous:<a rel=previous href="#WordCursor%20DESCRIPTION">WordCursor DESCRIPTION</a>,
+Up:<a rel=up href="#WordCursor">WordCursor</a>
+<br>
+
+<h3>WordCursor METHODS</h3>
+
+<dl>
+<dt><code>virtual void Clear() = 0</code>
+<dd>Clear all data in object, set
+<strong>GetResult()
+</strong> data to NULL but
+do not delete it (the application is responsible for that). 
+<br><dt><code>virtual inline int IsA() const</code>
+<dd>Returns the type of the object. May be overloaded by
+derived classes to differentiate them at runtime. 
+Returns WORD_CURSOR. 
+<br><dt><code>virtual inline int Optimize()</code>
+<dd>Optimize the cursor before starting a Walk. 
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int ContextSave(String&amp; buffer) const = 0</code>
+<dd>Save in
+<strong>buffer
+</strong> all the information necessary to resume
+the walk at the point it left. The ASCII representation of the
+last key found (GetFound()) is written in
+<strong>buffer
+</strong> using the
+WordKey::Get method. 
+<br><dt><code>virtual int ContextRestore(const String&amp; buffer) = 0</code>
+<dd>Restore from buffer all the information necessary to
+resume the walk at the point it left. The
+<strong>buffer
+</strong> is expected
+to contain an ASCII representation of a WordKey (see WordKey::Set
+method). A
+<strong>Seek
+</strong> is done on the key and the object is prepared
+to jump to the next occurrence when
+<strong>WalkNext
+</strong> is called (the
+cursor_get_flags is set to
+<code>DB_NEXT. 
+</code>
+<br><dt><code>virtual int Walk() = 0</code>
+<dd>Walk and collect data from the index. 
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int WalkInit() = 0</code>
+<dd>Must be called before other Walk methods are used. 
+Fill internal state according to input parameters
+and move before the first matching entry. 
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int WalkRewind() = 0</code>
+<dd>Move before the first index matching entry. 
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int WalkNext() = 0</code>
+<dd>Move to the next matching entry. 
+At end of list, WORD_WALK_ATEND is returned. 
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int WalkNextStep() = 0</code>
+<dd>Advance the cursor one step. The entry pointed to by the cursor may
+or may not match the requirements.  Returns OK if entry pointed
+by cursor matches requirements.  Returns NOTOK on
+failure. Returns WORD_WALK_NOMATCH_FAILED if the current entry
+does not match requirements, it's safe to call WalkNextStep again
+until either OK or NOTOK is returned. 
+<br><dt><code>virtual int WalkFinish() = 0</code>
+<dd>Terminate Walk, free allocated resources. 
+Returns OK on success, NOTOK otherwise. 
+<br><dt><code>virtual int Seek(const WordKey&amp; patch) = 0</code>
+<dd>Move before the inverted index position specified in
+<strong>patch. 
+</strong>
+May only be called after a successfull call to the
+<code>WalkNext
+</code>
+or
+<code>WalkNextStep
+</code>method. 
+Copy defined fields from
+<strong>patch
+</strong> into a copy of the
+<code>found
+</code> data member and
+initialize internal state so that
+<code>WalkNext
+</code> jumps to
+this key next time it's called (cursor_get_flag set to DB_SET_RANGE). 
+Returns OK if successfull, NOTOK otherwise. 
+<br><dt><code>virtual inline int IsAtEnd() const</code>
+<dd>Returns true if cursor is positioned after the last possible
+match, false otherwise. 
+<br><dt><code>inline WordKey&amp; GetSearch()</code>
+<dd>Returns the search criterion. 
+<br><dt><code>inline int GetAction() const</code>
+<dd>Returns the type of action when a matching entry
+is found. 
+<br><dt><code>inline List *GetResults()</code>
+<dd>Returns the list of WordReference found. The application
+is responsible for deallocation of the list. If the
+<strong>action
+</strong>
+input flag bit HTDIG_WORDLIST_COLLECTOR is not set, return a NULL
+pointer. 
+<br><dt><code>inline List *GetTraces()</code>
+<dd>For debugging purposes. Returns the list of WordReference hit
+during the search
+process. Some of them match the searched key, some don't. 
+The application is responsible for deallocation of the list. 
+<br><dt><code>inline void SetTraces(List* traceRes_arg)</code>
+<dd>For debugging purposes. Set the list of WordReference hit
+during the search process. 
+<br><dt><code>inline const WordReference&amp; GetFound()</code>
+<dd>Returns the last entry hit by the search. Only contains
+a valid value if the last
+<code>WalkNext
+</code> or
+<code>WalkNextStep
+</code>
+call was successfull (i.e. returned OK). 
+<br><dt><code>inline int GetStatus() const</code>
+<dd>Returns the status of the cursor which may be
+OK or WORD_WALK_ATEND. 
+<br><dt><code>virtual int Get(String&amp; bufferout) const = 0</code>
+<dd>Convert the whole structure to an ASCII string description. 
+Returns OK if successfull, NOTOK otherwise. 
+<br><dt><code>inline String Get() const</code>
+<dd>Convert the whole structure to an ASCII string description
+and return it. 
+<br><dt><code>virtual int Initialize(WordList *nwords, const WordKey &amp;nsearchKey, wordlist_walk_callback_t ncallback, Object * ncallback_data, int naction) = 0</code>
+<dd>Protected method. Derived classes should use this function to initialize
+the object if they do not call a WordCursor constructor in their own
+constructutor. Initialization may occur after the object is created
+and must occur before a
+<strong>Walk*
+</strong> method is called. See the
+DESCRIPTION section for the semantics of the arguments. 
+Return OK on success, NOTOK on error. 
+<br><dt><code>WordKey searchKey</code>
+<dd>Input data. The key to be searched, see DESCRIPTION for more information. 
+<br><dt><code>WordReference found</code>
+<dd>Output data. Last match found. Use GetFound() to retrieve it. 
+<br><dt><code>int status</code>
+<dd>Output data. WORD_WALK_ATEND if cursor is past last match,
+OK otherwise. Use GetStatus() to retrieve it. 
+<br><dt><code>WordList *words</code>
+<dd>The inverted index used by this cursor. 
+</dl>
+
+<p><hr>
+Node:<a name="WordCursorOne">WordCursorOne</a>,
+Next:<a rel=next href="#WordMonitor">WordMonitor</a>,
+Previous:<a rel=previous href="#WordCursor">WordCursor</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordCursorOne</h2>
+
+<ul>
+<li><a href="#WordCursorOne%20NAME">WordCursorOne NAME</a>: 
+<li><a href="#WordCursorOne%20SYNOPSIS">WordCursorOne SYNOPSIS</a>: 
+<li><a href="#WordCursorOne%20DESCRIPTION">WordCursorOne DESCRIPTION</a>: 
+<li><a href="#WordCursorOne%20METHODS">WordCursorOne METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordCursorOne%20NAME">WordCursorOne NAME</a>,
+Next:<a rel=next href="#WordCursorOne%20SYNOPSIS">WordCursorOne SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordCursorOne">WordCursorOne</a>,
+Up:<a rel=up href="#WordCursorOne">WordCursorOne</a>
+<br>
+
+<h3>WordCursorOne NAME</h3>
+
+<p>search and retrieve entries in a WordListOne object.
+
+<p><hr>
+Node:<a name="WordCursorOne%20SYNOPSIS">WordCursorOne SYNOPSIS</a>,
+Next:<a rel=next href="#WordCursorOne%20DESCRIPTION">WordCursorOne DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordCursorOne%20NAME">WordCursorOne NAME</a>,
+Up:<a rel=up href="#WordCursorOne">WordCursorOne</a>
+<br>
+
+<h3>WordCursorOne SYNOPSIS</h3>
+
+<pre>
+#include &lt;WordList.h&gt;
+
+int callback(WordList *, WordDBCursor&amp; , const WordReference *, Object &amp;)
+{
+   ...
+}
+
+Object* data = ...
+
+WordList *words = ...;
+
+WordCursor *search = words-&gt;Cursor(callback, data);
+WordCursor *search = words-&gt;Cursor(WordKey("word &lt;UNDEF&gt; &lt;UNDEF&gt;"));
+WordCursor *search = words-&gt;Cursor(WordKey("word &lt;UNDEF&gt; &lt;UNDEF&gt;"), callback, data);
+WordCursor *search = words-&gt;Cursor(WordKey());
+
+...
+
+if(search-&gt;Walk() == NOTOK) bark;
+List* results = search-&gt;GetResults();
+
+search-&gt;WalkInit();
+if(search-&gt;WalkNext() == OK)
+  dosomething(search-&gt;GetFound());
+search-&gt;WalkFinish();
+</pre>
+
+<p><hr>
+Node:<a name="WordCursorOne%20DESCRIPTION">WordCursorOne DESCRIPTION</a>,
+Next:<a rel=next href="#WordCursorOne%20METHODS">WordCursorOne METHODS</a>,
+Previous:<a rel=previous href="#WordCursorOne%20SYNOPSIS">WordCursorOne SYNOPSIS</a>,
+Up:<a rel=up href="#WordCursorOne">WordCursorOne</a>
+<br>
+
+<h3>WordCursorOne DESCRIPTION</h3>
+
+<p>WordCursorOne is a WordCursor derived class that implements search
+in a WordListOne object. It currently is the only derived class of
+the WordCursor object. Most of its behaviour is described in the
+WordCursor manual page, only the behaviour specific to WordCursorOne
+is documented here.
+
+<p><hr>
+Node:<a name="WordCursorOne%20METHODS">WordCursorOne METHODS</a>,
+Previous:<a rel=previous href="#WordCursorOne%20DESCRIPTION">WordCursorOne DESCRIPTION</a>,
+Up:<a rel=up href="#WordCursorOne">WordCursorOne</a>
+<br>
+
+<h3>WordCursorOne METHODS</h3>
+
+<dl>
+<dt><code>WordCursorOne(WordList *words)</code>
+<dd>Private constructor. Creator of the object must then call Initialize()
+prior to using any other methods. 
+<br><dt><code>WordCursorOne(WordList *words, wordlist_walk_callback_t callback, Object * callback_data)</code>
+<dd>Private constructor. See WordList::Cursor method with same prototype for
+description. 
+<br><dt><code>WordCursorOne(WordList *words, const WordKey &amp;searchKey, int action = HTDIG_WORDLIST_WALKER)</code>
+<dd>Private constructor. See WordList::Cursor method with same prototype for
+description. 
+<br><dt><code>WordCursorOne(WordList *words, const WordKey &amp;searchKey, wordlist_walk_callback_t callback, Object * callback_data)</code>
+<dd>Private constructor. See WordList::Cursor method with same prototype for
+description. 
+</dl>
+
+<p><hr>
+Node:<a name="WordMonitor">WordMonitor</a>,
+Next:<a rel=next href="#Configuration">Configuration</a>,
+Previous:<a rel=previous href="#WordCursorOne">WordCursorOne</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>WordMonitor</h2>
+
+<ul>
+<li><a href="#WordMonitor%20NAME">WordMonitor NAME</a>: 
+<li><a href="#WordMonitor%20SYNOPSIS">WordMonitor SYNOPSIS</a>: 
+<li><a href="#WordMonitor%20DESCRIPTION">WordMonitor DESCRIPTION</a>: 
+<li><a href="#WordMonitor%20CONFIGURATION">WordMonitor CONFIGURATION</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="WordMonitor%20NAME">WordMonitor NAME</a>,
+Next:<a rel=next href="#WordMonitor%20SYNOPSIS">WordMonitor SYNOPSIS</a>,
+Previous:<a rel=previous href="#WordMonitor">WordMonitor</a>,
+Up:<a rel=up href="#WordMonitor">WordMonitor</a>
+<br>
+
+<h3>WordMonitor NAME</h3>
+
+<p>monitoring classes activity.
+
+<p><hr>
+Node:<a name="WordMonitor%20SYNOPSIS">WordMonitor SYNOPSIS</a>,
+Next:<a rel=next href="#WordMonitor%20DESCRIPTION">WordMonitor DESCRIPTION</a>,
+Previous:<a rel=previous href="#WordMonitor%20NAME">WordMonitor NAME</a>,
+Up:<a rel=up href="#WordMonitor">WordMonitor</a>
+<br>
+
+<h3>WordMonitor SYNOPSIS</h3>
+
+<pre>
+Only called thru WordContext::Initialize()
+</pre>
+
+<p><hr>
+Node:<a name="WordMonitor%20DESCRIPTION">WordMonitor DESCRIPTION</a>,
+Next:<a rel=next href="#WordMonitor%20CONFIGURATION">WordMonitor CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordMonitor%20SYNOPSIS">WordMonitor SYNOPSIS</a>,
+Up:<a rel=up href="#WordMonitor">WordMonitor</a>
+<br>
+
+<h3>WordMonitor DESCRIPTION</h3>
+
+<p>The test directory contains a
+<code>benchmark-report
+</code> script used to generate
+and archive graphs from the output of
+<code>WordMonitor
+</code>.
+
+<p><hr>
+Node:<a name="WordMonitor%20CONFIGURATION">WordMonitor CONFIGURATION</a>,
+Previous:<a rel=previous href="#WordMonitor%20DESCRIPTION">WordMonitor DESCRIPTION</a>,
+Up:<a rel=up href="#WordMonitor">WordMonitor</a>
+<br>
+
+<h3>WordMonitor CONFIGURATION</h3>
+
+<p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
+<dl>
+<dt><code>wordlist_monitor_period &lt;sec&gt; (default 0)</code>
+<dd>
+ If the value
+<strong>sec
+</strong> is a positive integer, set a timer to
+print reports every
+<strong>sec
+</strong> seconds. The timer is set using
+the ALRM signal and will fail if the calling application already
+has a handler on that signal. 
+<br><dt><code>wordlist_monitor_output &lt;file&gt;[,{rrd,readable] (default stderr)</code>
+<dd>
+ Print reports on
+<strong>file
+</strong> instead of the default
+<strong>stderr
+</strong>. 
+If
+<strong>type
+</strong> is set to
+<strong>rrd
+</strong> the output is fit for the
+<code>benchmark-report
+</code> script. Otherwise it a (hardly :-) readable
+string. 
+</dl>
+
+<p><hr>
+Node:<a name="Configuration">Configuration</a>,
+Next:<a rel=next href="#mifluz">mifluz</a>,
+Previous:<a rel=previous href="#WordMonitor">WordMonitor</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>Configuration</h2>
+
+<ul>
+<li><a href="#Configuration%20NAME">Configuration NAME</a>: 
+<li><a href="#Configuration%20SYNOPSIS">Configuration SYNOPSIS</a>: 
+<li><a href="#Configuration%20DESCRIPTION">Configuration DESCRIPTION</a>: 
+<li><a href="#Configuration%20FILE%20FORMAT">Configuration FILE FORMAT</a>: 
+<li><a href="#Configuration%20METHODS">Configuration METHODS</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="Configuration%20NAME">Configuration NAME</a>,
+Next:<a rel=next href="#Configuration%20SYNOPSIS">Configuration SYNOPSIS</a>,
+Previous:<a rel=previous href="#Configuration">Configuration</a>,
+Up:<a rel=up href="#Configuration">Configuration</a>
+<br>
+
+<h3>Configuration NAME</h3>
+
+<p>reads the configuration file and manages it in memory.
+
+<p><hr>
+Node:<a name="Configuration%20SYNOPSIS">Configuration SYNOPSIS</a>,
+Next:<a rel=next href="#Configuration%20DESCRIPTION">Configuration DESCRIPTION</a>,
+Previous:<a rel=previous href="#Configuration%20NAME">Configuration NAME</a>,
+Up:<a rel=up href="#Configuration">Configuration</a>
+<br>
+
+<h3>Configuration SYNOPSIS</h3>
+
+<pre>
+#include &lt;Configuration.h&gt;
+
+Configuration config;
+
+ConfigDefault config_defaults = {
+  { "verbose", "true" },
+  { 0, 0 }
+};
+
+config.Defaults(config_defaults);
+
+config.Read("/spare2/myconfig") ;
+
+config.Add("sync", "false");
+
+if(config["sync"]) ...
+if(config.Value("rate") &lt; 50) ...
+if(config.Boolean("sync")) ...
+</pre>
+
+<p><hr>
+Node:<a name="Configuration%20DESCRIPTION">Configuration DESCRIPTION</a>,
+Next:<a rel=next href="#Configuration%20FILE%20FORMAT">Configuration FILE FORMAT</a>,
+Previous:<a rel=previous href="#Configuration%20SYNOPSIS">Configuration SYNOPSIS</a>,
+Up:<a rel=up href="#Configuration">Configuration</a>
+<br>
+
+<h3>Configuration DESCRIPTION</h3>
+
+<p>The primary purpose of the
+<strong>Configuration
+</strong> class is to parse
+a configuration file and allow the application to modify the internal
+data structure produced. All values are strings and are converted by the
+appropriate accessors. For instance the
+<strong>Boolean
+</strong> method will
+return numerical true (not zero) if the string either contains
+a number that is different from zero or the string
+<code>true
+</code>.
+
+<p>The
+<code>ConfigDefaults
+</code> type is a structure of two char pointers:
+the name of the configuration attribute and it's value. The end of
+the array is the first entry that contains a null pointer instead of
+the attribute name. Numerical
+values must be in strings. For instance:
+<pre>ConfigDefault* config_defaults = {
+  { "wordlist_compress", "true" },
+  { "wordlist_page_size", "8192" },
+  { 0, 0 }
+};
+</pre>
+The additional
+fields of the
+<strong>ConfigDefault
+</strong> are purely informative.
+
+<p><hr>
+Node:<a name="Configuration%20FILE%20FORMAT">Configuration FILE FORMAT</a>,
+Next:<a rel=next href="#Configuration%20METHODS">Configuration METHODS</a>,
+Previous:<a rel=previous href="#Configuration%20DESCRIPTION">Configuration DESCRIPTION</a>,
+Up:<a rel=up href="#Configuration">Configuration</a>
+<br>
+
+<h3>Configuration FILE FORMAT</h3>
+
+<p>The configuration file is a plain ASCII text file. Each line in
+the file is either a comment or an attribute. 
+Comment lines are blank lines or lines that start with a '#'. 
+Attributes consist of a variable name and an associated
+value:
+<pre>&lt;name&gt;:&lt;whitespace&gt;&lt;value&gt;&lt;newline&gt;
+</pre>
+
+<p>The &lt;name&gt; contains any alphanumeric character or
+underline (_) The &lt;value&gt; can include any character
+except newline. It also cannot start with spaces or tabs since
+those are considered part of the whitespace after the colon. It
+is important to keep in mind that any trailing spaces or tabs
+will be included.
+
+<p>It is possible to split the &lt;value&gt; across several
+lines of the configuration file by ending each line with a
+backslash (\). The effect on the value is that a space is
+added where the line split occurs.
+
+<p>A configuration file can include another file, by using the special
+&lt;name&gt;,
+<code>include
+</code>. The &lt;value&gt; is taken as
+the file name of another configuration file to be read in at
+this point. If the given file name is not fully qualified, it is
+taken relative to the directory in which the current configuration
+file is found. Variable expansion is permitted in the file name. 
+Multiple include statements, and nested includes are also permitted.
+<pre>include: common.conf
+</pre>
+
+<p><hr>
+Node:<a name="Configuration%20METHODS">Configuration METHODS</a>,
+Previous:<a rel=previous href="#Configuration%20FILE%20FORMAT">Configuration FILE FORMAT</a>,
+Up:<a rel=up href="#Configuration">Configuration</a>
+<br>
+
+<h3>Configuration METHODS</h3>
+
+<dl>
+<dt><code>Configuration()</code>
+<dd>Constructor
+<br><dt><code>~Configuration()</code>
+<dd>Destructor
+<br><dt><code>void Add(const String&amp; str)</code>
+<dd>Add configuration item
+<strong>str
+</strong> to the configuration. The value
+associated with it is undefined. 
+<br><dt><code>void Add(const String&amp; name, const String&amp; value)</code>
+<dd>Add configuration item
+<strong>name
+</strong> to the configuration and associate
+it with
+<strong>value
+</strong>. 
+<br><dt><code>int Remove(const String&amp; name)</code>
+<dd>Remove the
+<strong>name
+</strong> from the configuration. 
+<br><dt><code>void NameValueSeparators(const String&amp; s)</code>
+<dd>Let the Configuration know how to parse name value pairs. 
+Each character of string
+<strong>s
+</strong> is a valid separator between
+the
+<code>name
+</code> and the
+<code>value. 
+</code>
+<br><dt><code>virtual int Read(const String&amp; filename)</code>
+<dd>Read name/value configuration pairs from the file
+<strong>filename
+</strong>. 
+<br><dt><code>const String Find(const String&amp; name) const</code>
+<dd>Return the value of configuration attribute
+<strong>name
+</strong> as a
+<code>String
+</code>. 
+<br><dt><code>const String operator[](const String&amp; name) const</code>
+<dd>Alias to the
+<strong>Find
+</strong> method. 
+<br><dt><code>int Value(const String&amp; name, int default_value = 0) const</code>
+<dd>Return the value associated with the configuration attribute
+<strong>name
+</strong>, converted to integer using the atoi(3) function. 
+If the attribute is not found in the configuration and
+a
+<strong>default_value
+</strong> is provided, return it. 
+<br><dt><code>double Double(const String&amp; name, double default_value = 0) const</code>
+<dd>Return the value associated with the configuration attribute
+<strong>name
+</strong>, converted to double using the atof(3) function. 
+If the attribute is not found in the configuration and
+a
+<strong>default_value
+</strong> is provided, return it. 
+<br><dt><code>int Boolean(const String&amp; name, int default_value = 0) const</code>
+<dd>Return 1 if the value associated to
+<strong>name
+</strong> is
+either
+<strong>1, yes
+</strong> or
+<strong>true
+</strong>. 
+Return 0 if the value associated to
+<strong>name
+</strong> is
+either
+<strong>0, no
+</strong> or
+<strong>false
+</strong>. 
+<br><dt><code>void Defaults(const ConfigDefaults *array)</code>
+<dd>Load configuration attributes from the
+<code>name
+</code> and
+<code>value
+</code>
+members of the
+<strong>array
+</strong> argument. 
+</dl>
+
+<p><hr>
+Node:<a name="mifluz">mifluz</a>,
+Previous:<a rel=previous href="#Configuration">Configuration</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>mifluz</h2>
+
+<ul>
+<li><a href="#mifluz%20NAME">mifluz NAME</a>: 
+<li><a href="#mifluz%20SYNOPSIS">mifluz SYNOPSIS</a>: 
+<li><a href="#mifluz%20DESCRIPTION">mifluz DESCRIPTION</a>: 
+<li><a href="#mifluz%20CLASSES%20AND%20COMMANDS">mifluz CLASSES AND COMMANDS</a>: 
+<li><a href="#mifluz%20CONFIGURATION">mifluz CONFIGURATION</a>: 
+<li><a href="#mifluz%20ENVIRONMENT">mifluz ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="mifluz%20NAME">mifluz NAME</a>,
+Next:<a rel=next href="#mifluz%20SYNOPSIS">mifluz SYNOPSIS</a>,
+Previous:<a rel=previous href="#mifluz">mifluz</a>,
+Up:<a rel=up href="#mifluz">mifluz</a>
+<br>
+
+<h3>mifluz NAME</h3>
+
+<p>C++ library to use and manage inverted indexes
+
+<p><hr>
+Node:<a name="mifluz%20SYNOPSIS">mifluz SYNOPSIS</a>,
+Next:<a rel=next href="#mifluz%20DESCRIPTION">mifluz DESCRIPTION</a>,
+Previous:<a rel=previous href="#mifluz%20NAME">mifluz NAME</a>,
+Up:<a rel=up href="#mifluz">mifluz</a>
+<br>
+
+<h3>mifluz SYNOPSIS</h3>
+
+<pre>#include &lt;mifluz.h&gt;
+
+main()
+{
+   Configuration* config = WordContext::Initialize();
+
+   WordList* words = new WordList(*config);
+
+   ...
+
+   delete words;
+
+   WordContext::Finish();
+}
+</pre>
+
+<p><hr>
+Node:<a name="mifluz%20DESCRIPTION">mifluz DESCRIPTION</a>,
+Next:<a rel=next href="#mifluz%20CLASSES%20AND%20COMMANDS">mifluz CLASSES AND COMMANDS</a>,
+Previous:<a rel=previous href="#mifluz%20SYNOPSIS">mifluz SYNOPSIS</a>,
+Up:<a rel=up href="#mifluz">mifluz</a>
+<br>
+
+<h3>mifluz DESCRIPTION</h3>
+
+<p>The purpose of
+<code>mifluz
+</code> is to provide a C++ library to build and query a
+full text inverted index. It is dynamically updatable, scalable (up to
+1Tb indexes), uses a controlled amount of memory, shares index files
+and memory cache among processes or threads and compresses index files
+to 50% of the raw data. The structure of the index is configurable at
+runtime and allows inclusion of relevance ranking information. The
+query functions do not require loading all the occurrences of a
+searched term.  They consume very few resources and many searches can
+be run in parallel.
+
+<p>The file management library used in mifluz is a modified Berkeley DB
+(www.sleepycat.com) version 3.1.14.
+
+<p><hr>
+Node:<a name="mifluz%20CLASSES%20AND%20COMMANDS">mifluz CLASSES AND COMMANDS</a>,
+Next:<a rel=next href="#mifluz%20CONFIGURATION">mifluz CONFIGURATION</a>,
+Previous:<a rel=previous href="#mifluz%20DESCRIPTION">mifluz DESCRIPTION</a>,
+Up:<a rel=up href="#mifluz">mifluz</a>
+<br>
+
+<h3>mifluz CLASSES AND COMMANDS</h3>
+
+<dl>
+<dt><code>Configuration</code>
+<dd>
+
+<p>reads the configuration file and manages it in memory. 
+<br><dt><code>WordContext</code>
+<dd>
+
+<p>read configuration and setup mifluz context. 
+<br><dt><code>WordCursor</code>
+<dd>
+
+<p>abstract class to search and retrieve entries in a WordList object. 
+<br><dt><code>WordCursorOne</code>
+<dd>
+
+<p>search and retrieve entries in a WordListOne object. 
+<br><dt><code>WordDBInfo</code>
+<dd>
+ inverted index usage environment. 
+<br><dt><code>WordDict</code>
+<dd>
+
+<p>manage and use an inverted index dictionary. 
+<br><dt><code>WordKey</code>
+<dd>
+ inverted index key. 
+<br><dt><code>WordKeyInfo</code>
+<dd>
+ information on the key structure of the inverted index. 
+<br><dt><code>WordList</code>
+<dd>
+
+<p>abstract class to manage and use an inverted index file. 
+<br><dt><code>WordListOne</code>
+<dd>
+
+<p>manage and use an inverted index file. 
+<br><dt><code>WordMonitor</code>
+<dd>
+ monitoring classes activity. 
+<br><dt><code>WordRecord</code>
+<dd>
+ inverted index record. 
+<br><dt><code>WordRecordInfo</code>
+<dd>
+ information on the record structure of the inverted index. 
+<br><dt><code>WordReference</code>
+<dd>
+ inverted index occurrence. 
+<br><dt><code>WordType</code>
+<dd>
+ defines a word in term of allowed characters, length etc. 
+<br><dt><code>htdb_dump</code>
+<dd>
+
+<p>dump the content of an inverted index in Berkeley DB fashion
+<br><dt><code>htdb_load</code>
+<dd>
+
+<p>displays statistics for Berkeley DB environments. 
+<br><dt><code>htdb_stat</code>
+<dd>
+
+<p>displays statistics for Berkeley DB environments. 
+<br><dt><code>mifluzdump</code>
+<dd>
+
+<p>dump the content of an inverted index. 
+<br><dt><code>mifluzload</code>
+<dd>
+
+<p>load the content of an inverted index. 
+<br><dt><code>mifluzsearch</code>
+<dd>
+ search the content of an inverted index. 
+</dl>
+
+<p><hr>
+Node:<a name="mifluz%20CONFIGURATION">mifluz CONFIGURATION</a>,
+Next:<a rel=next href="#mifluz%20ENVIRONMENT">mifluz ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluz%20CLASSES%20AND%20COMMANDS">mifluz CLASSES AND COMMANDS</a>,
+Up:<a rel=up href="#mifluz">mifluz</a>
+<br>
+
+<h3>mifluz CONFIGURATION</h3>
+
+<p>The format of the configuration file read by WordContext::Initialize is:
+<pre>keyword: value
+</pre>
+Comments may be added on lines starting with a #. The default
+configuration file is read from from the file pointed by the
+<strong>MIFLUZ_CONFIG
+</strong> environment variable or
+<strong>~/.mifluz
+</strong> or
+<strong>/etc/mifluz.conf
+</strong> in this
+order. If no configuration file is available, builtin defaults are used. 
+Here is an example configuration file:
+<pre>wordlist_extend: true
+wordlist_cache_size: 10485760
+wordlist_page_size: 32768
+wordlist_compress: 1
+wordlist_wordrecord_description: NONE
+wordlist_wordkey_description: Word/DocID 32/Flags 8/Location 16
+wordlist_monitor: true
+wordlist_monitor_period: 30
+wordlist_monitor_output: monitor.out,rrd
+</pre>
+
+<dl>
+<dt><code>wordlist_allow_numbers {true|false} &lt;number&gt; (default false)</code>
+<dd>
+ A digit is considered a valid character within a word if
+this configuration parameter is set to
+<code>true
+</code> otherwise
+it is an error to insert a word containing digits. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_cache_inserts {true|false} (default false)</code>
+<dd>
+ If true all
+<strong>Insert
+</strong> calls are cached in memory. When the
+WordList object is closed or a different access method is called
+the cached entries are flushed in the inverted index. 
+<br><dt><code>wordlist_cache_max &lt;bytes&gt; (default 0)</code>
+<dd>
+ Maximum size of the cumulated cache files generated when doing bulk
+insertion with the
+<strong>BatchStart()
+</strong> function. When this limit is
+reached, the cache files are all merged into the inverted index. 
+The value 0 means infinite size allowed. 
+See WordList(3) for the rationale behind cache file handling. 
+<br><dt><code>wordlist_cache_size &lt;bytes&gt; (default 500K)</code>
+<dd>
+ Berkeley DB cache size (see Berkeley DB documentation)
+Cache makes a huge difference in performance. It must be at least 2%
+of the expected total data size. Note that if compression is activated
+the data size is eight times larger than the actual file size. In this
+case the cache must be scaled to 2% of the data size, not 2%
+of the file size. See
+<strong>Cache tuning
+</strong> in the mifluz guide for
+more hints. 
+See WordList(3) for the rationale behind cache file handling. 
+<br><dt><code>wordlist_compress {true|false} (default false)</code>
+<dd>
+ Activate compression of the index. The resulting index is eight times
+smaller than the uncompressed index. 
+<br><dt><code>wordlist_env_dir &lt;directory&gt; (default .)</code>
+<dd>
+ Only valid if
+<code>wordlist_env_share
+</code> set to
+<code>true. 
+</code>
+Specify the directory in which the sharable environment will
+be created. All
+inverted indexes specified with a non-absolute pathname will be
+created relative to this directory. 
+<br><dt><code>wordlist_env_share {true,false} (default false)</code>
+<dd>
+ If true a sharable environment is open or created if none exist. 
+<br><dt><code>wordlist_env_skip {true,false} (default false)</code>
+<dd>
+ If true no environment is created at all. This must never
+be used if a
+<code>WordList
+</code> object is created. It may be
+useful if only
+<code>WordKey
+</code> objects are used, for instance. 
+<br><dt><code>wordlist_extend {true|false} (default false)</code>
+<dd>
+ If
+<strong>true
+</strong> maintain reference count of unique
+words. The
+<strong>Noccurrence
+</strong> method gives access to this count. 
+<br><dt><code>wordlist_lowercase {true|false} &lt;number&gt; (default true)</code>
+<dd>
+ If a word contains upper case letters it is converted to lowercase
+if this configuration parameter is true, otherwise it is left
+untouched. 
+<br><dt><code>wordlist_maximum_word_length &lt;number&gt; (default 25)</code>
+<dd>
+ The maximum length of a word. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_mimimun_word_length &lt;number&gt; (default 3)</code>
+<dd>
+ The minimum length of a word. 
+See the
+<strong>Normalize
+</strong> method for more information. 
+<br><dt><code>wordlist_monitor {true|false} (default false)</code>
+<dd>
+ If true create a
+<code>WordMonitor
+</code> instance to gather statistics and
+build reports. 
+<br><dt><code>wordlist_monitor_output &lt;file&gt;[,{rrd,readable] (default stderr)</code>
+<dd>
+ Print reports on
+<strong>file
+</strong> instead of the default
+<strong>stderr
+</strong>. 
+If
+<strong>type
+</strong> is set to
+<strong>rrd
+</strong> the output is fit for the
+<code>benchmark-report
+</code> script. Otherwise it a (hardly :-) readable
+string. 
+<br><dt><code>wordlist_monitor_period &lt;sec&gt; (default 0)</code>
+<dd>
+ If the value
+<strong>sec
+</strong> is a positive integer, set a timer to
+print reports every
+<strong>sec
+</strong> seconds. The timer is set using
+the ALRM signal and will fail if the calling application already
+has a handler on that signal. 
+<br><dt><code>wordlist_page_size &lt;bytes&gt; (default 8192)</code>
+<dd>
+ Berkeley DB page size (see Berkeley DB documentation)
+<br><dt><code>wordlist_truncate {true|false} &lt;number&gt; (default true)</code>
+<dd>
+ If a word is too long according to
+the
+<code>wordlist_maximum_word_length
+</code> it is truncated
+if this configuration parameter is
+<code>true
+</code> otherwise it
+is considered an invalid word. 
+<br><dt><code>wordlist_valid_punctuation [characters] (default none)</code>
+<dd>
+ A list of punctuation characters that may appear in a word. 
+These characters will be removed from the word before insertion
+in the index. 
+<br><dt><code>wordlist_verbose &lt;number&gt; (default 0)</code>
+<dd>
+ Set the verbosity level of the WordList class.
+
+<p>1 walk logic
+
+<p>2 walk logic details
+
+<p>3 walk logic lots of details
+<br><dt><code>wordlist_wordkey_description &lt;desc&gt; (no default)</code>
+<dd>
+ Describe the structure of the inverted index key. 
+In the following explanation of the
+<code>&lt;desc&gt;
+</code> format,
+mandatory words are
+in bold and values that must be replaced in italic.
+
+<p><strong>Word
+</strong>
+<code>bits/name bits
+</code>[/...]
+
+<p>The
+<code>name
+</code> is an alphanumerical symbolic name for the key field. 
+The
+<code>bits
+</code> is the number of bits required to store this field. 
+Note that all values are stored in unsigned integers (unsigned int). 
+Example:
+<pre>Word 8/Document 16/Location 8
+</pre>
+<br><dt><code>wordlist_wordkey_document [field ...] (default none)</code>
+<dd>
+ A white space separated list of field numbers that define a document. 
+The field number list must not contain gaps. For instance 1 2 3 is
+valid but 1 3 4 is not valid. 
+This configuration parameter is not used by the mifluz library
+but may be used by a query application to define the semantic of
+a document. In response to a query, the application will return a
+list of results in which only distinct documents will be shown. 
+<br><dt><code>wordlist_wordrecord_description {NONE|DATA|STR} (no default)</code>
+<dd>
+ NONE: the record is empty
+
+<p>DATA: the record contains an integer (unsigned int)
+
+<p>STR: the record contains a string (String)
+</dl>
+
+<p><hr>
+Node:<a name="mifluz%20ENVIRONMENT">mifluz ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluz%20CONFIGURATION">mifluz CONFIGURATION</a>,
+Up:<a rel=up href="#mifluz">mifluz</a>
+<br>
+
+<h3>mifluz ENVIRONMENT</h3>
+
+<p><strong>MIFLUZ_CONFIG
+</strong> file name of configuration file read by
+WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong> or
+<strong>/etc/mifluz.conf
+</strong>
+
+<p><hr>
+Node:<a name="Concept%20Index">Concept Index</a>,
+Previous:<a rel=previous href="#Reference">Reference</a>,
+Up:<a rel=up href="#Top">Top</a>
+<br>
+
+<h1>Index of Concepts</h1>
+
+<ul compact>
+</ul>
+
+
+<h1>Table of Contents</h1>
+<ul>
+<li><a href="#Top">Mifluz</a>
+<li><a href="#Introduction">Introduction</a>
+<li><a href="#Architecture">Architecture</a>
+<li><a href="#Constraints">Constraints</a>
+<li><a href="#Document%20name%20scheme">Document name scheme</a>
+<li><a href="#Data%20Storage%20Spec">Data Storage Spec</a>
+<li><a href="#Cache%20tuning">Cache tuning</a>
+<li><a href="#Key%20Specification">Key Specification</a>
+<li><a href="#Internals">Internals</a>
+<ul>
+<li><a href="#Compression">Compression</a>
+<ul>
+<li><a href="#Berkeley%20DB%20Compression">Compression inside Berekeley DB</a>
+<li><a href="#Page%20compression%20in%20Mifluz">Page compression in Mifluz</a>
+</ul>
+</ul>
+<li><a href="#Development">Development</a>
+<li><a href="#Reference">Reference</a>
+<ul>
+<li><a href="#htdb_dump">htdb_dump</a>
+<ul>
+<li><a href="#htdb_dump%20NAME">htdb_dump NAME</a>
+<li><a href="#htdb_dump%20SYNOPSIS">htdb_dump SYNOPSIS</a>
+<li><a href="#htdb_dump%20DESCRIPTION">htdb_dump DESCRIPTION</a>
+<li><a href="#htdb_dump%20OPTIONS">htdb_dump OPTIONS</a>
+<li><a href="#htdb_dump%20ENVIRONMENT">htdb_dump ENVIRONMENT</a>
+</ul>
+<li><a href="#htdb_stat">htdb_stat</a>
+<ul>
+<li><a href="#htdb_stat%20NAME">htdb_stat NAME</a>
+<li><a href="#htdb_stat%20SYNOPSIS">htdb_stat SYNOPSIS</a>
+<li><a href="#htdb_stat%20DESCRIPTION">htdb_stat DESCRIPTION</a>
+<li><a href="#htdb_stat%20OPTIONS">htdb_stat OPTIONS</a>
+<li><a href="#htdb_stat%20ENVIRONMENT">htdb_stat ENVIRONMENT</a>
+</ul>
+<li><a href="#htdb_load">htdb_load</a>
+<ul>
+<li><a href="#htdb_load%20NAME">htdb_load NAME</a>
+<li><a href="#htdb_load%20SYNOPSIS">htdb_load SYNOPSIS</a>
+<li><a href="#htdb_load%20DESCRIPTION">htdb_load DESCRIPTION</a>
+<li><a href="#htdb_load%20OPTIONS">htdb_load OPTIONS</a>
+<li><a href="#htdb_load%20KEYWORDS">htdb_load KEYWORDS</a>
+<li><a href="#htdb_load%20ENVIRONMENT">htdb_load ENVIRONMENT</a>
+</ul>
+<li><a href="#mifluzdump">mifluzdump</a>
+<ul>
+<li><a href="#mifluzdump%20NAME">mifluzdump NAME</a>
+<li><a href="#mifluzdump%20SYNOPSIS">mifluzdump SYNOPSIS</a>
+<li><a href="#mifluzdump%20DESCRIPTION">mifluzdump DESCRIPTION</a>
+<li><a href="#mifluzdump%20ENVIRONMENT">mifluzdump ENVIRONMENT</a>
+</ul>
+<li><a href="#mifluzload">mifluzload</a>
+<ul>
+<li><a href="#mifluzload%20NAME">mifluzload NAME</a>
+<li><a href="#mifluzload%20SYNOPSIS">mifluzload SYNOPSIS</a>
+<li><a href="#mifluzload%20DESCRIPTION">mifluzload DESCRIPTION</a>
+<li><a href="#mifluzload%20ENVIRONMENT">mifluzload ENVIRONMENT</a>
+</ul>
+<li><a href="#mifluzsearch">mifluzsearch</a>
+<ul>
+<li><a href="#mifluzsearch%20NAME">mifluzsearch NAME</a>
+<li><a href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>
+<li><a href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>
+<li><a href="#mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>
+</ul>
+<li><a href="#WordContext">WordContext</a>
+<ul>
+<li><a href="#WordContext%20NAME">WordContext NAME</a>
+<li><a href="#WordContext%20SYNOPSIS">WordContext SYNOPSIS</a>
+<li><a href="#WordContext%20DESCRIPTION">WordContext DESCRIPTION</a>
+<li><a href="#WordContext%20CONFIGURATION">WordContext CONFIGURATION</a>
+<li><a href="#WordContext%20METHODS">WordContext METHODS</a>
+<li><a href="#WordContext%20ENVIRONMENT">WordContext ENVIRONMENT</a>
+</ul>
+<li><a href="#WordList">WordList</a>
+<ul>
+<li><a href="#WordList%20NAME">WordList NAME</a>
+<li><a href="#WordList%20SYNOPSIS">WordList SYNOPSIS</a>
+<li><a href="#WordList%20DESCRIPTION">WordList DESCRIPTION</a>
+<li><a href="#WordList%20CONFIGURATION">WordList CONFIGURATION</a>
+<li><a href="#WordList%20METHODS">WordList METHODS</a>
+</ul>
+<li><a href="#WordDict">WordDict</a>
+<ul>
+<li><a href="#WordDict%20NAME">WordDict NAME</a>
+<li><a href="#WordDict%20SYNOPSIS">WordDict SYNOPSIS</a>
+<li><a href="#WordDict%20DESCRIPTION">WordDict DESCRIPTION</a>
+<li><a href="#WordDict%20METHODS">WordDict METHODS</a>
+</ul>
+<li><a href="#WordListOne">WordListOne</a>
+<ul>
+<li><a href="#WordListOne%20NAME">WordListOne NAME</a>
+<li><a href="#WordListOne%20SYNOPSIS">WordListOne SYNOPSIS</a>
+<li><a href="#WordListOne%20DESCRIPTION">WordListOne DESCRIPTION</a>
+<li><a href="#WordListOne%20METHODS">WordListOne METHODS</a>
+</ul>
+<li><a href="#WordKey">WordKey</a>
+<ul>
+<li><a href="#WordKey%20NAME">WordKey NAME</a>
+<li><a href="#WordKey%20SYNOPSIS">WordKey SYNOPSIS</a>
+<li><a href="#WordKey%20DESCRIPTION">WordKey DESCRIPTION</a>
+<li><a href="#WordKey%20ASCII%20FORMAT">WordKey ASCII FORMAT</a>
+<li><a href="#WordKey%20METHODS">WordKey METHODS</a>
+</ul>
+<li><a href="#WordKeyInfo">WordKeyInfo</a>
+<ul>
+<li><a href="#WordKeyInfo%20NAME">WordKeyInfo NAME</a>
+<li><a href="#WordKeyInfo%20SYNOPSIS">WordKeyInfo SYNOPSIS</a>
+<li><a href="#WordKeyInfo%20DESCRIPTION">WordKeyInfo DESCRIPTION</a>
+<li><a href="#WordKeyInfo%20CONFIGURATION">WordKeyInfo CONFIGURATION</a>
+</ul>
+<li><a href="#WordType">WordType</a>
+<ul>
+<li><a href="#WordType%20NAME">WordType NAME</a>
+<li><a href="#WordType%20SYNOPSIS">WordType SYNOPSIS</a>
+<li><a href="#WordType%20DESCRIPTION">WordType DESCRIPTION</a>
+<li><a href="#WordType%20CONFIGURATION">WordType CONFIGURATION</a>
+<li><a href="#WordType%20METHODS">WordType METHODS</a>
+</ul>
+<li><a href="#WordDBInfo">WordDBInfo</a>
+<ul>
+<li><a href="#WordDBInfo%20NAME">WordDBInfo NAME</a>
+<li><a href="#WordDBInfo%20SYNOPSIS">WordDBInfo SYNOPSIS</a>
+<li><a href="#WordDBInfo%20DESCRIPTION">WordDBInfo DESCRIPTION</a>
+<li><a href="#WordDBInfo%20CONFIGURATION">WordDBInfo CONFIGURATION</a>
+</ul>
+<li><a href="#WordRecordInfo">WordRecordInfo</a>
+<ul>
+<li><a href="#WordRecordInfo%20NAME">WordRecordInfo NAME</a>
+<li><a href="#WordRecordInfo%20SYNOPSIS">WordRecordInfo SYNOPSIS</a>
+<li><a href="#WordRecordInfo%20DESCRIPTION">WordRecordInfo DESCRIPTION</a>
+<li><a href="#WordRecordInfo%20CONFIGURATION">WordRecordInfo CONFIGURATION</a>
+</ul>
+<li><a href="#WordRecord">WordRecord</a>
+<ul>
+<li><a href="#WordRecord%20NAME">WordRecord NAME</a>
+<li><a href="#WordRecord%20SYNOPSIS">WordRecord SYNOPSIS</a>
+<li><a href="#WordRecord%20DESCRIPTION">WordRecord DESCRIPTION</a>
+<li><a href="#WordRecord%20ASCII%20FORMAT">WordRecord ASCII FORMAT</a>
+<li><a href="#WordRecord%20METHODS">WordRecord METHODS</a>
+</ul>
+<li><a href="#WordReference">WordReference</a>
+<ul>
+<li><a href="#WordReference%20NAME">WordReference NAME</a>
+<li><a href="#WordReference%20SYNOPSIS">WordReference SYNOPSIS</a>
+<li><a href="#WordReference%20DESCRIPTION">WordReference DESCRIPTION</a>
+<li><a href="#WordReference%20ASCII%20FORMAT">WordReference ASCII FORMAT</a>
+<li><a href="#WordReference%20METHODS">WordReference METHODS</a>
+</ul>
+<li><a href="#WordCursor">WordCursor</a>
+<ul>
+<li><a href="#WordCursor%20NAME">WordCursor NAME</a>
+<li><a href="#WordCursor%20SYNOPSIS">WordCursor SYNOPSIS</a>
+<li><a href="#WordCursor%20DESCRIPTION">WordCursor DESCRIPTION</a>
+<li><a href="#WordCursor%20METHODS">WordCursor METHODS</a>
+</ul>
+<li><a href="#WordCursorOne">WordCursorOne</a>
+<ul>
+<li><a href="#WordCursorOne%20NAME">WordCursorOne NAME</a>
+<li><a href="#WordCursorOne%20SYNOPSIS">WordCursorOne SYNOPSIS</a>
+<li><a href="#WordCursorOne%20DESCRIPTION">WordCursorOne DESCRIPTION</a>
+<li><a href="#WordCursorOne%20METHODS">WordCursorOne METHODS</a>
+</ul>
+<li><a href="#WordMonitor">WordMonitor</a>
+<ul>
+<li><a href="#WordMonitor%20NAME">WordMonitor NAME</a>
+<li><a href="#WordMonitor%20SYNOPSIS">WordMonitor SYNOPSIS</a>
+<li><a href="#WordMonitor%20DESCRIPTION">WordMonitor DESCRIPTION</a>
+<li><a href="#WordMonitor%20CONFIGURATION">WordMonitor CONFIGURATION</a>
+</ul>
+<li><a href="#Configuration">Configuration</a>
+<ul>
+<li><a href="#Configuration%20NAME">Configuration NAME</a>
+<li><a href="#Configuration%20SYNOPSIS">Configuration SYNOPSIS</a>
+<li><a href="#Configuration%20DESCRIPTION">Configuration DESCRIPTION</a>
+<li><a href="#Configuration%20FILE%20FORMAT">Configuration FILE FORMAT</a>
+<li><a href="#Configuration%20METHODS">Configuration METHODS</a>
+</ul>
+<li><a href="#mifluz">mifluz</a>
+<ul>
+<li><a href="#mifluz%20NAME">mifluz NAME</a>
+<li><a href="#mifluz%20SYNOPSIS">mifluz SYNOPSIS</a>
+<li><a href="#mifluz%20DESCRIPTION">mifluz DESCRIPTION</a>
+<li><a href="#mifluz%20CLASSES%20AND%20COMMANDS">mifluz CLASSES AND COMMANDS</a>
+<li><a href="#mifluz%20CONFIGURATION">mifluz CONFIGURATION</a>
+<li><a href="#mifluz%20ENVIRONMENT">mifluz ENVIRONMENT</a>
+</ul>
+</ul>
+<li><a href="#Concept%20Index">Index of Concepts</a>
+</ul>
+
+</body></html>
+

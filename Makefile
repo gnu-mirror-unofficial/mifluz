@@ -17,6 +17,7 @@ tag:
 
 doc:
 	cp $(PRODUCT)/doc/$(PRODUCT).html doc
+	perl -pi -e '$$_ = "" if((/<html/ .. /<body/) || /body>/)' doc/$(PRODUCT).html
 
 upload:
 	cd ftp ; rsync --exclude-from=exclude --rsh=ssh -av *.tar.gz gnuftp.gnu.org:/home/ftp/gnu/mifluz/

@@ -27,43 +27,76 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
 <td width="99%" valign="top"> 
       <blockquote>
-	<p>
-	First of all, <b>GNU mifluz</b> is at alpha stage.
-
-	<p> The purpose of <b>GNU mifluz</b> is to provide a C++ library to
-	build and query a full text inverted index. It is dynamically
-	updatable, scalable (up to 1Tb indexes), uses a controlled
-	amount of memory, shares index files and memory cache among
-	processes or threads and compresses index files to 50% of the
-	raw data. The structure of the index is configurable at
-	runtime and allows inclusion of relevance ranking information.
-	The query functions do not require to load all the occurences
-	of a searched term. They consume very few resources and many
-	searches can be run in parallel.
-
-	<p> Implementing a library that manages an inverted index is
-	a very easy task when there is a small number of words and
-	documents. It becomes a lot harder when dealing with a large
-	number of words and documents. <b>GNU mifluz</b> has been
-	designed with the further upper limits in mind : 500 million
-	documents, 50 giga words, 20 million document updates per day.
-
-	<p> <b>GNU mifluz</b> has two main characteristics : it is
-	very simple (one might say stupid :-) and uses 50% of the size
-	of the indexed text for the index. It is simple because it
-	provides only a few basic functionalities. It does not contain
-	document parsers (HTML, PDF etc...). It does not contain a
-	full text query parser. It does not provide result display
-	functions or other user friendly stuff. It only provides
-	functions to store word occurences and retrieve them. The fact
-	that it uses 50% of the size of the indexed text is rather
-	atypical. Most well known full text indexing systems only use
-	30%. The advantage <b>GNU mifluz</b> has over most full text
-	indexing systems is that it is fully dynamic (update, delete,
-	insert), uses only a controled amount of memory while
-	resolving a query, has higher upper limits and has a simple
-	storage scheme. Consuming more disk space allows all this.
 	
+<p>
+  <p>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr class="TopBody" valign="top">
+        <td>
+          <img src="/images/pix.png" width="5" height="1" alt=" ">
+        </td>
+        <td class="TopBody" width="10" valign="top">
+          <img border="0" width="10" height="13" src="/images/ul.png" alt="(( ">
+        </td>
+        <td class="TopBody">
+          <b>mifluz</b>
+          <a href="http://www.gnu.org/software/mifluz/">mifluz-0.22</a>
+          <b>2 July 2001</b>
+        </td>
+        <td width="10" align="right" class="TopBody" valign="top">
+          <img border="0" width="10" height="13" src="/images/ur.png" alt="))">
+        </td>
+      </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="1" bgcolor="#736199">
+      <tr>
+        <td valign="bottom">
+          <table border="0" bgcolor="#cacaca" cellspacing="0" cellpadding="3">
+            <tr>
+              <td nowrap="1" class="newsinfo">
+                <a href="http://www.gnu.org/software/mifluz/">Link</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="newstext">
+                <description>
+	<ul>
+
+	  <li> Implement result cache for mifluzsearch. The results are
+	    stored in /var/cache/mifluz for a given amount of time and
+	    re-used when possible. If the search only asked for 10
+	    documents, only those are cached. When the search asks for
+	    more, the cache is filled accordingly. The cache is a
+	    single Berkeley DB file with subdatabases.  It can be
+	    dumped using htdb_dump.
+	  </li>
+
+	  <li> Fix mifluzsearch bug that prevented searching indexes
+	    where the document did not start immediately after the
+	    word.
+	  </li>
+
+	  <li> Fix mifluzsearch bug that ignored mandatory words that
+	    do not exist in the index.
+	  </li>
+
+	  <li> Synchronize with unac-1.4.0
+	  </li>
+
+	  <li> Removed obsolete benchmark results
+	  </li>
+	  
+	</ul>
+      </description>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </p>
+</p>
+
       </blockquote>
 
     </td>
@@ -73,6 +106,7 @@
   <tr>
     <td align="right">
       <a href="mifluz.en.html" class="T2">Home</a> <br>
+      <a href="description.en.html" class="T2">Description</a> <br>
     </td>
   </tr>
 <tr><td class="TopTitle" align="center">Projects</td></tr>

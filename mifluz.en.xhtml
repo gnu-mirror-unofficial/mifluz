@@ -2,7 +2,10 @@
 <!DOCTYPE html
           PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-          [<!ENTITY submenu SYSTEM "submenu.en.xml">]>
+          [
+           <!ENTITY submenu SYSTEM "submenu.en.xml">
+           <!ENTITY news SYSTEM "news-bytes.en.xml">
+          ]>
 <html lang="en">
   <head>
     <title>GNU Mifluz</title>
@@ -12,43 +15,7 @@
 
     <div> <!-- The header will be inserted here -->
       <blockquote>
-	<p />
-	First of all, <b>GNU mifluz</b> is at alpha stage.
-
-	<p /> The purpose of <b>GNU mifluz</b> is to provide a C++ library to
-	build and query a full text inverted index. It is dynamically
-	updatable, scalable (up to 1Tb indexes), uses a controlled
-	amount of memory, shares index files and memory cache among
-	processes or threads and compresses index files to 50% of the
-	raw data. The structure of the index is configurable at
-	runtime and allows inclusion of relevance ranking information.
-	The query functions do not require to load all the occurences
-	of a searched term. They consume very few resources and many
-	searches can be run in parallel.
-
-	<p /> Implementing a library that manages an inverted index is
-	a very easy task when there is a small number of words and
-	documents. It becomes a lot harder when dealing with a large
-	number of words and documents. <b>GNU mifluz</b> has been
-	designed with the further upper limits in mind : 500 million
-	documents, 50 giga words, 20 million document updates per day.
-
-	<p /> <b>GNU mifluz</b> has two main characteristics : it is
-	very simple (one might say stupid :-) and uses 50% of the size
-	of the indexed text for the index. It is simple because it
-	provides only a few basic functionalities. It does not contain
-	document parsers (HTML, PDF etc...). It does not contain a
-	full text query parser. It does not provide result display
-	functions or other user friendly stuff. It only provides
-	functions to store word occurences and retrieve them. The fact
-	that it uses 50% of the size of the indexed text is rather
-	atypical. Most well known full text indexing systems only use
-	30%. The advantage <b>GNU mifluz</b> has over most full text
-	indexing systems is that it is fully dynamic (update, delete,
-	insert), uses only a controled amount of memory while
-	resolving a query, has higher upper limits and has a simple
-	storage scheme. Consuming more disk space allows all this.
-	
+	&news;
       </blockquote>
 
     </div> <!-- The footer will be inserted here -->

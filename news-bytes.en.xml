@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<p>
+  <p>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr class="TopBody" valign="top">
+        <td>
+          <img src="/images/pix.png" width="5" height="1" alt=" "/>
+        </td>
+        <td class="TopBody" width="10" valign="top">
+          <img border="0" width="10" height="13" src="/images/ul.png" alt="(( "/>
+        </td>
+        <td class="TopBody">
+          <b>mifluz</b>
+          <a href="http://www.gnu.org/software/mifluz/">mifluz-0.22</a>
+          <b>2 July 2001</b>
+        </td>
+        <td width="10" align="right" class="TopBody" valign="top">
+          <img border="0" width="10" height="13" src="/images/ur.png" alt="))"/>
+        </td>
+      </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="1" bgcolor="#736199">
+      <tr>
+        <td valign="bottom">
+          <table border="0" bgcolor="#cacaca" cellspacing="0" cellpadding="3">
+            <tr>
+              <td nowrap="1" class="newsinfo">
+                <a href="http://www.gnu.org/software/mifluz/">Link</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="newstext">
+                <description>
+	<ul>
+
+	  <li> Implement result cache for mifluzsearch. The results are
+	    stored in /var/cache/mifluz for a given amount of time and
+	    re-used when possible. If the search only asked for 10
+	    documents, only those are cached. When the search asks for
+	    more, the cache is filled accordingly. The cache is a
+	    single Berkeley DB file with subdatabases.  It can be
+	    dumped using htdb_dump.
+	  </li>
+
+	  <li> Fix mifluzsearch bug that prevented searching indexes
+	    where the document did not start immediately after the
+	    word.
+	  </li>
+
+	  <li> Fix mifluzsearch bug that ignored mandatory words that
+	    do not exist in the index.
+	  </li>
+
+	  <li> Synchronize with unac-1.4.0
+	  </li>
+
+	  <li> Removed obsolete benchmark results
+	  </li>
+	  
+	</ul>
+      </description>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </p>
+</p>

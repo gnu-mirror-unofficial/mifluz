@@ -20,7 +20,7 @@ doc:
 	perl -pi -e '$$_ = "" if((/<!DOCTYPE/ .. /<body/) || (/body>/ .. /html>/))' doc/$(PRODUCT).html
 
 upload:
-	cd ../download/$(PRODUCT) ; rsync --exclude-from=exclude --rsh=ssh -av *.tar.gz gnuftp.gnu.org:/home/ftp/gnu/$(PRODCUT)/
+	cd ../download/$(PRODUCT) ; rsync --exclude-from=exclude --rsh=ssh -av *.tar.gz gnuftp.gnu.org:/home/ftp/gnu/$(PRODUCT)/
 
 clean:
 	rm -fr $(PRODUCT)

@@ -4,6 +4,49 @@
     <table border="0" cellpadding="0" cellspacing="0">
       <tr valign="top">
         <td class="TopBody">
+          <a href="http://www.gnu.org/software/mifluz/">mifluz-0.23 is available</a>
+          <b>23 July 2001</b>
+        </td>
+      </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="1" bgcolor="#736199">
+      <tr>
+        <td valign="bottom">
+          <table border="0" bgcolor="#cacaca" cellspacing="0" cellpadding="3">
+            <tr>
+              <td nowrap="1" class="newsinfo">
+                <a href="http://www.gnu.org/software/mifluz/">Link</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="newstext">
+                <description>
+	<ul>
+
+	  <li> Bug fixes in mifluzsearch restricted queries (-l and -h)
+               and more regression tests.</li>
+
+          <li> Manual page for mifluzsearch.</li>
+
+          <li> Synchronize with unac-1.5.0. </li>
+
+          <li> Use AM_ICONV macro to prevent compilation warnings. </li>
+
+          <li> Minor distribution fixes. </li>
+
+	</ul>
+      </description>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </p>
+  <p>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr valign="top">
+        <td class="TopBody">
           <a href="http://www.gnu.org/software/mifluz/">mifluz-0.22 is available</a>
           <b>2 July 2001</b>
         </td>

@@ -9,7 +9,7 @@ co:
 
 dist:
 	cd $(PRODUCT) ; ./configure --enable-maintainer-mode ; make distcheck
-	cp -p $(PRODUCT)/*.tar.gz ftp
+	cp -p $(PRODUCT)/*.tar.gz ../download/$(PRODUCT)
 
 tag:
 	ver=`sed -e 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1-\2/' < $(PRODUCT)/.version` ; \
@@ -20,7 +20,7 @@ doc:
 	perl -pi -e '$$_ = "" if((/<!DOCTYPE/ .. /<body/) || (/body>/ .. /html>/))' doc/$(PRODUCT).html
 
 upload:
-	cd ftp ; rsync --exclude-from=exclude --rsh=ssh -av *.tar.gz gnuftp.gnu.org:/home/ftp/gnu/mifluz/
+	cd ../download/$(PRODUCT) ; rsync --exclude-from=exclude --rsh=ssh -av *.tar.gz gnuftp.gnu.org:/home/ftp/gnu/$(PRODCUT)/
 
 clean:
 	rm -fr $(PRODUCT)

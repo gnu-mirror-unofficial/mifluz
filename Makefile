@@ -16,8 +16,8 @@ tag:
 	cd $(PRODUCT) ; $(ECHO) cvs tag $(PRODUCT)-$$ver
 
 doc:
-	cp $(PRODUCT)/doc/$(PRODUCT).html doc
-	perl -pi -e '$$_ = "" if((/<html/ .. /<body/) || /body>/)' doc/$(PRODUCT).html
+	-tidy -asxml -q $(PRODUCT)/doc/$(PRODUCT).html > doc/mifluz.html
+	perl -pi -e '$$_ = "" if((/<!DOCTYPE/ .. /<body/) || (/body>/ .. /html>/))' doc/$(PRODUCT).html
 
 upload:
 	cd ftp ; rsync --exclude-from=exclude --rsh=ssh -av *.tar.gz gnuftp.gnu.org:/home/ftp/gnu/mifluz/

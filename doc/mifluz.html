@@ -49,6 +49,7 @@ Up:<a rel=up href="#(dir)">(dir)</a>
 <li><a href="#mifluzdump">mifluzdump</a>: 
 <li><a href="#mifluzload">mifluzload</a>: 
 <li><a href="#mifluzsearch">mifluzsearch</a>: 
+<li><a href="#mifluzdict">mifluzdict</a>: 
 <li><a href="#WordContext">WordContext</a>: 
 <li><a href="#WordList">WordList</a>: 
 <li><a href="#WordDict">WordDict</a>: 
@@ -111,6 +112,13 @@ Up:<a rel=up href="#(dir)">(dir)</a>
 <li><a href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>: 
 <li><a href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>: 
 <li><a href="#mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>:
+
+<p>mifluzdict
+
+</p><li><a href="#mifluzdict%20NAME">mifluzdict NAME</a>: 
+<li><a href="#mifluzdict%20SYNOPSIS">mifluzdict SYNOPSIS</a>: 
+<li><a href="#mifluzdict%20DESCRIPTION">mifluzdict DESCRIPTION</a>: 
+<li><a href="#mifluzdict%20ENVIRONMENT">mifluzdict ENVIRONMENT</a>:
 
 <p>WordContext
 
@@ -246,6 +254,8 @@ Up:<a rel=up href="#Top">Top</a>
 <h1>Introduction</h1>
 
 <p>First of all, <code>mifluz</code> is at beta stage.
+
+<p>This program is part of the GNU project, released under the aegis of GNU.
 
 <p>The purpose of <code>mifluz</code> is to provide a C++ library to store a full
 text inverted index. To put it briefly, it allows storage of occurrences of
@@ -823,6 +833,7 @@ Up:<a rel=up href="#Top">Top</a>
 <li><a href="#mifluzdump">mifluzdump</a>: 
 <li><a href="#mifluzload">mifluzload</a>: 
 <li><a href="#mifluzsearch">mifluzsearch</a>: 
+<li><a href="#mifluzdict">mifluzdict</a>: 
 <li><a href="#WordContext">WordContext</a>: 
 <li><a href="#WordList">WordList</a>: 
 <li><a href="#WordDict">WordDict</a>: 
@@ -879,7 +890,7 @@ Up:<a rel=up href="#htdb_dump">htdb_dump</a>
 <h3>htdb_dump SYNOPSIS</h3>
 
 <pre>
-htdb_dump [-klNpWz] [-C cachesize] [-d ahr] [-f file] [-h home] [-s subdb] db_file
+htdb_dump [-klNpWz] [-S pagesize] [-C cachesize] [-d ahr] [-f file] [-h home] [-s subdb] db_file
 </pre>
 
 <p><hr>
@@ -1772,7 +1783,7 @@ file name of configuration file read by WordContext(3). Defaults to
 
 <p><hr>
 Node:<a name="mifluzsearch">mifluzsearch</a>,
-Next:<a rel=next href="#WordContext">WordContext</a>,
+Next:<a rel=next href="#mifluzdict">mifluzdict</a>,
 Previous:<a rel=previous href="#mifluzload">mifluzload</a>,
 Up:<a rel=up href="#Reference">Reference</a>
 <br>
@@ -1822,6 +1833,19 @@ Up:<a rel=up href="#mifluzsearch">mifluzsearch</a>
 <p>mifluzsearch searches a mifluz index for documents matching a
 Alt*Vista expression (simple syntax).
 
+<p>Debugging information interpretation. A cursor is open in the index
+for every word and they are stored in a list. The list of cursors
+is always processed in the same order, as a single link list. With
+-v, each block is an individual action on behalf of the word shown
+on the first line. The last line of the block is the conclusion of
+the action described in the block. REDO means the same cursor must
+be examined again because the conditions have changed. RESTART means
+we go back to the first cursor in the list because it may not
+match the new conditions anymore. NEXT means the cursor and all
+the cursors before it match the conditions and we may proceed to
+the next cursor. ATEND means the cursor cannot match the conditions
+because it is at the end of the index.
+
 <p><hr>
 Node:<a name="mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>,
 Previous:<a rel=previous href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>,
@@ -1837,9 +1861,82 @@ file name of configuration file read by WordContext(3). Defaults to
 </strong>
 
 <p><hr>
+Node:<a name="mifluzdict">mifluzdict</a>,
+Next:<a rel=next href="#WordContext">WordContext</a>,
+Previous:<a rel=previous href="#mifluzsearch">mifluzsearch</a>,
+Up:<a rel=up href="#Reference">Reference</a>
+<br>
+
+<h2>mifluzdict</h2>
+
+<ul>
+<li><a href="#mifluzdict%20NAME">mifluzdict NAME</a>: 
+<li><a href="#mifluzdict%20SYNOPSIS">mifluzdict SYNOPSIS</a>: 
+<li><a href="#mifluzdict%20DESCRIPTION">mifluzdict DESCRIPTION</a>: 
+<li><a href="#mifluzdict%20ENVIRONMENT">mifluzdict ENVIRONMENT</a>: 
+</ul>
+
+<p><hr>
+Node:<a name="mifluzdict%20NAME">mifluzdict NAME</a>,
+Next:<a rel=next href="#mifluzdict%20SYNOPSIS">mifluzdict SYNOPSIS</a>,
+Previous:<a rel=previous href="#mifluzdict">mifluzdict</a>,
+Up:<a rel=up href="#mifluzdict">mifluzdict</a>
+<br>
+
+<h3>mifluzdict NAME</h3>
+
+<p>dump the dictionnary of an inverted index.
+
+<p><hr>
+Node:<a name="mifluzdict%20SYNOPSIS">mifluzdict SYNOPSIS</a>,
+Next:<a rel=next href="#mifluzdict%20DESCRIPTION">mifluzdict DESCRIPTION</a>,
+Previous:<a rel=previous href="#mifluzdict%20NAME">mifluzdict NAME</a>,
+Up:<a rel=up href="#mifluzdict">mifluzdict</a>
+<br>
+
+<h3>mifluzdict SYNOPSIS</h3>
+
+<pre>
+mifluzdict file
+</pre>
+
+<p><hr>
+Node:<a name="mifluzdict%20DESCRIPTION">mifluzdict DESCRIPTION</a>,
+Next:<a rel=next href="#mifluzdict%20ENVIRONMENT">mifluzdict ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzdict%20SYNOPSIS">mifluzdict SYNOPSIS</a>,
+Up:<a rel=up href="#mifluzdict">mifluzdict</a>
+<br>
+
+<h3>mifluzdict DESCRIPTION</h3>
+
+<p>mifluzdict writes on
+<strong>stdout
+</strong> a complete ascii description
+of the
+<strong>file
+</strong> inverted index using the
+<code>WordList::Write
+</code>
+method.
+
+<p><hr>
+Node:<a name="mifluzdict%20ENVIRONMENT">mifluzdict ENVIRONMENT</a>,
+Previous:<a rel=previous href="#mifluzdict%20DESCRIPTION">mifluzdict DESCRIPTION</a>,
+Up:<a rel=up href="#mifluzdict">mifluzdict</a>
+<br>
+
+<h3>mifluzdict ENVIRONMENT</h3>
+
+<p><strong>MIFLUZ_CONFIG
+</strong>
+file name of configuration file read by WordContext(3). Defaults to
+<strong>~/.mifluz. 
+</strong>
+
+<p><hr>
 Node:<a name="WordContext">WordContext</a>,
 Next:<a rel=next href="#WordList">WordList</a>,
-Previous:<a rel=previous href="#mifluzsearch">mifluzsearch</a>,
+Previous:<a rel=previous href="#mifluzdict">mifluzdict</a>,
 Up:<a rel=up href="#Reference">Reference</a>
 <br>
 
@@ -1943,7 +2040,7 @@ set to a pathname, read it as a configuration file. If
 <code>~/.mifluz
 </code>
 configuration file or
-<code>/etc/mifluz.conf
+<code>/usr/etc/mifluz.conf
 </code>. See the mifluz
 manual page for a complete list of the configuration attributes. 
 <br><dt><code>WordContext(const Configuration &amp;config)</code>
@@ -1985,7 +2082,7 @@ maintains a Berkeley DB environment (DB_ENV) in the following way:
 Build a
 <code>Configuration
 </code> object from the file pointed to by the
-MIFLUZ_CONFIG environment variable or ~/.mifluz or /etc/mifluz.conf. 
+MIFLUZ_CONFIG environment variable or ~/.mifluz or /usr/etc/mifluz.conf. 
 The
 <strong>config_defaults
 </strong> argument, if provided, is passed to
@@ -2127,6 +2224,17 @@ WordContext object is deleted.
 WordKey(WordContext*, const WordKey&amp;) constructor. It is the
 responsibility of the caller to delete this object before the
 WordContext object is deleted. 
+<br><dt><code>static String ConfigFile()</code>
+<dd>Return the full pathname of the configuration file. The configuration
+file lookup first searches for the file pointed by the
+<strong>MIFLUZ_CONFIG
+</strong> environment variable then
+<strong>~/.mifluz
+</strong> and
+finally
+<strong>/usr/etc/mifluz.conf
+</strong>. If no configuration file is found,
+return the empty string. 
 </dl>
 
 <p><hr>
@@ -2142,7 +2250,7 @@ Up:<a rel=up href="#WordContext">WordContext</a>
 WordContext(3). Defaults to
 <strong>~/.mifluz. 
 </strong> or
-<strong>/etc/mifluz.conf
+<strong>/usr/etc/mifluz.conf
 </strong>
 
 <p><hr>
@@ -3128,13 +3236,17 @@ otherwise.
 <strong>position
 </strong> becomes
 <code>defined. 
-</code>
+</code> A bit
+is set in the bit field describing the defined/undefined state
+of the value and the actual value of the field is not modified. 
 <br><dt><code>void Undefined(int position)</code>
 <dd>Value in field
 <strong>position
 </strong> becomes
 <code>undefined. 
-</code>
+</code> A bit
+is set in the bit field describing the defined/undefined state
+of the value and the actual value of the field is not modified. 
 <br><dt><code>int Set(const String&amp; bufferin)</code>
 <dd>Set the whole structure from ASCII string in
 <strong>bufferin. 
@@ -3225,6 +3337,23 @@ All fields are compared. If a field is defined in
 </strong>
 and not defined in the object, the key are not considered
 equal. 
+<br><dt><code>int Cmp(const WordKey&amp; other) const</code>
+<dd>Compare
+<strong>object
+</strong> and
+<strong>other
+</strong> as in strcmp. Undefined
+fields are ignored. Returns a positive number if
+<strong>object
+</strong> is
+greater than
+<strong>other
+</strong>, zero if they are equal, a negative
+number if
+<strong>object
+</strong> is lower than
+<strong>other. 
+</strong>
 <br><dt><code>int PackEqual(const WordKey&amp; other) const</code>
 <dd>Return true if the object and
 <strong>other
@@ -3274,7 +3403,7 @@ Otherwise returns NOTOK
 returned int is as of strcmp and is driven by the key description
 found in
 <code>WordKeyInfo. 
-</code> Returns positive number if
+</code> Returns a positive number if
 <strong>a
 </strong> is
 greater than
@@ -3298,7 +3427,7 @@ if
 returned int is as of strcmp and is driven by the key description
 found in
 <code>WordKeyInfo. 
-</code> Returns positive number if
+</code> Returns a positive number if
 <strong>a
 </strong> is
 greater than
@@ -3508,7 +3637,13 @@ Up:<a rel=up href="#WordType">WordType</a>
 
 <p>For more information on the configuration attributes and a complete list of attributes, see the mifluz(3) manual page.
 <dl>
-<dt><code>wordlist_allow_numbers {true|false} &lt;number&gt; (default false)</code>
+<dt><code>wordlist_locale &lt;locale&gt; (default C)</code>
+<dd>
+ Set the locale of the program to
+<strong>locale
+</strong>. See setlocale(3)
+for more information. 
+<br><dt><code>wordlist_allow_numbers {true|false} &lt;number&gt; (default false)</code>
 <dd>
  A digit is considered a valid character within a word if
 this configuration parameter is set to
@@ -3634,7 +3769,9 @@ at least one character listed in
 <dd>
 the word does not contain any alphanumerical character. 
 </dl>
-
+<br><dt><code>static String NormalizeStatus(int flags)</code>
+<dd>Returns a string explaining the return flags of the Normalize
+method. 
 </dl>
 
 <p><hr>
@@ -4418,9 +4555,13 @@ Returns OK on success, NOTOK otherwise.
 <dd>Move before the first index matching entry. 
 Returns OK on success, NOTOK otherwise. 
 <br><dt><code>virtual int WalkNext() = 0</code>
-<dd>Move to the next matching entry. 
-At end of list, WORD_WALK_ATEND is returned. 
-Returns OK on success, NOTOK otherwise. 
+<dd>Move to the next matching entry.  At end of list, WORD_WALK_ATEND
+is returned.  Returns OK on success, NOTOK otherwise. When OK
+is returned, the GetFound() method returns the matched entry. 
+When WORD_WALK_ATEND is returned, the GetFound() method returns
+an empty object if the end of the index was reached or the match
+that was found and that is greated than the specified search
+criterion. 
 <br><dt><code>virtual int WalkNextStep() = 0</code>
 <dd>Advance the cursor one step. The entry pointed to by the cursor may
 or may not match the requirements.  Returns OK if entry pointed
@@ -4428,6 +4569,12 @@ by cursor matches requirements.  Returns NOTOK on
 failure. Returns WORD_WALK_NOMATCH_FAILED if the current entry
 does not match requirements, it's safe to call WalkNextStep again
 until either OK or NOTOK is returned. 
+<br><dt><code>virtual int WalkNextExclude(const WordKey&amp; key)</code>
+<dd>Return 0 if this key must not be returned by WalkNext as a valid
+match. The WalkNextStep method calls this virtual method immediately
+after jumping to the next entry in the database. This may be used,
+for instance, to skip entries that were selected by a previous
+search. 
 <br><dt><code>virtual int WalkFinish() = 0</code>
 <dd>Terminate Walk, free allocated resources. 
 Returns OK on success, NOTOK otherwise. 
@@ -4454,6 +4601,8 @@ Returns OK if successfull, NOTOK otherwise.
 <br><dt><code>virtual inline int IsAtEnd() const</code>
 <dd>Returns true if cursor is positioned after the last possible
 match, false otherwise. 
+<br><dt><code>virtual inline int IsNoMatch() const</code>
+<dd>Returns true if cursor hit a value that does not match search criterion. 
 <br><dt><code>inline WordKey&amp; GetSearch()</code>
 <dd>Returns the search criterion. 
 <br><dt><code>inline int GetAction() const</code>
@@ -5093,6 +5242,10 @@ Up:<a rel=up href="#mifluz">mifluz</a>
 <dd>
 
 <p>displays statistics for Berkeley DB environments. 
+<br><dt><code>mifluzdict</code>
+<dd>
+
+<p>dump the dictionnary of an inverted index. 
 <br><dt><code>mifluzdump</code>
 <dd>
 
@@ -5213,6 +5366,12 @@ useful if only
 words. The
 <strong>Noccurrence
 </strong> method gives access to this count. 
+<br><dt><code>wordlist_locale &lt;locale&gt; (default C)</code>
+<dd>
+ Set the locale of the program to
+<strong>locale
+</strong>. See setlocale(3)
+for more information. 
 <br><dt><code>wordlist_lowercase {true|false} &lt;number&gt; (default true)</code>
 <dd>
  If a word contains upper case letters it is converted to lowercase
@@ -5321,6 +5480,12 @@ This configuration parameter is not used by the mifluz library
 but may be used by a query application to define the semantic of
 a document. In response to a query, the application will return a
 list of results in which only distinct documents will be shown. 
+<br><dt><code>wordlist_wordkey_location field (default none)</code>
+<dd>
+ A single field number that contains the position of a word in a
+given document. 
+This configuration parameter is not used by the mifluz library
+but may be used by a query application. 
 <br><dt><code>wordlist_wordrecord_description {NONE|DATA|STR} (no default)</code>
 <dd>
  NONE: the record is empty
@@ -5343,7 +5508,7 @@ Up:<a rel=up href="#mifluz">mifluz</a>
 WordContext(3). Defaults to
 <strong>~/.mifluz. 
 </strong> or
-<strong>/etc/mifluz.conf
+<strong>/usr/etc/mifluz.conf
 </strong>
 
 <p><hr>
@@ -5424,6 +5589,13 @@ Up:<a rel=up href="#Top">Top</a>
 <li><a href="#mifluzsearch%20SYNOPSIS">mifluzsearch SYNOPSIS</a>
 <li><a href="#mifluzsearch%20DESCRIPTION">mifluzsearch DESCRIPTION</a>
 <li><a href="#mifluzsearch%20ENVIRONMENT">mifluzsearch ENVIRONMENT</a>
+</ul>
+<li><a href="#mifluzdict">mifluzdict</a>
+<ul>
+<li><a href="#mifluzdict%20NAME">mifluzdict NAME</a>
+<li><a href="#mifluzdict%20SYNOPSIS">mifluzdict SYNOPSIS</a>
+<li><a href="#mifluzdict%20DESCRIPTION">mifluzdict DESCRIPTION</a>
+<li><a href="#mifluzdict%20ENVIRONMENT">mifluzdict ENVIRONMENT</a>
 </ul>
 <li><a href="#WordContext">WordContext</a>
 <ul>
